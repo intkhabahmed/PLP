@@ -1,5 +1,7 @@
 package com.cg.as.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,10 +26,10 @@ public class Flight {
 	private String arrCity;
 	
 	@Column(name="dep_date")
-	private String deptDate;
+	private Date deptDate;
 	
 	@Column(name="arr_date")
-	private String arrDate;
+	private Date arrDate;
 	
 	@Column(name="dep_time")
 	private String deptTime;
@@ -48,7 +50,7 @@ public class Flight {
 	private double bussSeatsFare;
 	
 	public Flight(String flightNo, String flightName, String deptCity, String arrCity,
-			String deptDate, String arrDate, String deptTime,
+			Date deptDate, Date arrDate, String deptTime,
 			String arrTime, int firstSeats, double firstSeatsFare,
 			int bussSeats, double bussSeatsFare) {
 		super();
@@ -86,11 +88,11 @@ public class Flight {
 		return deptCity;
 	}
 
-	public String getArrDate() {
+	public Date getArrDate() {
 		return arrDate;
 	}
 
-	public String getDeptDate() {
+	public Date getDeptDate() {
 		return deptDate;
 	}
 
