@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.as.dao.IAirlineDAO;
-import com.cg.as.entity.BookingInfo;
+import com.cg.as.entity.BookingInformation;
 import com.cg.as.entity.Flight;
 import com.cg.as.entity.LoginMaster;
 import com.cg.as.exception.AirlineException;
@@ -33,11 +33,19 @@ public class AirlineServiceImpl implements IAirlineService {
 	}
 
 	@Override
-	public List<BookingInfo> viewBookings(String query, String searchBasis)
+	public List<BookingInformation> viewBookings(String query, String searchBasis)
 			throws AirlineException {
 		return dao.viewBookings(query, searchBasis);
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public List<BookingInformation> viewPassengersOfFlight(String flightNo)
+			throws AirlineException {
+		return dao.viewPassengersOfFlight(flightNo);
+	}
+>>>>>>> a9b8ec1d111f8d4fb46739f806b1c22c2abfd135
 
 	@Override
 	public int signUp(LoginMaster login) throws AirlineException {

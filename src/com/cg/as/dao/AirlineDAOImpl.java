@@ -13,7 +13,6 @@ import javax.persistence.TypedQuery;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
-import com.cg.as.entity.BookingInfo;
 import com.cg.as.entity.Flight;
 import com.cg.as.entity.LoginMaster;
 import com.cg.as.exception.AirlineException;
@@ -76,22 +75,25 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 * to see booking details of a particular flight
 	 */
 	@Override
-	public List<BookingInfo> viewBookings(String query, String searchBasis)
+	public List<BookingInformation> viewBookings(String query, String searchBasis)
 			throws AirlineException {
-		TypedQuery<BookingInfo> sqlQuery = null;
+
+		TypedQuery<BookingInformation> sqlQuery = null;
+
 			if (searchBasis.equals("byFlight")) {
 				sqlQuery = entityManager.createQuery(
 						"SELECT b FROM BookingInfo b WHERE b.flightNo=:flightNo",
-						BookingInfo.class);
+						BookingInformation.class);
 				sqlQuery.setParameter("flightNo", query);
 			} else if (searchBasis.equals("byUser")) {
 				@SuppressWarnings("unchecked")
-				List<BookingInfo> bookings = entityManager.createQuery(
-						"SELECT b FROM BookingInfo b WHERE b.custEmail=(SELECT u.custEmail FROM USER u WHERE u.username=:user)"
+				List<BookingInformation> bookings = entityManager.createQuery(
+						"SELECT b FROM BookingInformation b WHERE b.custEmail=(SELECT u.custEmail FROM USER u WHERE u.username=:user)"
 						).setParameter("user", query).getResultList();
 				return bookings;
 			}
 		return sqlQuery.getResultList();
+
 	}
 
 	@Override

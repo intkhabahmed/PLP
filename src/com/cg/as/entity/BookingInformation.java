@@ -1,24 +1,56 @@
 package com.cg.as.entity;
 
-public class BookingInfo {
+import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="bookinginformation")
+public class BookingInformation {
+	
+	@Id
+	@Column(name="booking_id")
 	private String bookingId;
+	
+	@Column(name="cust_email")
 	private String custEmail;
+	
+	@Column(name="no_of_passengers")
 	private int noOfPassengers;
+	
+	@Column(name="class_type")
 	private String classType;
+	
+	@Column(name="total_fare")
 	private double totalFare;
+	
+	@Column(name="CreditCard_info")
 	private String creditcardInfo;
-	private String rcCity;
+	
+	@Column(name="src_city")
+	private String srcCity;
+	
+	@Column(name="dest_city")
 	private String destCity;
+	
+	@Column(name="flightNo")
 	private String flightNo;
 
-	public BookingInfo() {
+	@Column(name="booking_date")
+	private Date bookingDate;
 
+	
+	public BookingInformation() {
+		super();
 	}
 
-	public BookingInfo(String bookingId, String custEmail, int noOfPassengers,
-			String classType, double totalFare, String creditcardInfo,
-			String rcCity, String destCity, String flightNo) {
+	public BookingInformation(String bookingId, String custEmail,
+			int noOfPassengers, String classType, double totalFare,
+			String creditcardInfo, String srcCity, String destCity,
+			String flightNo, Date bookingDate) {
 		super();
 		this.bookingId = bookingId;
 		this.custEmail = custEmail;
@@ -26,18 +58,21 @@ public class BookingInfo {
 		this.classType = classType;
 		this.totalFare = totalFare;
 		this.creditcardInfo = creditcardInfo;
-		this.rcCity = rcCity;
+		this.srcCity = srcCity;
 		this.destCity = destCity;
 		this.flightNo = flightNo;
+		this.bookingDate = bookingDate;
 	}
+
 
 	public String getBookingId() {
 		return bookingId;
 	}
-
+	
 	public void setBookingId(String bookingId) {
 		this.bookingId = bookingId;
 	}
+
 
 	public String getCustEmail() {
 		return custEmail;
@@ -79,12 +114,12 @@ public class BookingInfo {
 		this.creditcardInfo = creditcardInfo;
 	}
 
-	public String getRcCity() {
-		return rcCity;
+	public String getSrcCity() {
+		return srcCity;
 	}
 
-	public void setRcCity(String rcCity) {
-		this.rcCity = rcCity;
+	public void setSrcCity(String srcCity) {
+		this.srcCity = srcCity;
 	}
 
 	public String getDestCity() {
@@ -103,19 +138,27 @@ public class BookingInfo {
 		this.flightNo = flightNo;
 	}
 
-	public void formattedString() {
-		System.out.format("%15s%20s%15s%10s%15s%20s%20s%15s%15s", bookingId,
-				custEmail, noOfPassengers, classType, totalFare,
-				creditcardInfo, rcCity, destCity, flightNo + "\n");
+	public Date getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(Date bookingDate) {
+		this.bookingDate = bookingDate;
 	}
 
 	@Override
 	public String toString() {
-		return "BookingInfo [bookingId=" + bookingId + ", custEmail="
+		return "BookingInformation [bookingId=" + bookingId + ", custEmail="
 				+ custEmail + ", noOfPassengers=" + noOfPassengers
 				+ ", classType=" + classType + ", totalFare=" + totalFare
-				+ ", creditcardInfo=" + creditcardInfo + ", rcCity=" + rcCity
-				+ ", destCity=" + destCity + ", flightNo=" + flightNo + "]";
+				+ ", creditcardInfo=" + creditcardInfo + ", srcCity=" + srcCity
+				+ ", destCity=" + destCity + ", flightNo=" + flightNo
+				+ ", bookingDate=" + bookingDate + "]";
 	}
 
+	public void formattedString() {
+		System.out.format("%15s%20s%15s%10s%15s%20s%20s%15s%15s", bookingId,
+				custEmail, noOfPassengers, classType, totalFare,
+				creditcardInfo, srcCity, destCity, flightNo,bookingDate + "\n");
+	}
 }
