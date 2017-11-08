@@ -12,14 +12,14 @@
 	<a href="index.html">Get All List of Flights</a>
 	<c:if test="${flights ne null}">
 		<table>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+			<c:forEach items="${flights}" var="flight">
+				<tr>
+				<td>${flight.flightNo}</td>
+				<td>${flight.flightName}</td>
+				<td>${flight.arrDate}</td>
+				<td>${flight.arrTime}</td>
 			</tr>
+			</c:forEach>
 		</table>
 	</c:if>
 </body>

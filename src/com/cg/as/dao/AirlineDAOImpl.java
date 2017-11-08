@@ -21,7 +21,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
 	 * @see com.cg.dao.IAirlineDAO#viewListOfFlights() Method for retrieving all
@@ -62,7 +62,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return sqlQuery.getResultList();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
 	 * @see com.cg.dao.IAirlineDAO#viewBookingsOfFlight(java.lang.String) Method
@@ -91,6 +91,11 @@ public class AirlineDAOImpl implements IAirlineDAO {
 
 	}
 
+	/**
+	 * (non-Javadoc)
+	 * @see com.cg.as.dao.IAirlineDAO#validLogin(com.cg.as.entity.User)
+	 * 
+	 */
 	@Override
 	public User validLogin(User user) throws AirlineException {
 		TypedQuery<User> sqlQuery = entityManager
