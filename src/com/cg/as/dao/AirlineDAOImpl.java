@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
@@ -84,7 +85,10 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		} else if (searchBasis.equals("byUser")) {
 			CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 			CriteriaQuery<BookingInformation> criteria = cb.createQuery(BookingInformation.class);
+			Root<BookingInformation> bookingRoot = criteria.from(BookingInformation.class);
+			criteria.select(bookingRoot);
 			
+			CriteriaQuery<User> userCriteria = cb.createQuery(User.class);
 			List<BookingInformation> bookings = entityManager
 					.createQuery(
 							"SELECT b FROM BookingInformation b WHERE b.custEmail=(SELECT u.custEmail FROM USER u WHERE u.username=:user)",BookingInformation.class)
