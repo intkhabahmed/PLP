@@ -1,71 +1,27 @@
 package com.cg.as.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.cg.as.entity.BookingInformation;
 import com.cg.as.entity.Flight;
-import com.cg.as.entity.LoginMaster;
+import com.cg.as.entity.User;
 import com.cg.as.exception.AirlineException;
-import com.cg.utility.DBUtil;
 
 @Repository
 public class AirlineDAOImpl implements IAirlineDAO {
-	private static Logger logger = Logger
-			.getLogger(com.cg.as.dao.AirlineDAOImpl.class);
+	/*private static Logger logger = Logger
+			.getLogger(com.cg.as.dao.AirlineDAOImpl.class);*/
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	private Connection airlineConn = null;
 
-	/*
-	 * Method to get the city name for the given abbreviation
-	 */
-	@Override
-	public String getCityAbbreviation(String cityName) throws AirlineException {
-		ResultSet rs = null;
-		PreparedStatement pst = null;
-		String abbr = "";
-		try {
-			airlineConn = DBUtil.createConnection();
-			String sql = "SELECT abbreviation FROM Airport WHERE location=UPPER(?)";
-			pst = airlineConn.prepareStatement(sql);
-			pst.setString(1, cityName);
-			rs = pst.executeQuery();
-			if (rs.next()) {
-				abbr = rs.getString(1);
-			}
-			logger.info("Abbreviation was retrieved for the following City Name: "
-					+ cityName);
-		} catch (Exception e) {
-			logger.error("Failed to retrieve abbreviation:" + e.getMessage());
-			throw new AirlineException(
-					"Server Error: Cannot retrieve Abbreviation for given city");
-
-		} finally {
-			try {
-				DBUtil.closeConnection();
-			} catch (SQLException e) {
-				throw new AirlineException(
-						"Server Error: Cannot close database connection", e);
-			}
-		}
-		return abbr;
-	}
-
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
 	 * @see com.cg.dao.IAirlineDAO#viewListOfFlights() Method for retrieving all
@@ -74,382 +30,96 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	@Override
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
 			throws AirlineException {
-		List<Flight> flightList = new ArrayList<Flight>();
-		ResultSet rs = null;
-		PreparedStatement pst = null;
-		String sql = "";
-		try {
-			airlineConn = DBUtil.createConnection();
-			if (searchBasis.equals("dest")) {
-				sql = "SELECT * FROM FlightInformation WHERE arr_city=?";
-				pst = airlineConn.prepareStatement(sql);
-				pst.setString(1, query);
-			} else if (searchBasis.equals("day")) {
-				sql = "SELECT * FROM FlightInformation WHERE dep_date=to_date(?,'yyyy-mm-dd')";
-				pst = airlineConn.prepareStatement(sql);
-				pst.setString(1, query);
-			} else if (searchBasis.equals("route")) {
-				String route[] = query.split("-");
-				sql = "SELECT * FROM FlightInformation WHERE dep_city=? AND arr_city=?";
-				pst = airlineConn.prepareStatement(sql);
-				pst.setString(1, route[0]);
-				pst.setString(2, route[1]);
-			} else if (searchBasis.equals("flightNo")) {
-				sql = "SELECT * FROM FlightInformation WHERE flightNo=UPPER(?)";
-				pst = airlineConn.prepareStatement(sql);
-				pst.setString(1, query);
-			} else if (searchBasis.equals("all")) {
-				sql = "SELECT * FROM FlightInformation";
-				pst = airlineConn.prepareStatement(sql);
-			}
-
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
-				Flight flights = new Flight(rs.getString(1), rs.getString(2),
-						rs.getString(3), rs.getString(4), format.format(rs
-								.getDate(5)), format.format(rs.getDate(6)),
-						rs.getString(7), rs.getString(8), rs.getInt(9),
-						rs.getDouble(10), rs.getInt(11), rs.getDouble(12));
-				flightList.add(flights);
-			}
-			logger.info("List of flights retrieved");
-		} catch (Exception e) {
-			logger.error("Failed to retrieve list of flights:" + e.getMessage());
-			throw new AirlineException(
-					"Server Error: Cannot retrieve flight details", e);
-
-		} finally {
-			try {
-				DBUtil.closeConnection();
-			} catch (SQLException e) {
-				throw new AirlineException(
-						"Server Error: Cannot close database connection", e);
-			}
+		TypedQuery<Flight> sqlQuery = null;
+		if (searchBasis.equals("dest")) {
+			sqlQuery = entityManager.createQuery(
+					"SELECT f FROM Flight f WHERE f.arrCity=:arrCity",
+					Flight.class);
+			sqlQuery.setParameter("arrCity", query);
+		} else if (searchBasis.equals("day")) {
+			sqlQuery = entityManager.createQuery(
+					"SELECT f FROM Flight f WHERE f.deptDate=:deptDate",
+					Flight.class);
+			sqlQuery.setParameter("deptDate", query);
+		} else if (searchBasis.equals("route")) {
+			String route[] = query.split("-");
+			sqlQuery = entityManager
+					.createQuery(
+							"SELECT f FROM Flight f WHERE f.deptCity=:deptCity AND f.arrCity=:arrCity",
+							Flight.class);
+			sqlQuery.setParameter("deptCity", route[0]);
+			sqlQuery.setParameter("arrCity", route[1]);
+		} else if (searchBasis.equals("flightNo")) {
+			sqlQuery = entityManager.createQuery(
+					"SELECT f FROM Flight f WHERE f.flightNo=:flightNo",
+					Flight.class);
+			sqlQuery.setParameter("flightNo", query);
+		} else if (searchBasis.equals("all")) {
+			sqlQuery = entityManager.createQuery("SELECT f FROM Flight f",
+					Flight.class);
 		}
-		return flightList;
+
+		return sqlQuery.getResultList();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
 	 * @see com.cg.dao.IAirlineDAO#viewBookingsOfFlight(java.lang.String) Method
 	 * to see booking details of a particular flight
 	 */
 	@Override
-	public List<BookingInformation> viewBookings(String query, String searchBasis)
-			throws AirlineException {
-		List<BookingInformation> bookingList = new ArrayList<BookingInformation>();
-		ResultSet rs = null;
-		PreparedStatement pst = null;
-		String sql = "";
-		try {
-			airlineConn = DBUtil.createConnection();
-			if (searchBasis.equals("byFlight")) {
-				sql = "SELECT * FROM BookingInformation WHERE flightNo=Upper(?)";
-				pst = airlineConn.prepareStatement(sql);
-				pst.setString(1, query);
-			} else if (searchBasis.equals("byUser")) {
-				sql = "SELECT * FROM BookingInformation WHERE cust_email=(SELECT cust_email FROM users WHERE username=?)";
-				pst = airlineConn.prepareStatement(sql);
-				pst.setString(1, query);
-			}
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				BookingInformation bookingInfo = new BookingInformation(rs.getString(1),
-						rs.getString(2), rs.getInt(3), rs.getString(4),
-						rs.getDouble(5), rs.getString(6), rs.getString(7),
-						rs.getString(8), rs.getString(9));
-				bookingList.add(bookingInfo);
-			}
-			logger.info("Booking information retrieved");
-		} catch (Exception e) {
-			logger.error("Failed to retrieve booking information:"
-					+ e.getMessage());
-			throw new AirlineException(
-					"Server Error: Cannot retrieve booking details for the given query",
-					e);
+	public List<BookingInformation> viewBookings(String query,
+			String searchBasis) throws AirlineException {
 
-		} finally {
-			try {
-				DBUtil.closeConnection();
-			} catch (SQLException e) {
-				throw new AirlineException(
-						"Server Error: Cannot close database connection", e);
-			}
+		TypedQuery<BookingInformation> sqlQuery = null;
+
+		if (searchBasis.equals("byFlight")) {
+			sqlQuery = entityManager.createQuery(
+					"SELECT b FROM BookingInfo b WHERE b.flightNo=:flightNo",
+					BookingInformation.class);
+			sqlQuery.setParameter("flightNo", query);
+		} else if (searchBasis.equals("byUser")) {
+			@SuppressWarnings("unchecked")
+			List<BookingInformation> bookings = entityManager
+					.createQuery(
+							"SELECT b FROM BookingInformation b WHERE b.custEmail=(SELECT u.custEmail FROM USER u WHERE u.username=:user)")
+					.setParameter("user", query).getResultList();
+			return bookings;
 		}
-		return bookingList;
+		return sqlQuery.getResultList();
+
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * @see com.cg.as.dao.IAirlineDAO#validLogin(com.cg.as.entity.User)
 	 * 
-	 * @see com.cg.dao.IAirlineDAO#viewPassengersOfFlight(java.lang.String)
-	 * Method to retrieve passenger list of a particular flight
 	 */
 	@Override
-	public List<BookingInformation> viewPassengersOfFlight(String flightNo)
+	public User validLogin(User user) throws AirlineException {
+		TypedQuery<User> sqlQuery = entityManager
+				.createQuery(
+						"SELECT u FROM User WHERE u.username=:user AND password=:pass",
+						User.class);
+		sqlQuery.setParameter(":user", user.getUsername());
+		sqlQuery.setParameter(":pass", user.getPassword());
+		return sqlQuery.getSingleResult();
+
+	}
+
+	@Override
+	public User signUp(User user) throws AirlineException {
+		entityManager.persist(user);
+		return user;
+	}
+
+	@Override
+	public BookingInformation bookingCancel(String bookingId)
 			throws AirlineException {
-		List<BookingInformation> passengerList = new ArrayList<BookingInformation>();
-		ResultSet rs = null;
-		PreparedStatement pst = null;
-		try {
-			airlineConn = DBUtil.createConnection();
-			String sql = "SELECT booking_id,cust_email FROM BookingInformation WHERE flightNo=Upper(?)";
-			pst = airlineConn.prepareStatement(sql);
-			pst.setString(1, flightNo);
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				BookingInformation bookingInfo = new BookingInformation();
-				bookingInfo.setBookingId(rs.getString(1));
-				bookingInfo.setCustEmail(rs.getString(2));
-				passengerList.add(bookingInfo);
-			}
-			logger.info("List Passsengers of following was retrieved: "
-					+ flightNo);
-		} catch (Exception e) {
-
-			logger.error("Failed to retrieve passengers list of: " + flightNo
-					+ " with following error " + e.getMessage());
-			throw new AirlineException(
-					"Server Error: Cannot retrieve booking details for the given flightNo-"
-							+ flightNo, e);
-
-		} finally {
-			try {
-				DBUtil.closeConnection();
-			} catch (SQLException e) {
-				throw new AirlineException(
-						"Server Error: Cannot close database connection", e);
-			}
-		}
-		return passengerList;
-	}
-
-	/* Method to update schedule of a particular flight */
-	@Override
-	public String updateFlightSchedule(String flightNo, String newInput,
-			int choice) throws AirlineException {
-		Connection connFlight = null;
-		int status = 0;
-
-		PreparedStatement pstFlight = null;
-		try {
-			connFlight = DBUtil.createConnection();
-			if (choice == 1) {
-				String sql = new String(
-						"Update Flightinformation Set arr_Date =? where flightNo=Upper(?)");
-				pstFlight = connFlight.prepareStatement(sql);
-				Date d = Date.valueOf(newInput);
-				pstFlight.setDate(1, d);
-
-				pstFlight.setString(2, flightNo);
-			} else if (choice == 2) {
-				String sql = new String(
-						"Update Flightinformation Set Dep_Date =? where flightNo=Upper(?)");
-				pstFlight = connFlight.prepareStatement(sql);
-				Date d = Date.valueOf(newInput);
-				pstFlight.setDate(1, d);
-				pstFlight.setString(2, flightNo);
-			} else if (choice == 3) {
-				String sql = new String(
-						"Update Flightinformation Set Arr_time =? where flightNo=Upper(?)");
-				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setString(1, newInput);
-				pstFlight.setString(2, flightNo);
-			} else if (choice == 4) {
-				String sql = new String(
-						"Update Flightinformation Set Dep_time =? where flightNo=Upper(?)");
-				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setString(1, newInput);
-				pstFlight.setString(2, flightNo);
-			}
-			status = pstFlight.executeUpdate();
-			logger.info("Flight Schedule of following flight number updated: "
-					+ flightNo);
-		} catch (Exception e) {
-			logger.error("Flight Schedule Updation falied with following error message: "
-					+ e.getMessage());
-			throw new AirlineException("Server Error: Cannot update the table");
-
-		} finally {
-			try {
-				DBUtil.closeConnection();
-			} catch (SQLException e) {
-				throw new AirlineException(
-						"Server Error: Cannot close database connection", e);
-			}
-		}
-
-		if (status == 0)
-			return "Flight Updation Failed";
-		else
-			return "Schedule Updated for the flight number " + flightNo;
-	}
-
-	@Override
-	public String updateFlightInformation(String flightNo, String newInput,
-			int choice) throws AirlineException {
-		Connection connFlight = null;
-		int status = 0;
-
-		PreparedStatement pstFlight = null;
-
-		try {
-			connFlight = DBUtil.createConnection();
-			if (choice == 1) {
-				String sql = new String(
-						"Update Flightinformation Set arr_city =? where flightNo=UPPER(?)");
-				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setString(1, newInput);
-			} else if (choice == 2) {
-				String sql = new String(
-						"Update Flightinformation Set dep_city =? where flightNo=UPPER(?)");
-				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setString(1, newInput);
-			} else if (choice == 3) {
-				String sql = new String(
-						"Update Flightinformation Set firstseatfare =? where flightNo=UPPER(?)");
-				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setDouble(1, Double.parseDouble(newInput));
-			} else if (choice == 4) {
-				String sql = new String(
-						"Update Flightinformation Set BUSSSEATSFARE =? where flightNo=UPPER(?)");
-				pstFlight = connFlight.prepareStatement(sql);
-				pstFlight.setDouble(1, Double.parseDouble(newInput));
-			}
-
-			pstFlight.setString(2, flightNo);
-			status = pstFlight.executeUpdate();
-			logger.info("Flight Information of following flight number updated: "
-					+ flightNo);
-		} catch (Exception e) {
-			logger.error("Flight Schedule Updation falied with following error message: "
-					+ e.getMessage());
-			throw new AirlineException("Server Error: Cannot update the table");
-
-		} finally {
-			try {
-				DBUtil.closeConnection();
-			} catch (SQLException e) {
-				throw new AirlineException(
-						"Server Error: Cannot close database connection", e);
-			}
-		}
-
-		if (status == 0)
-			return "Flight Updation Failed";
-		else
-			return "Information Updated for the flight number " + flightNo;
-	}
-
-	@Override
-	public String validLogin(LoginMaster login) throws AirlineException {
-		String status = "";
-		Connection connBook = null;
-		PreparedStatement pstBook = null;
-		String sql = new String(
-				"Select role from users where username=? AND password=?");
-
-		try {
-			connBook = DBUtil.createConnection();
-			pstBook = connBook.prepareStatement(sql);
-			pstBook.setString(1, login.getUsername());
-			pstBook.setString(2, login.getPassword());
-			ResultSet rset = pstBook.executeQuery();
-			if (rset.next()) {
-				status = rset.getString(1);
-			}
-			logger.info("Following user logged in: " + login.getUsername());
-		} catch (SQLException se) {
-			logger.error("Login failed with user name: " + login.getUsername()
-					+ " " + se.getMessage());
-			throw new AirlineException(
-					"Server Error: Could not retrieve login details", se);
-
-		} finally {
-			try {
-				DBUtil.closeConnection();
-
-			} catch (SQLException se) {
-				throw new AirlineException(
-						"Server Error: Problems in Closing Connection", se);
-			}
-		}
-		return status;
-
-	}
-
-	@Override
-	public int signUp(LoginMaster login) throws AirlineException {
-		int status = 0;
-		Connection connBook = null;
-		PreparedStatement pstBook = null;
-
-		String sql = new String(
-				"INSERT INTO users VALUES(userid_sequence.nextval,?,?,?,?,?)");
-
-		try {
-			connBook = DBUtil.createConnection();
-			pstBook = connBook.prepareStatement(sql);
-			pstBook.setString(1, login.getUsername());
-			pstBook.setString(2, login.getEmail());
-			pstBook.setString(3, login.getPassword());
-			pstBook.setString(4, login.getRole());
-			pstBook.setLong(5, login.getMobile());
-			status = pstBook.executeUpdate();
-			logger.info(login.getRole()
-					+ " registered with following username "
-					+ login.getUsername());
-		} catch (SQLException se) {
-			logger.error("Signup failed for username: " + login.getUsername());
-			throw new AirlineException(
-					"Server Error: Records could not be inserted", se);
-
-		} finally {
-			try {
-				DBUtil.closeConnection();
-
-			} catch (SQLException se) {
-				throw new AirlineException(
-						"Server Error: Problems in Closing Connection", se);
-			}
-		}
-		return status;
-	}
-
-	@Override
-	public int bookingCancel(String bookingId, String username)
-			throws AirlineException {
-		int status = 0;
-		Connection connBook = null;
-		PreparedStatement pstBook = null;
-
-		String sql = new String(
-				"DELETE FROM BookingInformation WHERE Booking_id=? AND cust_email=(SELECT cust_email FROM users WHERE username=?");
-
-		try {
-			connBook = DBUtil.createConnection();
-			pstBook = connBook.prepareStatement(sql);
-			pstBook.setString(1, bookingId);
-			pstBook.setString(2, username);
-			status = pstBook.executeUpdate();
-			logger.info("Booking done with following booking id:" + bookingId);
-		} catch (SQLException se) {
-			logger.error("Booking failed: " + se.getMessage());
-			throw new AirlineException(
-					"Server Error: Problem in cancellation of Flight", se);
-
-		} finally {
-			try {
-				DBUtil.closeConnection();
-
-			} catch (SQLException se) {
-				throw new AirlineException(
-						"Server Error: Problems in Closing Connection", se);
-			}
-		}
-		return status;
+		BookingInformation booking = entityManager.find(BookingInformation.class, bookingId);
+		entityManager.remove(booking);
+		return booking;
 	}
 
 	/*
@@ -457,7 +127,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 * 
 	 * @see com.cg.dao.IAirlineDAO#flightOccupancyDetails(java.lang.String,
 	 * java.lang.String) for getting flight occupancy details
-	 */
+	 
 	public int[] flightOccupancyDetails(String flightNo)
 			throws AirlineException {
 		int seats[] = new int[4];
@@ -623,5 +293,5 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			}
 		}
 		return status;
-	}
+	}*/
 }

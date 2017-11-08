@@ -1,9 +1,6 @@
 package com.cg.as.service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.transaction.Transactional;
 
@@ -13,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.cg.as.dao.IAirlineDAO;
 import com.cg.as.entity.BookingInformation;
 import com.cg.as.entity.Flight;
-import com.cg.as.entity.LoginMaster;
+import com.cg.as.entity.User;
 import com.cg.as.exception.AirlineException;
 
 @Service
@@ -21,65 +18,41 @@ import com.cg.as.exception.AirlineException;
 public class AirlineServiceImpl implements IAirlineService {
 
 	@Autowired
-	IAirlineDAO dao;
+	IAirlineDAO airlineDAO;
 
-	@Override
-	public String getCityAbbreviation(String cityName) throws AirlineException {
-		return dao.getCityAbbreviation(cityName);
-	}
+	
 
 	@Override
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
 			throws AirlineException {
-		List<Flight> flights = dao.viewListOfFlights(query, searchBasis);
+		List<Flight> flights = airlineDAO.viewListOfFlights(query, searchBasis);
 		return flights;
 	}
 
 	@Override
 	public List<BookingInformation> viewBookings(String query, String searchBasis)
 			throws AirlineException {
-		return dao.viewBookings(query, searchBasis);
+		return airlineDAO.viewBookings(query, searchBasis);
 	}
 
 	@Override
-	public List<BookingInformation> viewPassengersOfFlight(String flightNo)
+	public User signUp(User user) throws AirlineException {
+		return airlineDAO.signUp(user);
+	}
+
+	@Override
+	public User validLogin(User user) throws AirlineException {
+		return airlineDAO.validLogin(user);
+	}
+
+	@Override
+	public BookingInformation bookingCancel(String bookingId)
 			throws AirlineException {
-		return dao.viewPassengersOfFlight(flightNo);
-	}
-
-	@Override
-	public int signUp(LoginMaster login) throws AirlineException {
-		return dao.signUp(login);
-	}
-
-	@Override
-	public String validLogin(LoginMaster login) throws AirlineException {
-		return dao.validLogin(login);
-	}
-
-	@Override
-	public String updateFlightSchedule(String flightNo, String newInput,
-			int choice) throws AirlineException {
-		String status = dao.updateFlightSchedule(flightNo, newInput, choice);
-		return status;
-	}
-
-	@Override
-	public String updateFlightInformation(String oldFlightNo,
-			String newFlightNo, int choice) throws AirlineException {
-		String status = dao.updateFlightInformation(oldFlightNo, newFlightNo,
-				choice);
-		return status;
-	}
-
-	@Override
-	public int bookingCancel(String bookingId, String username)
-			throws AirlineException {
-		return dao.bookingCancel(bookingId, username);
+		return airlineDAO.bookingCancel(bookingId);
 
 	}
 
-	@Override
+	/*@Override
 	public int[] flightOccupancyDetails(String flightNo)
 			throws AirlineException {
 		int[] seats = dao.flightOccupancyDetails(flightNo);
@@ -155,6 +128,6 @@ public class AirlineServiceImpl implements IAirlineService {
 			break;
 		default:
 		}
-	}
+	}*/
 
 }
