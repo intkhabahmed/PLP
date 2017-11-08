@@ -9,15 +9,11 @@ import com.cg.as.exception.AirlineException;
 
 public interface IAirlineService {
 	
-	public String getCityAbbreviation(String cityName) throws AirlineException;
 	public List<Flight> viewListOfFlights(String query, String searchBasis) throws AirlineException;
 	public List<BookingInfo> viewBookings(String query, String searchBasis) throws AirlineException;
-	public List<BookingInfo> viewPassengersOfFlight(String flightNo) throws AirlineException;
 	public int signUp(LoginMaster login) throws AirlineException;
 	public String validLogin(LoginMaster login) throws AirlineException;
-	public String updateFlightSchedule(String flightNo, String newInput, int choice) throws AirlineException;
 	public int bookingCancel(String bookingId, String username) throws AirlineException;
-	public String updateFlightInformation(String oldFlightNo, String newFlightNo, int choice) throws AirlineException;
 	public int[] flightOccupancyDetails(String flightNo) throws AirlineException;
 	public int bookingConfirm(String username,String flightno, int noOfPassengers, String classType,
 			String creditCard) throws AirlineException;

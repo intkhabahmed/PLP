@@ -23,10 +23,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	@Autowired
 	IAirlineDAO dao;
 
-	@Override
-	public String getCityAbbreviation(String cityName) throws AirlineException {
-		return dao.getCityAbbreviation(cityName);
-	}
+	
 
 	@Override
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
@@ -41,11 +38,6 @@ public class AirlineServiceImpl implements IAirlineService {
 		return dao.viewBookings(query, searchBasis);
 	}
 
-	@Override
-	public List<BookingInfo> viewPassengersOfFlight(String flightNo)
-			throws AirlineException {
-		return dao.viewPassengersOfFlight(flightNo);
-	}
 
 	@Override
 	public int signUp(LoginMaster login) throws AirlineException {
@@ -55,21 +47,6 @@ public class AirlineServiceImpl implements IAirlineService {
 	@Override
 	public String validLogin(LoginMaster login) throws AirlineException {
 		return dao.validLogin(login);
-	}
-
-	@Override
-	public String updateFlightSchedule(String flightNo, String newInput,
-			int choice) throws AirlineException {
-		String status = dao.updateFlightSchedule(flightNo, newInput, choice);
-		return status;
-	}
-
-	@Override
-	public String updateFlightInformation(String oldFlightNo,
-			String newFlightNo, int choice) throws AirlineException {
-		String status = dao.updateFlightInformation(oldFlightNo, newFlightNo,
-				choice);
-		return status;
 	}
 
 	@Override
