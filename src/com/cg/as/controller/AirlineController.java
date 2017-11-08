@@ -6,10 +6,12 @@ import org.springframework.stereotype.Controller;
 import com.cg.as.service.IAirlineService;
 
 @Controller
-public class TraineeController {
+public class AirlineController {
 	
 	@Autowired
-	private IAirlineService airlineService;
+	IAirlineService airlineService;
+	
+	
 	
 	
 

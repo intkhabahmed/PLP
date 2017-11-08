@@ -1,31 +1,25 @@
 package com.cg.as.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
+import com.cg.as.entity.BookingInformation;
 import com.cg.as.entity.Flight;
-import com.cg.as.entity.LoginMaster;
+import com.cg.as.entity.User;
 import com.cg.as.exception.AirlineException;
-import com.cg.utility.DBUtil;
 
 @Repository
 public class AirlineDAOImpl implements IAirlineDAO {
-	private static Logger logger = Logger
-			.getLogger(com.cg.as.dao.AirlineDAOImpl.class);
+	/*private static Logger logger = Logger
+			.getLogger(com.cg.as.dao.AirlineDAOImpl.class);*/
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	private Connection airlineConn = null;
 
 	/*
 	 * (non-Javadoc)
@@ -75,134 +69,52 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 * to see booking details of a particular flight
 	 */
 	@Override
-	public List<BookingInformation> viewBookings(String query, String searchBasis)
-			throws AirlineException {
+	public List<BookingInformation> viewBookings(String query,
+			String searchBasis) throws AirlineException {
 
 		TypedQuery<BookingInformation> sqlQuery = null;
 
-			if (searchBasis.equals("byFlight")) {
-				sqlQuery = entityManager.createQuery(
-						"SELECT b FROM BookingInfo b WHERE b.flightNo=:flightNo",
-						BookingInformation.class);
-				sqlQuery.setParameter("flightNo", query);
-			} else if (searchBasis.equals("byUser")) {
-				@SuppressWarnings("unchecked")
-				List<BookingInformation> bookings = entityManager.createQuery(
-						"SELECT b FROM BookingInformation b WHERE b.custEmail=(SELECT u.custEmail FROM USER u WHERE u.username=:user)"
-						).setParameter("user", query).getResultList();
-				return bookings;
-			}
+		if (searchBasis.equals("byFlight")) {
+			sqlQuery = entityManager.createQuery(
+					"SELECT b FROM BookingInfo b WHERE b.flightNo=:flightNo",
+					BookingInformation.class);
+			sqlQuery.setParameter("flightNo", query);
+		} else if (searchBasis.equals("byUser")) {
+			@SuppressWarnings("unchecked")
+			List<BookingInformation> bookings = entityManager
+					.createQuery(
+							"SELECT b FROM BookingInformation b WHERE b.custEmail=(SELECT u.custEmail FROM USER u WHERE u.username=:user)")
+					.setParameter("user", query).getResultList();
+			return bookings;
+		}
 		return sqlQuery.getResultList();
 
 	}
 
 	@Override
-	public String validLogin(LoginMaster login) throws AirlineException {
-		String status = "";
-		Connection connBook = null;
-		PreparedStatement pstBook = null;
-		String sql = new String(
-				"Select role from users where username=? AND password=?");
-
-		try {
-			connBook = DBUtil.createConnection();
-			pstBook = connBook.prepareStatement(sql);
-			pstBook.setString(1, login.getUsername());
-			pstBook.setString(2, login.getPassword());
-			ResultSet rset = pstBook.executeQuery();
-			if (rset.next()) {
-				status = rset.getString(1);
-			}
-			logger.info("Following user logged in: " + login.getUsername());
-		} catch (SQLException se) {
-			logger.error("Login failed with user name: " + login.getUsername()
-					+ " " + se.getMessage());
-			throw new AirlineException(
-					"Server Error: Could not retrieve login details", se);
-
-		} finally {
-			try {
-				DBUtil.closeConnection();
-
-			} catch (SQLException se) {
-				throw new AirlineException(
-						"Server Error: Problems in Closing Connection", se);
-			}
-		}
-		return status;
+	public User validLogin(User user) throws AirlineException {
+		TypedQuery<User> sqlQuery = entityManager
+				.createQuery(
+						"SELECT u FROM User WHERE u.username=:user AND password=:pass",
+						User.class);
+		sqlQuery.setParameter(":user", user.getUsername());
+		sqlQuery.setParameter(":pass", user.getPassword());
+		return sqlQuery.getSingleResult();
 
 	}
 
 	@Override
-	public int signUp(LoginMaster login) throws AirlineException {
-		int status = 0;
-		Connection connBook = null;
-		PreparedStatement pstBook = null;
-
-		String sql = new String(
-				"INSERT INTO users VALUES(userid_sequence.nextval,?,?,?,?,?)");
-
-		try {
-			connBook = DBUtil.createConnection();
-			pstBook = connBook.prepareStatement(sql);
-			pstBook.setString(1, login.getUsername());
-			pstBook.setString(2, login.getEmail());
-			pstBook.setString(3, login.getPassword());
-			pstBook.setString(4, login.getRole());
-			pstBook.setLong(5, login.getMobile());
-			status = pstBook.executeUpdate();
-			logger.info(login.getRole()
-					+ " registered with following username "
-					+ login.getUsername());
-		} catch (SQLException se) {
-			logger.error("Signup failed for username: " + login.getUsername());
-			throw new AirlineException(
-					"Server Error: Records could not be inserted", se);
-
-		} finally {
-			try {
-				DBUtil.closeConnection();
-
-			} catch (SQLException se) {
-				throw new AirlineException(
-						"Server Error: Problems in Closing Connection", se);
-			}
-		}
-		return status;
+	public User signUp(User user) throws AirlineException {
+		entityManager.persist(user);
+		return user;
 	}
 
 	@Override
-	public int bookingCancel(String bookingId, String username)
+	public BookingInformation bookingCancel(String bookingId)
 			throws AirlineException {
-		int status = 0;
-		Connection connBook = null;
-		PreparedStatement pstBook = null;
-
-		String sql = new String(
-				"DELETE FROM BookingInformation WHERE Booking_id=? AND cust_email=(SELECT cust_email FROM users WHERE username=?");
-
-		try {
-			connBook = DBUtil.createConnection();
-			pstBook = connBook.prepareStatement(sql);
-			pstBook.setString(1, bookingId);
-			pstBook.setString(2, username);
-			status = pstBook.executeUpdate();
-			logger.info("Booking done with following booking id:" + bookingId);
-		} catch (SQLException se) {
-			logger.error("Booking failed: " + se.getMessage());
-			throw new AirlineException(
-					"Server Error: Problem in cancellation of Flight", se);
-
-		} finally {
-			try {
-				DBUtil.closeConnection();
-
-			} catch (SQLException se) {
-				throw new AirlineException(
-						"Server Error: Problems in Closing Connection", se);
-			}
-		}
-		return status;
+		BookingInformation booking = entityManager.find(BookingInformation.class, bookingId);
+		entityManager.remove(booking);
+		return booking;
 	}
 
 	/*
@@ -210,7 +122,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 * 
 	 * @see com.cg.dao.IAirlineDAO#flightOccupancyDetails(java.lang.String,
 	 * java.lang.String) for getting flight occupancy details
-	 */
+	 
 	public int[] flightOccupancyDetails(String flightNo)
 			throws AirlineException {
 		int seats[] = new int[4];
@@ -376,5 +288,5 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			}
 		}
 		return status;
-	}
+	}*/
 }

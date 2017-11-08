@@ -42,5 +42,5 @@
 	<!-- This is required to handle transactions via Annotations like @Transactional -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
-	<bean id="traineeDAO" class="com.cg.as.dao.AirlineDAOImpl"/>
+	<bean id="airlineDAO" class="com.cg.as.dao.AirlineDAOImpl"/>
 </beans>
