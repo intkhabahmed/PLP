@@ -1,11 +1,31 @@
 package com.cg.as.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="users")
 public class User {
+	
+	@Id
+	@Column(name="userid")
 	private int userId;
+	
+	@Column(name="username")
 	private String username;
+	
+	@Column(name="password")
 	private String password;
+	
+	@Column(name="cust_email")
 	private String email;
+	
+	@Column(name="mobile_no")
 	private long mobileNo;
+	
+	@Column(name="role")
 	private String role;
 	
 	public User(){

@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
-import com.cg.as.entity.BookingInfo;
+import com.cg.as.entity.BookingInformation;
 import com.cg.as.entity.Flight;
 import com.cg.as.entity.LoginMaster;
 import com.cg.as.exception.AirlineException;
@@ -137,9 +137,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 * to see booking details of a particular flight
 	 */
 	@Override
-	public List<BookingInfo> viewBookings(String query, String searchBasis)
+	public List<BookingInformation> viewBookings(String query, String searchBasis)
 			throws AirlineException {
-		List<BookingInfo> bookingList = new ArrayList<BookingInfo>();
+		List<BookingInformation> bookingList = new ArrayList<BookingInformation>();
 		ResultSet rs = null;
 		PreparedStatement pst = null;
 		String sql = "";
@@ -156,7 +156,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			}
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				BookingInfo bookingInfo = new BookingInfo(rs.getString(1),
+				BookingInformation bookingInfo = new BookingInformation(rs.getString(1),
 						rs.getString(2), rs.getInt(3), rs.getString(4),
 						rs.getDouble(5), rs.getString(6), rs.getString(7),
 						rs.getString(8), rs.getString(9));
@@ -188,9 +188,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 * Method to retrieve passenger list of a particular flight
 	 */
 	@Override
-	public List<BookingInfo> viewPassengersOfFlight(String flightNo)
+	public List<BookingInformation> viewPassengersOfFlight(String flightNo)
 			throws AirlineException {
-		List<BookingInfo> passengerList = new ArrayList<BookingInfo>();
+		List<BookingInformation> passengerList = new ArrayList<BookingInformation>();
 		ResultSet rs = null;
 		PreparedStatement pst = null;
 		try {
@@ -200,7 +200,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			pst.setString(1, flightNo);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				BookingInfo bookingInfo = new BookingInfo();
+				BookingInformation bookingInfo = new BookingInformation();
 				bookingInfo.setBookingId(rs.getString(1));
 				bookingInfo.setCustEmail(rs.getString(2));
 				passengerList.add(bookingInfo);

@@ -1,17 +1,50 @@
 package com.cg.as.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="flightinformation")
 public class Flight {
+	
+	@Id
+	@Column(name="flightno")
 	private String flightNo;
+	
+	@Column(name="airline")
 	private String flightName;
+	
+	@Column(name="dep_city")
 	private String deptCity;
+	
+	@Column(name="arr_city")
 	private String arrCity;
+	
+	@Column(name="dep_date")
 	private String deptDate;
+	
+	@Column(name="arr_date")
 	private String arrDate;
+	
+	@Column(name="dep_time")
 	private String deptTime;
+	
+	@Column(name="arr_time")
 	private String arrTime;
+	
+	@Column(name="FirstSeats")
 	private int firstSeats;
+	
+	@Column(name="FirstSeatFare")
 	private double firstSeatsFare;
+	
+	@Column(name="BussSeats")
 	private int bussSeats;
+	
+	@Column(name="BussSeatsFare")
 	private double bussSeatsFare;
 	
 	public Flight(String flightNo, String flightName, String deptCity, String arrCity,

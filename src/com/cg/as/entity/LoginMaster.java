@@ -1,5 +1,6 @@
 package com.cg.as.entity;
 
+
 public class LoginMaster {
 	private int userId;
 	private String username;
