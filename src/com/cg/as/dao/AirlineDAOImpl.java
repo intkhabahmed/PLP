@@ -8,12 +8,14 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 
 import org.springframework.stereotype.Repository;
 
 import com.cg.as.entity.BookingInformation;
 import com.cg.as.entity.Flight;
 import com.cg.as.entity.User;
+import com.cg.as.entity.User_;
 import com.cg.as.exception.AirlineException;
 
 @Repository
@@ -84,12 +86,15 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			sqlQuery.setParameter("flightNo", query);
 		} else if (searchBasis.equals("byUser")) {
 			CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-			CriteriaQuery<BookingInformation> criteria = cb.createQuery(BookingInformation.class);
-			Root<BookingInformation> bookingRoot = criteria.from(BookingInformation.class);
-			criteria.select(bookingRoot);
+			CriteriaQuery<BookingInformation> bookingCriteria = cb.createQuery(BookingInformation.class);
+			Root<BookingInformation> bookingRoot = bookingCriteria.from(BookingInformation.class);
+			bookingCriteria.select(bookingRoot);
 			
-			CriteriaQuery<User> userCriteria = cb.createQuery(User.class);
-			Root<>
+			Subquery<User> userSubquery = bookingCriteria.subquery(User.class);
+			Root<User> userRoot = userSubquery.from(User.class);
+			 userSubquery.select(userRoot.<User>get(User_.email));
+			 //userRoot.<User>get(new User().getEmail())
+			userSubquery.where(cb.equal(query, userRoot.get));
 			List<BookingInformation> bookings = entityManager
 					.createQuery(
 							"SELECT b FROM BookingInformation b WHERE b.custEmail=(SELECT u.custEmail FROM USER u WHERE u.username=:user)",BookingInformation.class)
