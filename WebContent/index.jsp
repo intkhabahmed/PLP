@@ -44,8 +44,8 @@
 				<tr>
 				<td>${booking.bookingId}</td>
 				<td>${booking.custEmail}</td>
-				<td>${booking.noOfPassenger}</td>
-				<td>${boooking.classType}</td>
+				<td>${booking.noOfPassengers}</td>
+				<td>${booking.classType}</td>
 			</tr>
 			
 			</c:forEach>
