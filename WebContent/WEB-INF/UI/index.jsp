@@ -8,21 +8,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-
 <body>
 	<h1>Airline Reservation System</h1>
 
+	<!-- <a href="flight.htm"></a> -->
 
-	<form:form action="listOfFlights.html" method="post" modelAttribute="booking">
+
+	<form:form action="" method="">
 
 		<table>
 			<tr>
-				<td><input type="button" onclick="location.href='login.html'" value="Login/SignUp" /></td>	
+				<td><input type="submit" value="Login" /></td>
+				<td><input type="submit" value="SignUp" /></td>
 			</tr>
 
 			<tr>
 				<td>From</td>
-				<td><form:select path="srcCity">
+				<td><form:select path="rcCity">
 						<form:option value="select">Select</form:option>
 						<form:option value="Pune">Pune(PNQ)</form:option>
 						<form:option value="Mumbai">Mumbai(BOM)</form:option>
@@ -48,17 +50,17 @@
 
 			<tr>
 				<td>Depart</td>
-				<td><form:input path="bookingDate" type="date" /></td>
+				<td><form:input path="bookingDate" /></td>
 			</tr>
 
 			<tr>
 				<td>No. of Passengers</td>
-				<td><form:input path="noOfPassengers" type="text"/></td>
+				<td><form:input path="noOfPassengers" /></td>
 			</tr>
 
 			<tr>
 				<td>Class Type</td>
-				<td><form:input path="classType" type="text"/></td>
+				<td><form:input path="classType" /></td>
 			</tr>
 
 

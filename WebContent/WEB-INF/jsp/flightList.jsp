@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,8 +9,14 @@
 </head>
 <body>
 	<h1>Hello this is index page</h1>
+<<<<<<< HEAD:WebContent/index.jsp
+	Source :<input type = "text" name="src" >
+	Destination :<input type = "text" name="dest" >
+	<a href="login.html">Login</a>
 	<a href="index.html">Get All List of Flights</a>
 	<a href="booking.html">Get All Flight Bookings</a>
+=======
+>>>>>>> 71266d62a3cbbbb7f4063cf186836b94d88aaf2b:WebContent/WEB-INF/jsp/flightList.jsp
 	<c:if test="${flights ne null}">
 		<table border="1">
 			<tr>

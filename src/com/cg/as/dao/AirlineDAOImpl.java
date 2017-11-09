@@ -85,6 +85,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 					BookingInformation.class);
 			sqlQuery.setParameter("flightNo", query);
 		} else if (searchBasis.equals("byUser")) {
+
 			TypedQuery<User> userQuery = entityManager.createQuery(
 					"SELECT u FROM User u WHERE u.username=:username",
 					User.class);
@@ -100,17 +101,22 @@ public class AirlineDAOImpl implements IAirlineDAO {
 
 	
 	/* (non-Javadoc)
+>>>>>>> b160fbd0310f9509ec730c80d73e7accb8fd1f16
 	 * @see com.cg.as.dao.IAirlineDAO#validLogin(com.cg.as.entity.User)
 	 */
-	@Override
+	/*@Override
+	public User validLogin(String username, String password) throws AirlineException {
+		//User user = entityManager.find(User.class, 1);
+		TypedQuery<User> query = entityManager.createQuery("Select u from User u where u.username='"+username+"'", User.class);
+		return query.getSingleResult();*/
+
 	public User validLogin(User user) throws AirlineException {
 		TypedQuery<User> sqlQuery = entityManager.createQuery(
-				"SELECT u FROM User WHERE u.username=:user AND password=:pass",
+				"SELECT u FROM User u WHERE u.username=:user AND u.password=:pass",
 				User.class);
-		sqlQuery.setParameter(":user", user.getUsername());
-		sqlQuery.setParameter(":pass", user.getPassword());
+		sqlQuery.setParameter("user", user.getUsername());
+		sqlQuery.setParameter("pass", user.getPassword());
 		return sqlQuery.getSingleResult();
-
 	}
 
 	
