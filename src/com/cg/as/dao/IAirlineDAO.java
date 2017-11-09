@@ -15,6 +15,7 @@ public interface IAirlineDAO {
 	 * @throws AirlineException
 	 */
 	public List<Flight> viewListOfFlights(String query, String searchBasis) throws AirlineException;
+	
 	/**
 	 * @param query
 	 * @param searchBasis
@@ -22,18 +23,21 @@ public interface IAirlineDAO {
 	 * @throws AirlineException
 	 */
 	public List<BookingInformation> viewBookings(String query, String searchBasis) throws AirlineException;
+	
 	/**
 	 * @param user
 	 * @return
 	 * @throws AirlineException
 	 */
 	public User signUp(User user) throws AirlineException;
+	
 	/**
 	 * @param user
 	 * @return
 	 * @throws AirlineException
 	 */
 	public User validLogin(User user) throws AirlineException;
+	
 	/**
 	 * @param bookingId
 	 * @return
