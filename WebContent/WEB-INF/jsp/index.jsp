@@ -8,18 +8,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
+
 <body>
 	<h1>Airline Reservation System</h1>
 
-	<!-- <a href="flight.htm"></a> -->
 
-
-	<form:form action="" method="post" modelAttribute="booking">
+	<form:form action="listOfFlights.html" method="post" modelAttribute="booking">
 
 		<table>
 			<tr>
-				<td><input type="submit" value="Login" /></td>
-				<td><input type="submit" value="SignUp" /></td>
+				<td><input type="button" onclick="location.href='login.html'" value="Login/SignUp" /></td>	
 			</tr>
 
 			<tr>

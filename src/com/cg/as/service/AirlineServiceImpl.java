@@ -41,8 +41,18 @@ public class AirlineServiceImpl implements IAirlineService {
 	}
 
 	@Override
-	public User validLogin(User user) throws AirlineException {
-		return airlineDAO.validLogin(user);
+	public User validLogin(String username, String password) throws AirlineException {
+		User user= null;
+		if(!(airlineDAO.validLogin(username, password)==null)){
+			user = airlineDAO.validLogin(username, password);
+			if(user.getPassword()==password){
+				return user;
+			}
+			else
+				return user;
+		}
+		return user;
+		
 	}
 
 	@Override

@@ -89,7 +89,6 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			criteria.select(bookingRoot);
 			
 			CriteriaQuery<User> userCriteria = cb.createQuery(User.class);
-			Root<>
 			List<BookingInformation> bookings = entityManager
 					.createQuery(
 							"SELECT b FROM BookingInformation b WHERE b.custEmail=(SELECT u.custEmail FROM USER u WHERE u.username=:user)",BookingInformation.class)
@@ -106,15 +105,10 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 * 
 	 */
 	@Override
-	public User validLogin(User user) throws AirlineException {
-		TypedQuery<User> sqlQuery = entityManager
-				.createQuery(
-						"SELECT u FROM User WHERE u.username=:user AND password=:pass",
-						User.class);
-		sqlQuery.setParameter(":user", user.getUsername());
-		sqlQuery.setParameter(":pass", user.getPassword());
-		return sqlQuery.getSingleResult();
-
+	public User validLogin(String username, String password) throws AirlineException {
+		//User user = entityManager.find(User.class, 1);
+		TypedQuery<User> query = entityManager.createQuery("Select u from User u where u.username='"+username+"'", User.class);
+		return query.getSingleResult();
 	}
 
 	@Override
