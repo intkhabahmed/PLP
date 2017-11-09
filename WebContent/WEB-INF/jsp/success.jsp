@@ -8,5 +8,6 @@
 </head>
 <body>
 <h1>I'm in success page</h1>
+${message}
 </body>
 </html>

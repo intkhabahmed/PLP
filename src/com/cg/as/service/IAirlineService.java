@@ -20,7 +20,6 @@ public interface IAirlineService {
 	public int checkTimeFormat(String newInput);
 	public int checkDateFormat(String newInput) throws AirlineException;
 	public void checkValidation(String query, String basis) throws AirlineException;*/
-	User validLogin(String username, String password)
-			throws AirlineException;
+	public User validLogin(User user) throws AirlineException;
 	
 }

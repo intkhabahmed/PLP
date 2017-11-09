@@ -58,20 +58,25 @@ public class AirlineController {
 	
 	
 	@RequestMapping("/loginCheck")
-	public String loginValidation(@RequestParam("username") String username, @RequestParam("password") String password)
+	public String loginValidation(@RequestParam("username") String username, @RequestParam("password") String password,Model model)
 	{
-		User user;
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+		
 		try {
-			user = airlineService.validLogin(username, password);
-			if (username.equals(user.getUsername())) {
-				return "success";
-			}else {
-				return "error";
+			user = airlineService.validLogin(user);
+			if(username.equals(user.getUsername())){
+				model.addAttribute("booking", new BookingInformation());
+				model.addAttribute("message","Welcome "+user.getUsername());
+				return "index";
 			}
-		} catch (Exception e) {
+			
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "success";
+		model.addAttribute("message", "Invalid username/password");
+		return "login_signUp";
 	}
 
 }

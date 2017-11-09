@@ -26,6 +26,7 @@
 
 </tr>
 </table>
+${message}
 
 </form:form>
 </body>
