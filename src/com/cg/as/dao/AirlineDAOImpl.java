@@ -13,6 +13,10 @@ import com.cg.as.entity.Flight;
 import com.cg.as.entity.User;
 import com.cg.as.exception.AirlineException;
 
+/**
+ * @author inahmed
+ *
+ */
 @Repository
 public class AirlineDAOImpl implements IAirlineDAO {
 	/*
@@ -23,11 +27,8 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see com.cg.dao.IAirlineDAO#viewListOfFlights() Method for retrieving all
-	 *      flight details
+	/* (non-Javadoc)
+	 * @see com.cg.as.dao.IAirlineDAO#viewListOfFlights(java.lang.String, java.lang.String)
 	 */
 	@Override
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
@@ -64,11 +65,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return sqlQuery.getResultList();
 	}
 
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see com.cg.dao.IAirlineDAO#viewBookingsOfFlight(java.lang.String) Method
-	 *      to see booking details of a particular flight
+	
+	/* (non-Javadoc)
+	 * @see com.cg.as.dao.IAirlineDAO#viewBookings(java.lang.String, java.lang.String)
 	 */
 	@Override
 	public List<BookingInformation> viewBookings(String query,
@@ -95,11 +94,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 
 	}
 
-	/**
-	 * (non-Javadoc)
-	 * 
+	
+	/* (non-Javadoc)
 	 * @see com.cg.as.dao.IAirlineDAO#validLogin(com.cg.as.entity.User)
-	 * 
 	 */
 	@Override
 	public User validLogin(User user) throws AirlineException {
@@ -112,12 +109,20 @@ public class AirlineDAOImpl implements IAirlineDAO {
 
 	}
 
+	
+	/* (non-Javadoc)
+	 * @see com.cg.as.dao.IAirlineDAO#signUp(com.cg.as.entity.User)
+	 */
 	@Override
 	public User signUp(User user) throws AirlineException {
 		entityManager.persist(user);
 		return user;
 	}
 
+	
+	/* (non-Javadoc)
+	 * @see com.cg.as.dao.IAirlineDAO#bookingCancel(java.lang.String)
+	 */
 	@Override
 	public BookingInformation bookingCancel(String bookingId)
 			throws AirlineException {
