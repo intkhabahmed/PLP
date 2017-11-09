@@ -9,10 +9,43 @@ import com.cg.as.exception.AirlineException;
 
 public interface IAirlineService {
 	
+	/**
+	 * @param query
+	 * @param searchBasis
+	 * @return
+	 * @throws AirlineException
+	 */
 	public List<Flight> viewListOfFlights(String query, String searchBasis) throws AirlineException;
+	
+	/**
+	 * @param query
+	 * @param searchBasis
+	 * @return
+	 * @throws AirlineException
+	 */
 	public List<BookingInformation> viewBookings(String query, String searchBasis) throws AirlineException;
+	
+	/**
+	 * @param user
+	 * @return
+	 * @throws AirlineException
+	 */
 	public User signUp(User user) throws AirlineException;
-	public User validLogin(User user) throws AirlineException;
+
+	
+	/**
+	 * @param user
+	 * @return
+	 * @throws AirlineException
+	 */
+
+	
+	/**
+	 * @param bookingId
+	 * @return
+	 * @throws AirlineException
+	 */
+
 	public BookingInformation bookingCancel(String bookingId) throws AirlineException;
 	/*public int[] flightOccupancyDetails(String flightNo) throws AirlineException;
 	public int bookingConfirm(String username,String flightno, int noOfPassengers, String classType,
@@ -21,4 +54,6 @@ public interface IAirlineService {
 	public int checkTimeFormat(String newInput);
 	public int checkDateFormat(String newInput) throws AirlineException;
 	public void checkValidation(String query, String basis) throws AirlineException;*/
+	public User validLogin(User user) throws AirlineException;
+	
 }

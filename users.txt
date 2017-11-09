@@ -6,3 +6,5 @@ Insert into users values(2,'Admin','admin@myairlines.com','admin','Admin',987654
 create sequence userid_sequence start with 3;
 
 create sequence ticketbooking_id_seq start with 1;
+
+....
