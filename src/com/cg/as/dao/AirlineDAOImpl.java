@@ -17,6 +17,10 @@ import com.cg.as.exception.AirlineException;
  * @author inahmed
  *
  */
+/**
+ * @author inahmed
+ *
+ */
 @Repository
 public class AirlineDAOImpl implements IAirlineDAO {
 	/*
@@ -81,20 +85,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 					BookingInformation.class);
 			sqlQuery.setParameter("flightNo", query);
 		} else if (searchBasis.equals("byUser")) {
-<<<<<<< HEAD
-			CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-			CriteriaQuery<BookingInformation> criteria = cb.createQuery(BookingInformation.class);
-			Root<BookingInformation> bookingRoot = criteria.from(BookingInformation.class);
-			criteria.select(bookingRoot);
-			
-			CriteriaQuery<User> userCriteria = cb.createQuery(User.class);
-		//	Root<>
-			List<BookingInformation> bookings = entityManager
-					.createQuery(
-							"SELECT b FROM BookingInformation b WHERE b.custEmail=(SELECT u.custEmail FROM USER u WHERE u.username=:user)",BookingInformation.class)
-					.setParameter("user", query).getResultList();
-			return bookings;
-=======
+
 			TypedQuery<User> userQuery = entityManager.createQuery(
 					"SELECT u FROM User u WHERE u.username=:username",
 					User.class);
@@ -103,7 +94,6 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			sqlQuery = entityManager
 					.createQuery("SELECT b FROM BookingInformation b WHERE b.custEmail=:email", BookingInformation.class);
 			sqlQuery.setParameter("email", user.getEmail());
->>>>>>> 71266d62a3cbbbb7f4063cf186836b94d88aaf2b
 		}
 		return sqlQuery.getResultList();
 
@@ -140,7 +130,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	}
 
 	
-	/* (non-Javadoc)
+	
+	/*
+	 * (non-Javadoc)
 	 * @see com.cg.as.dao.IAirlineDAO#bookingCancel(java.lang.String)
 	 */
 	@Override

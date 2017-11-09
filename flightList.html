@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="WebContent/WEB-INF/css/bootstrap.min.css" rel="stylesheet">
+		<script src="WebContent/WEB-INF/js/jquery-3.1.0.min.js"></script>
+		<script src="WebContent/WEB-INF/js/bootstrap.min.js"/></script>
+	<title>Search Results | MyAirlines</title>
+</head>
+<body>
+	<div class="container" id="signupFormContainer">
+			<div class="row">
+				<div id="searchFormContainer">
+						<hr>
+						<form class="form-inline" action="" method="post">
+							<div class="row">
+								<div class="col-sm-2">
+									<div class="form-group">
+										<label for="">Source City</label>
+										<input type="text" class="form-control" name="srcCity"/>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+										<label for="">Destination City</label>
+										<input type="text" class="form-control" name="destCity"/>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+										<label for="">Depart Date</label>
+										<input type="date" class="form-control" name="deptDate"/>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+										<label for="">No of Travellers</label>
+										<input type="text" class="form-control" name="noOfPassengers"/>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+										<label for="">Class Type</label>
+										<select name="classType" class="form-control">
+											<option value="">--Select--</option>
+											<option value="first">First</option>
+											<option value="business">Business</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<br>
+									<input type="submit" value="Search" class="btn btn-danger"/>
+								</div>	
+							</div>
+						</form>
+				</div>
+				<hr>
+			</div><!--Form container end-->
+		</div>
+</body>
+</html>

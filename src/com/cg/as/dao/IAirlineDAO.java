@@ -8,6 +8,7 @@ import com.cg.as.entity.User;
 import com.cg.as.exception.AirlineException;
 
 public interface IAirlineDAO {
+	
 	/**
 	 * @param query
 	 * @param searchBasis
