@@ -8,6 +8,5 @@
 </head>
 <body>
 <a href = "menu.html">Index</a>
-
 </body>
 </html>
