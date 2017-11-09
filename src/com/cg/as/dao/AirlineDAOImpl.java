@@ -89,7 +89,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			criteria.select(bookingRoot);
 			
 			CriteriaQuery<User> userCriteria = cb.createQuery(User.class);
-			Root<>
+		//	Root<>
 			List<BookingInformation> bookings = entityManager
 					.createQuery(
 							"SELECT b FROM BookingInformation b WHERE b.custEmail=(SELECT u.custEmail FROM USER u WHERE u.username=:user)",BookingInformation.class)
