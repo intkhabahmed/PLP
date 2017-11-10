@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,12 +25,13 @@
 			</tr>
 			<c:forEach items="${flights}" var="flight">
 				<tr>
-				<td>${flight.flightNo}</td>
-				<td>${flight.flightName}</td>
-				<td><fmt:formatDate value="${flight.arrDate}" pattern="dd-MMM-yy"></fmt:formatDate></td>
-				<td>${flight.arrTime}</td>
-			</tr>
-			
+					<td>${flight.flightNo}</td>
+					<td>${flight.flightName}</td>
+					<td><fmt:formatDate value="${flight.arrDate}"
+							pattern="dd-MMM-yy"></fmt:formatDate></td>
+					<td>${flight.arrTime}</td>
+				</tr>
+
 			</c:forEach>
 		</table>
 	</c:if>
@@ -45,12 +46,12 @@
 			</tr>
 			<c:forEach items="${bookings}" var="booking">
 				<tr>
-				<td>${booking.bookingId}</td>
-				<td>${booking.custEmail}</td>
-				<td>${booking.noOfPassengers}</td>
-				<td>${booking.classType}</td>
-			</tr>
-			
+					<td>${booking.bookingId}</td>
+					<td>${booking.custEmail}</td>
+					<td>${booking.noOfPassengers}</td>
+					<td>${booking.classType}</td>
+				</tr>
+
 			</c:forEach>
 		</table>
 	</c:if>
