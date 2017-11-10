@@ -2,21 +2,14 @@ package com.cg.as.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-=======
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
->>>>>>> 71266d62a3cbbbb7f4063cf186836b94d88aaf2b
 
 import com.cg.as.entity.BookingInformation;
 import com.cg.as.entity.Flight;
@@ -30,7 +23,7 @@ public class AirlineController {
 	@Autowired
 	IAirlineService airlineService;
 	
-	@RequestMapping(value="/listOfFlights.html")
+	@RequestMapping(value="/listOfFlights", method=RequestMethod.POST)
 	public String getAllFlights(@ModelAttribute("booking") BookingInformation bookingInformation, Model model){
 		try {
 			List<Flight> flights = airlineService.viewListOfFlights("all", "all");
@@ -59,11 +52,11 @@ public class AirlineController {
 		return "index";
 	}
 	
-	@RequestMapping("/login")
+	/*@RequestMapping("/login")
 	public String login()
 	{
 		return "login_signUp";
-	}
+	}*/
 	
 	
 	@RequestMapping("/loginCheck")
@@ -88,11 +81,11 @@ public class AirlineController {
 		return "login_signUp";
 	}
 	
-	@RequestMapping("/login")
+	/*@RequestMapping("/login")
 	public String login(Model model){
 		model.addAttribute("user", new User());
 		return "Client";
-	}
+	}*/
 	
 	@RequestMapping(value="/validLogin",method=RequestMethod.POST)
 	public String validLogin(@ModelAttribute("user") User user,BindingResult result,Model model){
