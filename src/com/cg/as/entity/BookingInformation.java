@@ -20,8 +20,8 @@ public class BookingInformation {
 	@Column(name="booking_id")
 	private String bookingId;
 	
-	@Column(name="cust_email")
-	private String custEmail;
+	@Column(name="user_email")
+	private String userEmail;
 	
 	@Column(name="no_of_passengers")
 	@NotEmpty(message ="provide passengers seat")
@@ -64,13 +64,13 @@ public class BookingInformation {
 		super();
 	}
 
-	public BookingInformation(String bookingId, String custEmail,
+	public BookingInformation(String bookingId, String userEmail,
 			int noOfPassengers, String classType, double totalFare,
 			String creditcardInfo, String srcCity, String destCity,
 			String flightNo, Date bookingDate, Date travelDate) {
 		super();
 		this.bookingId = bookingId;
-		this.custEmail = custEmail;
+		this.userEmail = userEmail;
 		this.noOfPassengers = noOfPassengers;
 		this.classType = classType;
 		this.totalFare = totalFare;
@@ -90,12 +90,14 @@ public class BookingInformation {
 		this.bookingId = bookingId;
 	}
 
-	public String getCustEmail() {
-		return custEmail;
+	
+
+	public String getUserEmail() {
+		return userEmail;
 	}
 
-	public void setCustEmail(String custEmail) {
-		this.custEmail = custEmail;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 	public int getNoOfPassengers() {
@@ -167,12 +169,12 @@ public class BookingInformation {
 	}
 
 	public void setTravelDate(Date travelDate) {
-		travelDate = travelDate;
+		this.travelDate = travelDate;
 	}
 
 	public void formattedString() {
 		System.out.format("%15s%20s%15s%10s%15s%20s%20s%15s%15s", bookingId,
-				custEmail, noOfPassengers, classType, totalFare,
+				userEmail, noOfPassengers, classType, totalFare,
 				creditcardInfo, srcCity, destCity, flightNo,bookingDate + "\n");
 	}
 }

@@ -53,7 +53,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 					Flight.class);
 			sqlQuery.setParameter("deptDate", Date.valueOf(query));
 		} else if (searchBasis.equals("route")) {
-			String route[] = query.split("-");
+			String route[] = query.split("=");
 			sqlQuery = entityManager
 					.createQuery(
 							"SELECT f FROM Flight f WHERE f.deptCity=:deptCity AND f.arrCity=:arrCity",
@@ -68,6 +68,12 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		} else if (searchBasis.equals("all")) {
 			sqlQuery = entityManager.createQuery("SELECT f FROM Flight f",
 					Flight.class);
+		}else if(searchBasis.equals("byUser")){
+			String route[] = query.split("=");
+			sqlQuery = entityManager.createQuery("SELECT f FROM Flight f where f.deptCity=:deptCity AND f.arrCity=:arrCity AND f.deptDate=:deptDate",Flight.class);
+			sqlQuery.setParameter("deptCity", route[0]);
+			sqlQuery.setParameter("arrCity", route[1]);
+			sqlQuery.setParameter("deptDate", Date.valueOf(route[2]));
 		}
 
 		return sqlQuery.getResultList();

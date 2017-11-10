@@ -24,12 +24,12 @@
 				<td>From</td>
 				<td><form:select path="srcCity">
 						<form:option value="select">Select</form:option>
-						<form:option value="Pune">Pune(PNQ)</form:option>
-						<form:option value="Mumbai">Mumbai(BOM)</form:option>
-						<form:option value="Chennai">Chennai(MAA)</form:option>
-						<form:option value="Kolkata">Kolkata(CCU)</form:option>
-						<form:option value="Delhi">Delhi(DEL)</form:option>
-						<form:option value="Bangalore">Bangalore(BLR)</form:option>
+						<form:option value="PNQ">Pune(PNQ)</form:option>
+						<form:option value="BOM">Mumbai(BOM)</form:option>
+						<form:option value="MAA">Chennai(MAA)</form:option>
+						<form:option value="CCU">Kolkata(CCU)</form:option>
+						<form:option value="DEL">Delhi(DEL)</form:option>
+						<form:option value="BLR">Bangalore(BLR)</form:option>
 					</form:select></td>
 			</tr>
 
@@ -37,12 +37,12 @@
 				<td>To</td>
 				<td><form:select path="destCity">
 						<form:option value="select">Select</form:option>
-						<form:option value="Pune">Pune(PNQ)</form:option>
-						<form:option value="Mumbai">Mumbai(BOM)</form:option>
-						<form:option value="Chennai">Chennai(MAA)</form:option>
-						<form:option value="Kolkata">Kolkata(CCU)</form:option>
-						<form:option value="Delhi">Delhi(DEL)</form:option>
-						<form:option value="Bangalore">Bangalore(BLR)</form:option>
+						<form:option value="PNQ">Pune(PNQ)</form:option>
+						<form:option value="BOM">Mumbai(BOM)</form:option>
+						<form:option value="MAA">Chennai(MAA)</form:option>
+						<form:option value="CCU">Kolkata(CCU)</form:option>
+						<form:option value="DEL">Delhi(DEL)</form:option>
+						<form:option value="BLR">Bangalore(BLR)</form:option>
 					</form:select></td>
 			</tr>
 
