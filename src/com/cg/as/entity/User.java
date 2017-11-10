@@ -13,36 +13,35 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-
 @Entity
 @Table(name = "users")
 public class User {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "userid")
 	private int userId;
-	
+
 	@Column(name = "username")
 	@Valid
-	@NotBlank(message="Username is required")
+	@NotBlank(message = "Username is required")
 	@Size(min = 4, max = 20, message = "About Me must be between 4 and 20 characters")
-	@Pattern(regexp="^[a-zA-Z][a-zA-Z0-9._]{4,20}$",message="Error: Username can have only characters,digits, '.(dot)' and '_'")
+	@Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9._]{4,20}$", message = "Error: Username can have only characters,digits, '.(dot)' and '_'")
 	private String username;
 
 	@Column(name = "password")
 	@Valid
-	@NotNull(message="Please provide a valid password")
+	@NotNull(message = "Please provide a valid password")
 	@Size(min = 8, max = 20, message = "About Me must be between 8 and 20 characters")
 	private String password;
 
 	@Column(name = "cust_email")
-	//@Email(message = "Email should be valid")
-	//@NotEmpty(message = "Email is required")
+	// @Email(message = "Email should be valid")
+	// @NotEmpty(message = "Email is required")
 	private String email;
 
 	@Column(name = "mobile_no")
-	//@Pattern(regexp="[1-9][0-9]{9}",message="Error: please provide a valid mobile number")
+	// @Pattern(regexp="[1-9][0-9]{9}",message="Error: please provide a valid mobile number")
 	private long mobileNo;
 
 	@Column(name = "role")

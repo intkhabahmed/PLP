@@ -13,11 +13,13 @@
 	<h1>Airline Reservation System</h1>
 
 
-	<form:form action="listOfFlights.html" method="post" modelAttribute="booking">
+	<form:form action="listOfFlights.html" method="post"
+		modelAttribute="booking">
 
 		<table>
 			<tr>
-				<td><input type="button" onclick="location.href='login.html'" value="Login/SignUp" /></td>	
+				<td><input type="button" onclick="location.href='login.html'"
+					value="Login/SignUp" /></td>
 			</tr>
 
 			<tr>
@@ -53,12 +55,12 @@
 
 			<tr>
 				<td>No. of Passengers</td>
-				<td><form:input path="noOfPassengers" type="text"/></td>
+				<td><form:input path="noOfPassengers" type="text" /></td>
 			</tr>
 
 			<tr>
 				<td>Class Type</td>
-				<td><form:input path="classType" type="text"/></td>
+				<td><form:input path="classType" type="text" /></td>
 			</tr>
 
 

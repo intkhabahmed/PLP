@@ -18,10 +18,7 @@ import com.cg.as.exception.AirlineException;
  * @author inahmed
  *
  */
-/**
- * @author inahmed
- *
- */
+
 @Repository
 public class AirlineDAOImpl implements IAirlineDAO {
 	/*
@@ -68,9 +65,12 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		} else if (searchBasis.equals("all")) {
 			sqlQuery = entityManager.createQuery("SELECT f FROM Flight f",
 					Flight.class);
-		}else if(searchBasis.equals("byUser")){
+		} else if (searchBasis.equals("byUser")) {
 			String route[] = query.split("=");
-			sqlQuery = entityManager.createQuery("SELECT f FROM Flight f where f.deptCity=:deptCity AND f.arrCity=:arrCity AND f.deptDate=:deptDate",Flight.class);
+			sqlQuery = entityManager
+					.createQuery(
+							"SELECT f FROM Flight f where f.deptCity=:deptCity AND f.arrCity=:arrCity AND f.deptDate=:deptDate",
+							Flight.class);
 			sqlQuery.setParameter("deptCity", route[0]);
 			sqlQuery.setParameter("arrCity", route[1]);
 			sqlQuery.setParameter("deptDate", Date.valueOf(route[2]));
@@ -115,18 +115,11 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	}
 
 	/*
-	 * (non-Javadoc) >>>>>>> b160fbd0310f9509ec730c80d73e7accb8fd1f16
+	 * (non-Javadoc)
 	 * 
 	 * @see com.cg.as.dao.IAirlineDAO#validLogin(com.cg.as.entity.User)
 	 */
-	/*
-	 * @Override public User validLogin(String username, String password) throws
-	 * AirlineException { //User user = entityManager.find(User.class, 1);
-	 * TypedQuery<User> query =
-	 * entityManager.createQuery("Select u from User u where u.username='"
-	 * +username+"'", User.class); return query.getSingleResult();
-	 */
-
+	@Override
 	public User validLogin(User user) throws AirlineException {
 		TypedQuery<User> sqlQuery = entityManager
 				.createQuery(

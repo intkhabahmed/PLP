@@ -7,6 +7,10 @@ import com.cg.as.entity.Flight;
 import com.cg.as.entity.User;
 import com.cg.as.exception.AirlineException;
 
+/**
+ * @author inahmed
+ *
+ */
 public interface IAirlineDAO {
 	
 	/**
