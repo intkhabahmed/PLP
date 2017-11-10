@@ -1,5 +1,6 @@
 package com.cg.as.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -28,8 +29,11 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/* (non-Javadoc)
-	 * @see com.cg.as.dao.IAirlineDAO#viewListOfFlights(java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.cg.as.dao.IAirlineDAO#viewListOfFlights(java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
@@ -44,7 +48,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			sqlQuery = entityManager.createQuery(
 					"SELECT f FROM Flight f WHERE f.deptDate=:deptDate",
 					Flight.class);
-			sqlQuery.setParameter("deptDate", query);
+			sqlQuery.setParameter("deptDate", Date.valueOf(query));
 		} else if (searchBasis.equals("route")) {
 			String route[] = query.split("-");
 			sqlQuery = entityManager
@@ -66,9 +70,11 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return sqlQuery.getResultList();
 	}
 
-	
-	/* (non-Javadoc)
-	 * @see com.cg.as.dao.IAirlineDAO#viewBookings(java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.cg.as.dao.IAirlineDAO#viewBookings(java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
 	public List<BookingInformation> viewBookings(String query,
@@ -77,9 +83,10 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		TypedQuery<BookingInformation> sqlQuery = null;
 
 		if (searchBasis.equals("byFlight")) {
-			sqlQuery = entityManager.createQuery(
-					"SELECT b FROM BookingInformation b WHERE b.flightNo=:flightNo",
-					BookingInformation.class);
+			sqlQuery = entityManager
+					.createQuery(
+							"SELECT b FROM BookingInformation b WHERE b.flightNo=:flightNo",
+							BookingInformation.class);
 			sqlQuery.setParameter("flightNo", query);
 		} else if (searchBasis.equals("byUser")) {
 
@@ -89,7 +96,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			userQuery.setParameter("username", query);
 			User user = userQuery.getSingleResult();
 			sqlQuery = entityManager
-					.createQuery("SELECT b FROM BookingInformation b WHERE b.custEmail=:email", BookingInformation.class);
+					.createQuery(
+							"SELECT b FROM BookingInformation b WHERE b.custEmail=:email",
+							BookingInformation.class);
 			sqlQuery.setParameter("email", user.getEmail());
 		}
 		return sqlQuery.getResultList();
@@ -104,16 +113,18 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 */
 	@Override
 	public User validLogin(User user) throws AirlineException {
-		TypedQuery<User> sqlQuery = entityManager.createQuery(
-				"SELECT u FROM User u WHERE u.username=:user AND u.password=:pass",
-				User.class);
+		TypedQuery<User> sqlQuery = entityManager
+				.createQuery(
+						"SELECT u FROM User u WHERE u.username=:user AND u.password=:pass",
+						User.class);
 		sqlQuery.setParameter("user", user.getUsername());
 		sqlQuery.setParameter("pass", user.getPassword());
 		return sqlQuery.getSingleResult();
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.cg.as.dao.IAirlineDAO#signUp(com.cg.as.entity.User)
 	 */
 	@Override
@@ -122,10 +133,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return user;
 	}
 
-	
-	
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see com.cg.as.dao.IAirlineDAO#bookingCancel(java.lang.String)
 	 */
 	@Override

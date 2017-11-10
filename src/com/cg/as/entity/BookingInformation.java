@@ -57,6 +57,9 @@ public class BookingInformation {
 	@Future
 	private Date bookingDate;
 
+	@Column(name="travel_date")
+	private Date travelDate;
+
 	public BookingInformation() {
 		super();
 	}
@@ -64,7 +67,7 @@ public class BookingInformation {
 	public BookingInformation(String bookingId, String custEmail,
 			int noOfPassengers, String classType, double totalFare,
 			String creditcardInfo, String srcCity, String destCity,
-			String flightNo, Date bookingDate) {
+			String flightNo, Date bookingDate, Date travelDate) {
 		super();
 		this.bookingId = bookingId;
 		this.custEmail = custEmail;
@@ -76,6 +79,7 @@ public class BookingInformation {
 		this.destCity = destCity;
 		this.flightNo = flightNo;
 		this.bookingDate = bookingDate;
+		this.travelDate = travelDate;
 	}
 
 	public String getBookingId() {
@@ -158,14 +162,12 @@ public class BookingInformation {
 		this.bookingDate = bookingDate;
 	}
 
-	@Override
-	public String toString() {
-		return "BookingInformation [bookingId=" + bookingId + ", custEmail="
-				+ custEmail + ", noOfPassengers=" + noOfPassengers
-				+ ", classType=" + classType + ", totalFare=" + totalFare
-				+ ", creditcardInfo=" + creditcardInfo + ", srcCity=" + srcCity
-				+ ", destCity=" + destCity + ", flightNo=" + flightNo
-				+ ", bookingDate=" + bookingDate + "]";
+	public Date getTravelDate() {
+		return travelDate;
+	}
+
+	public void setTravelDate(Date travelDate) {
+		this.travelDate = travelDate;
 	}
 
 	public void formattedString() {
