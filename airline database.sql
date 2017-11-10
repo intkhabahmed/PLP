@@ -85,6 +85,7 @@ CreditCard_info Varchar2(10),
 Src_city Varchar2(10), 
 Dest_city Varchar2(10),
 FlightNo varchar2(10) constraint fk_bookinginfo_flightno references FlightInformation(Flightno),
-Booking_date Date
+Booking_date Date,
+Travel_date Date
 )
 /

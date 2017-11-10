@@ -48,7 +48,7 @@
 
 			<tr>
 				<td>Depart</td>
-				<td><form:input path="bookingDate" type="date" /></td>
+				<td><form:input path="travelDate" type="date" /></td>
 			</tr>
 
 			<tr>
