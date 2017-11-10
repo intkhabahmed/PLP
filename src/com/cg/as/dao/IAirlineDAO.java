@@ -54,4 +54,6 @@ public interface IAirlineDAO {
 			String creditCard) throws AirlineException;
 	public int checkAvailability(String query, String type) throws AirlineException;*/
 
+	public int[] flightOccupancyDetails(String flightNo);
+
 }

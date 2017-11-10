@@ -154,6 +154,25 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		entityManager.remove(booking);
 		return booking;
 	}
+	
+	@Override
+	public int[] flightOccupancyDetails(String flightNo){
+		int[] seatDetails = new int[4];
+		TypedQuery<Integer> sqlQuery = null;
+		sqlQuery = entityManager.createQuery("SELECT f.firstSeats FROM Flight f where f.flightNo=:flightNo",Integer.class);
+		sqlQuery.setParameter("flightNo", flightNo);
+		seatDetails[0] = sqlQuery.getSingleResult();
+		sqlQuery = entityManager.createQuery("SELECT f.bussSeats FROM Flight f where f.flightNo=:flightNo",Integer.class);
+		sqlQuery.setParameter("flightNo", flightNo);
+		seatDetails[1] = sqlQuery.getSingleResult();
+		sqlQuery =  entityManager.createQuery("SELECT f.noOfPassengers FROM BookingInformation f where f.flightNo=:flightNo AND f.classType='first'",Integer.class);
+		sqlQuery.setParameter("flightNo", flightNo);
+		seatDetails[2] = sqlQuery.getSingleResult();
+		sqlQuery =  entityManager.createQuery("SELECT f.noOfPassengers FROM BookingInformation f where f.flightNo=:flightNo AND f.classType='business'",Integer.class);
+		sqlQuery.setParameter("flightNo", flightNo);
+		seatDetails[3] = sqlQuery.getSingleResult();
+		return seatDetails;
+	}
 
 	/*
 	 * (non-Javadoc)

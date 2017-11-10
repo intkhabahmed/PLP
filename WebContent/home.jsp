@@ -8,5 +8,6 @@
 </head>
 <body>
 <a href = "menu.html">Index</a>
+<a href="viewOccupancyDetails.html">Get occupancy details</a>
 </body>
 </html>

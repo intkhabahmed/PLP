@@ -97,5 +97,18 @@ public class AirlineController {
 			return "msg";
 		}
 	}
-
+	
+	@RequestMapping(value="viewOccupancyDetails.html")
+	public String viewOccupancyDetails(Model model){
+		int a[] = airlineService.flightOccupancyDetails("SG-3309");
+		int b = a[0];
+		int c = a[1];
+		int d = a[2];
+		int e = a[3];
+		model.addAttribute("message1", b);
+		model.addAttribute("message2", c);
+		model.addAttribute("message3", d);
+		model.addAttribute("message4", e);
+		return "success";
+	}
 }
