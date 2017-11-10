@@ -30,7 +30,8 @@ public class AirlineController {
 		try {
 			// List<Flight> flights = airlineService.viewListOfFlights("PNQ",
 			// "dest");
-			List<Flight> flights = airlineService.viewListOfFlights(bookingInformation.getDestCity() , "dest");
+			List<Flight> flights = airlineService.viewListOfFlights(
+					bookingInformation.getDestCity(), "dest");
 			model.addAttribute("flights", flights);
 		} catch (AirlineException e) {
 			e.printStackTrace();
