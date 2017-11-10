@@ -11,8 +11,6 @@
 <body>
 	<h1>Hello this is index page</h1>
 
-	Source :<input type = "text" name="src" >
-	Destination :<input type = "text" name="dest" >
 	<a href="login.html">Login</a>
 	<a href="index.html">Get All List of Flights</a>
 	<a href="booking.html">Get All Flight Bookings</a>

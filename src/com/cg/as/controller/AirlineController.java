@@ -26,10 +26,10 @@ public class AirlineController {
 	@RequestMapping(value="/listOfFlights", method=RequestMethod.POST)
 	public String getAllFlights(@ModelAttribute("booking") BookingInformation bookingInformation, Model model){
 		try {
-			List<Flight> flights = airlineService.viewListOfFlights("all", "all");
+			List<Flight> flights = airlineService.viewListOfFlights("PNQ", "dest");
 			model.addAttribute("flights", flights);	
 		} catch (AirlineException e) {
-			e.getMessage();
+			e.printStackTrace();
 		}
 		return "flightList";
 	}

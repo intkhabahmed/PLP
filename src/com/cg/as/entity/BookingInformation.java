@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -63,7 +62,7 @@ public class BookingInformation {
 		super();
 	}
 
-	/*public BookingInformation(String bookingId, String custEmail,
+	public BookingInformation(String bookingId, String custEmail,
 			int noOfPassengers, String classType, double totalFare,
 			String creditcardInfo, String srcCity, String destCity,
 			String flightNo, Date bookingDate) {
@@ -78,7 +77,7 @@ public class BookingInformation {
 		this.destCity = destCity;
 		this.flightNo = flightNo;
 		this.bookingDate = bookingDate;
-	}*/
+	}
 
 
 	public String getBookingId() {
