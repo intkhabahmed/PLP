@@ -28,15 +28,10 @@ public class AirlineController {
 			@ModelAttribute("booking") BookingInformation bookingInformation,
 			Model model) {
 		try {
-<<<<<<< HEAD
-			List<Flight> flights = airlineService.viewListOfFlights("PNQ",
-					"dest");
-=======
 			String str = bookingInformation.getSrcCity()+"="+bookingInformation.getDestCity()+"="+bookingInformation.getTravelDate();
 			String str1 = bookingInformation.getSrcCity()+"="+bookingInformation.getDestCity();
 			List<Flight> flights = airlineService.viewListOfFlights(str, "byUser");
 
->>>>>>> eced08a88c065e5ee318c2058a924aaacd5d1102
 			model.addAttribute("flights", flights);
 		} catch (AirlineException e) {
 			e.printStackTrace();
