@@ -3,8 +3,11 @@ package com.cg.as.dao;
 import java.sql.Date;
 import java.util.List;
 
+
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -209,7 +212,29 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		
 	}
 	
+	@Override
+	public String forotPassword(String username, String password){
+		Query sqlQuery = entityManager.createQuery("Update User u Set u.password where u.username=:username");
+		sqlQuery.setParameter("username", username);
+		return username;
+	}
 
+	@Override
+	public String checkAvailabiltiy(String query, String searchBasis){
+		TypedQuery<String> sqlQuery= null;
+		String isAvail;
+		if(searchBasis.equals("byUsername")){
+			sqlQuery = entityManager.createQuery("Select u.username from User u where u.username=:query", String.class);
+			sqlQuery.setParameter("query", query);
+		}else if(searchBasis.equals("byEmail")){
+			sqlQuery = entityManager.createQuery("Select u.email from User u where u.email=:query", String.class);
+			sqlQuery.setParameter("query", query);
+		}
+		isAvail = sqlQuery.getSingleResult();
+		return isAvail;
+	}
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * 

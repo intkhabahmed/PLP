@@ -75,4 +75,8 @@ public interface IAirlineDAO {
 	 */
 	public BookingInformation confirmBooking(BookingInformation booking) throws AirlineException;
 
+	public String checkAvailabiltiy(String query, String searchBasis);
+
+	public String forotPassword(String username, String password);
+
 }

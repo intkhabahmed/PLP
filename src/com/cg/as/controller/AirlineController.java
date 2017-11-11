@@ -112,7 +112,6 @@ public class AirlineController {
 			model.addAttribute("message3", d);
 			model.addAttribute("message4", e);
 		} catch (AirlineException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

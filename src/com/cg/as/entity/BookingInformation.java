@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
@@ -19,6 +21,7 @@ public class BookingInformation {
 
 	@Id
 	@Column(name = "Booking_id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String bookingId;
 
 	@Column(name = "User_email")

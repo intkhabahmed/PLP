@@ -69,6 +69,25 @@ public class AirlineServiceImpl implements IAirlineService {
 		return airlineDAO.confirmBooking(booking);
 	}
 	
+	@Override
+	public String forotPassword(String username, String password){
+		String isAvail = airlineDAO.checkAvailabiltiy(username, "byUsername");
+		if(!isAvail.isEmpty())
+			return airlineDAO.forotPassword(username, password);
+		else
+			return "Invalid Username";
+	}
+	
+	@Override
+	public boolean checkAvailabiltiy(String query, String searchBasis){
+		boolean avail;
+		String isAvail = airlineDAO.checkAvailabiltiy(query, searchBasis);
+		if(isAvail.isEmpty())
+			return true;
+		else
+			return false;
+	}
+	
 	/*@Override
 	public int[] flightOccupancyDetails(String flightNo)
 			throws AirlineException {

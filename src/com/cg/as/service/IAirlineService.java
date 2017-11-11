@@ -61,5 +61,9 @@ public interface IAirlineService {
 	public BookingInformation modifyBookingInformation(BookingInformation booking) throws AirlineException;
 
 	public BookingInformation confirmBooking(BookingInformation booking) throws AirlineException;
+
+	public boolean checkAvailabiltiy(String query, String searchBasis);
+
+	public String forotPassword(String username, String password);
 	
 }
