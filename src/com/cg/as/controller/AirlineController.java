@@ -32,6 +32,8 @@ public class AirlineController {
 
 	@Autowired
 	IAirlineService airlineService;
+	
+	User user;
 
 	@RequestMapping(value = "/listOfFlights", method = RequestMethod.POST)
 	public String getAllFlights(
@@ -49,6 +51,7 @@ public class AirlineController {
 				model.addAttribute("flights", flights);
 			}
 			model.addAttribute("booking", bookingInformation);
+
 
 			model.addAttribute("classTypeOptions", new String[] { "First",
 					"Business" });
@@ -87,12 +90,13 @@ public class AirlineController {
 		return "login";
 	}
 
+
 	@RequestMapping("/showSignup")
 	public String showSignup(Model model) {
 		model.addAttribute("user", new User());
 		return "signup";
 	}
-
+	
 	@RequestMapping("/logout")
 	public String logout(Model model, SessionStatus status) {
 		status.setComplete();
@@ -147,25 +151,32 @@ public class AirlineController {
 
 		return returnPage;
 	}
-
-	@RequestMapping(value = "viewOccupancyDetails.html")
-	public String viewOccupancyDetails(Model model) {
-		int a[] = airlineService.flightOccupancyDetails("SG-3309");
-		int b = a[0];
-		int c = a[1];
-		int d = a[2];
-		int e = a[3];
-		model.addAttribute("message1", b);
-		model.addAttribute("message2", c);
-		model.addAttribute("message3", d);
-		model.addAttribute("message4", e);
+	
+	@RequestMapping(value="viewOccupancyDetails.html")
+	public String viewOccupancyDetails(Model model){
+		int a[];
+		try {
+			a = airlineService.flightOccupancyDetails("SG-3309");
+			int b = a[0];
+			int c = a[1];
+			int d = a[2];
+			int e = a[3];
+			model.addAttribute("message1", b);
+			model.addAttribute("message2", c);
+			model.addAttribute("message3", d);
+			model.addAttribute("message4", e);
+		} catch (Exception e1) {
+			e1.getMessage();
+		}
+		
 		return "success";
 	}
 
 	@RequestMapping(value = "/booking", method = RequestMethod.POST)
 	public String bookFlight(
 			@ModelAttribute("booking") BookingInformation bookingInformation) {
-
+	
 		return "index";
 	}
+	
 }

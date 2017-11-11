@@ -72,6 +72,7 @@ FirstSeats Number(10),
 FirstSeatFare Number(10,2), 
 BussSeats Number, 
 BussSeatsFare Number(10,2)
+duration Varchar2(30)
 )
 /
 
@@ -88,4 +89,6 @@ FlightNo varchar2(10) constraint fk_bookinginfo_flightno references FlightInform
 Booking_date Date,
 Travel_date Date
 )
+
+
 /

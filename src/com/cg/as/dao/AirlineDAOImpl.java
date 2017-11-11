@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -19,6 +20,14 @@ import com.cg.as.exception.AirlineException;
  *
  */
 
+/**
+ * @author hisinha
+ *
+ */
+/**
+ * @author hisinha
+ *
+ */
 @Repository
 public class AirlineDAOImpl implements IAirlineDAO {
 	/*
@@ -155,8 +164,12 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return booking;
 	}
 	
+	
+	/* (non-Javadoc)
+	 * @see com.cg.as.dao.IAirlineDAO#flightOccupancyDetails(java.lang.String)
+	 */
 	@Override
-	public int[] flightOccupancyDetails(String flightNo){
+	public int[] flightOccupancyDetails(String flightNo) throws AirlineException{
 		int[] seatDetails = new int[4];
 		TypedQuery<Integer> sqlQuery = null;
 		sqlQuery = entityManager.createQuery("SELECT f.firstSeats FROM Flight f where f.flightNo=:flightNo",Integer.class);
@@ -173,7 +186,53 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		seatDetails[3] = sqlQuery.getSingleResult();
 		return seatDetails;
 	}
+	
+	
+	/* (non-Javadoc)
+	 * @see com.cg.as.dao.IAirlineDAO#modifyBookingInformation(com.cg.as.entity.BookingInformation)
+	 */
+	@Override
+	public BookingInformation modifyBookingInformation(BookingInformation booking) throws AirlineException{
+		booking = entityManager.merge(booking);
+		entityManager.flush();
+		return booking;
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see com.cg.as.dao.IAirlineDAO#confirmBooking(com.cg.as.entity.BookingInformation)
+	 */
+	@Override
+	public BookingInformation confirmBooking(BookingInformation booking) throws AirlineException{
+		entityManager.persist(booking);
+		entityManager.flush();
+		return booking;
+		
+	}
+	
+	@Override
+	public String forgotPassword(String username, String password){
+		Query sqlQuery = entityManager.createQuery("Update User u Set u.password where u.username=:username");
+		sqlQuery.setParameter("username", username);
+		return username;
+	}
 
+	@Override
+	public String checkAvailabiltiy(String query, String searchBasis){
+		TypedQuery<String> sqlQuery= null;
+		String isAvail;
+		if(searchBasis.equals("byUsername")){
+			sqlQuery = entityManager.createQuery("Select u.username from User u where u.username=:query", String.class);
+			sqlQuery.setParameter("query", query);
+		}else if(searchBasis.equals("byEmail")){
+			sqlQuery = entityManager.createQuery("Select u.email from User u where u.email=:query", String.class);
+			sqlQuery.setParameter("query", query);
+		}
+		isAvail = sqlQuery.getSingleResult();
+		return isAvail;
+	}
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * 
