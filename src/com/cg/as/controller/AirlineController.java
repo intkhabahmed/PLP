@@ -22,6 +22,8 @@ public class AirlineController {
 
 	@Autowired
 	IAirlineService airlineService;
+	
+	User user;
 
 	@RequestMapping(value = "/listOfFlights", method = RequestMethod.POST)
 	public String getAllFlights(
@@ -62,7 +64,7 @@ public class AirlineController {
 	@RequestMapping("/loginCheck")
 	public String loginValidation(@RequestParam("username") String username,
 			@RequestParam("password") String password, Model model) {
-		User user = new User();
+		user = new User();
 		user.setUsername(username);
 		user.setPassword(password);
 

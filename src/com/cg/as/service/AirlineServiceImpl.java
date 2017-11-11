@@ -18,7 +18,7 @@ import com.cg.as.exception.AirlineException;
 public class AirlineServiceImpl implements IAirlineService {
 
 	@Autowired
-	IAirlineDAO airlineDAO;
+	private IAirlineDAO airlineDAO;
 
 	
 
@@ -80,7 +80,6 @@ public class AirlineServiceImpl implements IAirlineService {
 	
 	@Override
 	public boolean checkAvailabiltiy(String query, String searchBasis){
-		boolean avail;
 		String isAvail = airlineDAO.checkAvailabiltiy(query, searchBasis);
 		if(isAvail.isEmpty())
 			return true;

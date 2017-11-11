@@ -88,4 +88,6 @@ FlightNo varchar2(10) constraint fk_bookinginfo_flightno references FlightInform
 Booking_date Date,
 Travel_date Date
 )
+
+
 /

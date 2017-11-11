@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
@@ -21,7 +22,8 @@ public class BookingInformation {
 
 	@Id
 	@Column(name = "Booking_id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="seq1",sequenceName="ticketbooking_id_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seq1")
 	private String bookingId;
 
 	@Column(name = "User_email")
