@@ -70,10 +70,10 @@ public class AirlineServiceImpl implements IAirlineService {
 	}
 	
 	@Override
-	public String forotPassword(String username, String password){
+	public String forgotPassword(String username, String password){
 		String isAvail = airlineDAO.checkAvailabiltiy(username, "byUsername");
 		if(!isAvail.isEmpty())
-			return airlineDAO.forotPassword(username, password);
+			return airlineDAO.forgotPassword(username, password);
 		else
 			return "Invalid Username";
 	}

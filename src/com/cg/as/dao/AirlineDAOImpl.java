@@ -3,8 +3,6 @@ package com.cg.as.dao;
 import java.sql.Date;
 import java.util.List;
 
-
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -213,7 +211,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	}
 	
 	@Override
-	public String forotPassword(String username, String password){
+	public String forgotPassword(String username, String password){
 		Query sqlQuery = entityManager.createQuery("Update User u Set u.password where u.username=:username");
 		sqlQuery.setParameter("username", username);
 		return username;

@@ -33,7 +33,6 @@ public class AirlineController {
 			String str = bookingInformation.getSrcCity()+"="+bookingInformation.getDestCity()+"="+bookingInformation.getTravelDate();
 			List<Flight> flights = airlineService.viewListOfFlights(str, "byUser");
 
-
 			model.addAttribute("flights", flights);
 		} catch (AirlineException e) {
 			e.printStackTrace();
