@@ -14,50 +14,50 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "bookinginformation")
+@Table(name = "Bookinginformation")
 public class BookingInformation {
 
 	@Id
-	@Column(name = "booking_id")
+	@Column(name = "Booking_id")
 	private String bookingId;
 
-	@Column(name = "user_email")
+	@Column(name = "User_email")
 	private String custEmail;
 
-	@Column(name = "no_of_passengers")
+	@Column(name = "No_of_passengers")
 	@NotEmpty(message = "provide passengers seat")
 	private int noOfPassengers;
 
-	@Column(name = "class_type")
+	@Column(name = "Class_type")
 	@NotEmpty(message = "Provide a class")
 	private String classType;
 
-	@Column(name = "total_fare")
+	@Column(name = "Total_fare")
 	private double totalFare;
 
 	@Column(name = "CreditCard_info")
 	@NotEmpty(message = "Provide your credit card detail")
 	private String creditcardInfo;
 
-	@Column(name = "src_city")
+	@Column(name = "Src_city")
 	@Pattern(regexp = "[A-Za-z]{2,10}", message = "Please provide valid source city")
 	@Size(min = 2, max = 10, message = "size of the source between 2 to 10")
 	private String srcCity;
 
-	@Column(name = "dest_city")
+	@Column(name = "Dest_city")
 	@Pattern(regexp = "[A-Za-z]{2,10}", message = "Please provide valid destination city")
 	@Size(min = 2, max = 10, message = "size of the destination city between 2 to 10")
 	private String destCity;
 
-	@Column(name = "flightNo")
+	@Column(name = "FlightNo")
 	private String flightNo;
 
-	@Column(name = "booking_date")
+	@Column(name = "Booking_date")
 	@NotNull(message = "Provide a date please")
 	@Future
 	private Date bookingDate;
 
-	@Column(name = "travel_date")
+	@Column(name = "Travel_date")
 	private Date travelDate;
 
 	public BookingInformation() {

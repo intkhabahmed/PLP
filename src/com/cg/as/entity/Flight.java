@@ -11,28 +11,28 @@ import javax.persistence.Table;
 public class Flight {
 
 	@Id
-	@Column(name = "flightno")
+	@Column(name = "Flightno")
 	private String flightNo;
 
-	@Column(name = "airline")
+	@Column(name = "Airline")
 	private String flightName;
 
-	@Column(name = "dep_city")
+	@Column(name = "Dep_city")
 	private String deptCity;
 
-	@Column(name = "arr_city")
+	@Column(name = "Arr_city")
 	private String arrCity;
 
-	@Column(name = "dep_date")
+	@Column(name = "Dep_date")
 	private Date deptDate;
 
-	@Column(name = "arr_date")
+	@Column(name = "Arr_date")
 	private Date arrDate;
 
-	@Column(name = "dep_time")
+	@Column(name = "Dep_time")
 	private String deptTime;
 
-	@Column(name = "arr_time")
+	@Column(name = "Arr_time")
 	private String arrTime;
 
 	@Column(name = "FirstSeats")
