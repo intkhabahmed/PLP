@@ -54,8 +54,19 @@ public class AirlineServiceImpl implements IAirlineService {
 	
 	
 	@Override
-	public int[] flightOccupancyDetails(String flightNo){
+	public int[] flightOccupancyDetails(String flightNo) throws AirlineException{
 		return airlineDAO.flightOccupancyDetails(flightNo);
+	}
+	
+	
+	@Override
+	public BookingInformation modifyBookingInformation(BookingInformation booking) throws AirlineException{
+		return airlineDAO.modifyBookingInformation(booking);
+	}
+	
+	@Override
+	public BookingInformation confirmBooking(BookingInformation booking) throws AirlineException{
+		return airlineDAO.confirmBooking(booking);
 	}
 	
 	/*@Override

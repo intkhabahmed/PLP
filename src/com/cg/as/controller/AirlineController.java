@@ -100,15 +100,24 @@ public class AirlineController {
 	
 	@RequestMapping(value="viewOccupancyDetails.html")
 	public String viewOccupancyDetails(Model model){
-		int a[] = airlineService.flightOccupancyDetails("SG-3309");
-		int b = a[0];
-		int c = a[1];
-		int d = a[2];
-		int e = a[3];
-		model.addAttribute("message1", b);
-		model.addAttribute("message2", c);
-		model.addAttribute("message3", d);
-		model.addAttribute("message4", e);
+		int a[];
+		try {
+			a = airlineService.flightOccupancyDetails("SG-3309");
+			int b = a[0];
+			int c = a[1];
+			int d = a[2];
+			int e = a[3];
+			model.addAttribute("message1", b);
+			model.addAttribute("message2", c);
+			model.addAttribute("message3", d);
+			model.addAttribute("message4", e);
+		} catch (AirlineException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		return "success";
 	}
+	
+	
 }

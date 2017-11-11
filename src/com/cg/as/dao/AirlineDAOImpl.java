@@ -19,6 +19,14 @@ import com.cg.as.exception.AirlineException;
  *
  */
 
+/**
+ * @author hisinha
+ *
+ */
+/**
+ * @author hisinha
+ *
+ */
 @Repository
 public class AirlineDAOImpl implements IAirlineDAO {
 	/*
@@ -155,8 +163,12 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return booking;
 	}
 	
+	
+	/* (non-Javadoc)
+	 * @see com.cg.as.dao.IAirlineDAO#flightOccupancyDetails(java.lang.String)
+	 */
 	@Override
-	public int[] flightOccupancyDetails(String flightNo){
+	public int[] flightOccupancyDetails(String flightNo) throws AirlineException{
 		int[] seatDetails = new int[4];
 		TypedQuery<Integer> sqlQuery = null;
 		sqlQuery = entityManager.createQuery("SELECT f.firstSeats FROM Flight f where f.flightNo=:flightNo",Integer.class);
@@ -173,6 +185,30 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		seatDetails[3] = sqlQuery.getSingleResult();
 		return seatDetails;
 	}
+	
+	
+	/* (non-Javadoc)
+	 * @see com.cg.as.dao.IAirlineDAO#modifyBookingInformation(com.cg.as.entity.BookingInformation)
+	 */
+	@Override
+	public BookingInformation modifyBookingInformation(BookingInformation booking) throws AirlineException{
+		booking = entityManager.merge(booking);
+		entityManager.flush();
+		return booking;
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see com.cg.as.dao.IAirlineDAO#confirmBooking(com.cg.as.entity.BookingInformation)
+	 */
+	@Override
+	public BookingInformation confirmBooking(BookingInformation booking) throws AirlineException{
+		entityManager.persist(booking);
+		entityManager.flush();
+		return booking;
+		
+	}
+	
 
 	/*
 	 * (non-Javadoc)
