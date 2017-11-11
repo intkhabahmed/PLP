@@ -19,85 +19,80 @@ import com.cg.as.service.IAirlineService;
 
 @Controller
 public class AirlineController {
-	
+
 	@Autowired
 	IAirlineService airlineService;
-	
-	@RequestMapping(value="/listOfFlights", method=RequestMethod.POST)
-	public String getAllFlights(@ModelAttribute("booking") BookingInformation bookingInformation, Model model){
+
+	@RequestMapping(value = "/listOfFlights", method = RequestMethod.POST)
+	public String getAllFlights(
+			@ModelAttribute("booking") BookingInformation bookingInformation,
+			Model model) {
 		try {
-			List<Flight> flights = airlineService.viewListOfFlights("PNQ", "dest");
-			model.addAttribute("flights", flights);	
+			List<Flight> flights = airlineService.viewListOfFlights("PNQ",
+					"dest");
+			model.addAttribute("flights", flights);
 		} catch (AirlineException e) {
 			e.printStackTrace();
 		}
 		return "flightList";
 	}
-	
-	/*@RequestMapping(value="/booking.html")
-	public String getAllBookings(Model model){
-		try {
-			List<BookingInformation> bookings = airlineService.viewBookings("intu", "byUser");
-			model.addAttribute("bookings", bookings);
-			
-		} catch (AirlineException e) {
-			e.getMessage();
-		}
-		return "../../index";
-	}*/
-	
+
+	/*
+	 * @RequestMapping(value="/booking.html") public String getAllBookings(Model
+	 * model){ try { List<BookingInformation> bookings =
+	 * airlineService.viewBookings("intu", "byUser");
+	 * model.addAttribute("bookings", bookings);
+	 * 
+	 * } catch (AirlineException e) { e.getMessage(); } return "../../index"; }
+	 */
+
 	@RequestMapping("/menu")
-	public String success(Model model){
+	public String success(Model model) {
 		model.addAttribute("booking", new BookingInformation());
 		return "index";
 	}
-	
-	/*@RequestMapping("/login")
-	public String login()
-	{
-		return "login_signUp";
-	}*/
-	
-	
+
+	/*
+	 * @RequestMapping("/login") public String login() { return "login_signUp";
+	 * }
+	 */
+
 	@RequestMapping("/loginCheck")
-	public String loginValidation(@RequestParam("username") String username, @RequestParam("password") String password,Model model)
-	{
+	public String loginValidation(@RequestParam("username") String username,
+			@RequestParam("password") String password, Model model) {
 		User user = new User();
 		user.setUsername(username);
 		user.setPassword(password);
-		
+
 		try {
 			user = airlineService.validLogin(user);
-			if(username.equals(user.getUsername())){
+			if (username.equals(user.getUsername())) {
 				model.addAttribute("booking", new BookingInformation());
-				model.addAttribute("message","Welcome "+user.getUsername());
+				model.addAttribute("message", "Welcome " + user.getUsername());
 				return "index";
 			}
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		model.addAttribute("message", "Invalid username/password");
 		return "login_signUp";
 	}
-	
-	/*@RequestMapping("/login")
-	public String login(Model model){
-		model.addAttribute("user", new User());
-		return "Client";
-	}*/
-	
-	@RequestMapping(value="/validLogin",method=RequestMethod.POST)
-	public String validLogin(@ModelAttribute("user") User user,BindingResult result,Model model){
-		if(result.hasErrors())
-		{
+
+	/*
+	 * @RequestMapping("/login") public String login(Model model){
+	 * model.addAttribute("user", new User()); return "Client"; }
+	 */
+
+	@RequestMapping(value = "/validLogin", method = RequestMethod.POST)
+	public String validLogin(@ModelAttribute("user") User user,
+			BindingResult result, Model model) {
+		if (result.hasErrors()) {
 			return "Client";
-		}
-		else
-		{
-		System.out.println(user.getUsername());
-		model.addAttribute("hi",user.getUsername());
-		return "msg";
+		} else {
+			System.out.println(user.getUsername());
+			model.addAttribute("hi", user.getUsername());
+			return "msg";
 		}
 	}
 
