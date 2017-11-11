@@ -82,6 +82,9 @@ public class BookingInformation {
 		this.travelDate = travelDate;
 	}
 
+	
+	
+	
 	public String getBookingId() {
 		return bookingId;
 	}
@@ -90,12 +93,12 @@ public class BookingInformation {
 		this.bookingId = bookingId;
 	}
 
-	public String getUserEmail() {
+	public String getCustEmail() {
 		return custEmail;
 	}
 
-	public void setUserEmail(String userEmail) {
-		this.custEmail = userEmail;
+	public void setCustEmail(String custEmail) {
+		this.custEmail = custEmail;
 	}
 
 	public int getNoOfPassengers() {
