@@ -56,6 +56,14 @@ public interface IAirlineService {
 	public void checkValidation(String query, String basis) throws AirlineException;*/
 	public User validLogin(User user) throws AirlineException;
 
-	public int[] flightOccupancyDetails(String flightNo);
+	public int[] flightOccupancyDetails(String flightNo) throws AirlineException;
+
+	public BookingInformation modifyBookingInformation(BookingInformation booking) throws AirlineException;
+
+	public BookingInformation confirmBooking(BookingInformation booking) throws AirlineException;
+
+	public boolean checkAvailabiltiy(String query, String searchBasis);
+
+	public String forotPassword(String username, String password);
 	
 }

@@ -54,6 +54,29 @@ public interface IAirlineDAO {
 			String creditCard) throws AirlineException;
 	public int checkAvailability(String query, String type) throws AirlineException;*/
 
-	public int[] flightOccupancyDetails(String flightNo);
+	/**
+	 * @param flightNo
+	 * @return
+	 * @throws AirlineException
+	 */
+	public int[] flightOccupancyDetails(String flightNo) throws AirlineException;
+	
+	/**
+	 * @param booking
+	 * @return
+	 * @throws AirlineException
+	 */
+	public BookingInformation modifyBookingInformation(BookingInformation booking) throws AirlineException;
+	
+	/**
+	 * @param booking
+	 * @return
+	 * @throws AirlineException
+	 */
+	public BookingInformation confirmBooking(BookingInformation booking) throws AirlineException;
+
+	public String checkAvailabiltiy(String query, String searchBasis);
+
+	public String forotPassword(String username, String password);
 
 }
