@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>									
 <body>
+<<<<<<< HEAD
 	<a href="menu.html">Index</a>
+=======
+<a href = "menu.html">Index</a>
+<a href="viewOccupancyDetails.html">Get occupancy details</a>
+>>>>>>> eced08a88c065e5ee318c2058a924aaacd5d1102
 </body>
 </html>

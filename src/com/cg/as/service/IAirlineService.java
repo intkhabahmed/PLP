@@ -55,5 +55,7 @@ public interface IAirlineService {
 	public int checkDateFormat(String newInput) throws AirlineException;
 	public void checkValidation(String query, String basis) throws AirlineException;*/
 	public User validLogin(User user) throws AirlineException;
+
+	public int[] flightOccupancyDetails(String flightNo);
 	
 }

@@ -28,8 +28,15 @@ public class AirlineController {
 			@ModelAttribute("booking") BookingInformation bookingInformation,
 			Model model) {
 		try {
+<<<<<<< HEAD
 			List<Flight> flights = airlineService.viewListOfFlights("PNQ",
 					"dest");
+=======
+			String str = bookingInformation.getSrcCity()+"="+bookingInformation.getDestCity()+"="+bookingInformation.getTravelDate();
+			String str1 = bookingInformation.getSrcCity()+"="+bookingInformation.getDestCity();
+			List<Flight> flights = airlineService.viewListOfFlights(str, "byUser");
+
+>>>>>>> eced08a88c065e5ee318c2058a924aaacd5d1102
 			model.addAttribute("flights", flights);
 		} catch (AirlineException e) {
 			e.printStackTrace();
@@ -95,5 +102,18 @@ public class AirlineController {
 			return "msg";
 		}
 	}
-
+	
+	@RequestMapping(value="viewOccupancyDetails.html")
+	public String viewOccupancyDetails(Model model){
+		int a[] = airlineService.flightOccupancyDetails("SG-3309");
+		int b = a[0];
+		int c = a[1];
+		int d = a[2];
+		int e = a[3];
+		model.addAttribute("message1", b);
+		model.addAttribute("message2", c);
+		model.addAttribute("message3", d);
+		model.addAttribute("message4", e);
+		return "success";
+	}
 }

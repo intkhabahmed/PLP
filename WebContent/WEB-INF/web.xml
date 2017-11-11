@@ -24,16 +24,16 @@
 	</filter-mapping>
 
 	<servlet>
-		<servlet-name>ASServlet</servlet-name>
+		<servlet-name>ARSServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/config/servlet-config.xml</param-value>
+			<param-value>/WEB-INF/config/ARSServlet-config.xml</param-value>
 		</init-param>
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>ASServlet</servlet-name>
+		<servlet-name>ARSServlet</servlet-name>
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 	

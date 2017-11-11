@@ -14,51 +14,52 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="bookinginformation")
+@Table(name = "Bookinginformation")
 public class BookingInformation {
-	
+
 	@Id
-	@Column(name="booking_id")
+	@Column(name = "Booking_id")
 	private String bookingId;
-	
-	@Column(name="cust_email")
+
+	@Column(name = "User_email")
 	private String custEmail;
-	
-	@Column(name="no_of_passengers")
-	@NotEmpty(message ="provide passengers seat")
+
+	@Column(name = "No_of_passengers")
+	@NotEmpty(message = "provide passengers seat")
 	private int noOfPassengers;
-	
-	
-	@Column(name="class_type")
+
+	@Column(name = "Class_type")
 	@NotEmpty(message = "Provide a class")
 	private String classType;
-	
-	@Column(name="total_fare")
+
+	@Column(name = "Total_fare")
 	private double totalFare;
-	
-	@Column(name="CreditCard_info")
+
+	@Column(name = "CreditCard_info")
 	@NotEmpty(message = "Provide your credit card detail")
 	private String creditcardInfo;
-	
-	@Column(name="src_city")
-	@Pattern(regexp="[A-Za-z]{2,10}",message="Please provide valid source city")
-	@Size(min=2,max=10,message="size of the source between 2 to 10")
+
+	@Column(name = "Src_city")
+	@Pattern(regexp = "[A-Za-z]{2,10}", message = "Please provide valid source city")
+	@Size(min = 2, max = 10, message = "size of the source between 2 to 10")
 	private String srcCity;
-	
-	@Column(name="dest_city")
-	@Pattern(regexp="[A-Za-z]{2,10}",message="Please provide valid destination city")
-	@Size(min=2,max=10,message="size of the destination city between 2 to 10")
+
+	@Column(name = "Dest_city")
+	@Pattern(regexp = "[A-Za-z]{2,10}", message = "Please provide valid destination city")
+	@Size(min = 2, max = 10, message = "size of the destination city between 2 to 10")
 	private String destCity;
-	
-	@Column(name="flightNo")
+
+	@Column(name = "FlightNo")
 	private String flightNo;
 
-	@Column(name="booking_date")
-	@NotNull(message="Provide a date please")
+	@Column(name = "Booking_date")
+	@NotNull(message = "Provide a date please")
 	@Future
 	private Date bookingDate;
 
-	
+	@Column(name = "Travel_date")
+	private Date travelDate;
+
 	public BookingInformation() {
 		super();
 	}
@@ -66,7 +67,7 @@ public class BookingInformation {
 	public BookingInformation(String bookingId, String custEmail,
 			int noOfPassengers, String classType, double totalFare,
 			String creditcardInfo, String srcCity, String destCity,
-			String flightNo, Date bookingDate) {
+			String flightNo, Date bookingDate, Date travelDate) {
 		super();
 		this.bookingId = bookingId;
 		this.custEmail = custEmail;
@@ -78,24 +79,23 @@ public class BookingInformation {
 		this.destCity = destCity;
 		this.flightNo = flightNo;
 		this.bookingDate = bookingDate;
+		this.travelDate = travelDate;
 	}
-
 
 	public String getBookingId() {
 		return bookingId;
 	}
-	
+
 	public void setBookingId(String bookingId) {
 		this.bookingId = bookingId;
 	}
 
-
-	public String getCustEmail() {
+	public String getUserEmail() {
 		return custEmail;
 	}
 
-	public void setCustEmail(String custEmail) {
-		this.custEmail = custEmail;
+	public void setUserEmail(String userEmail) {
+		this.custEmail = userEmail;
 	}
 
 	public int getNoOfPassengers() {
@@ -162,19 +162,19 @@ public class BookingInformation {
 		this.bookingDate = bookingDate;
 	}
 
-	@Override
-	public String toString() {
-		return "BookingInformation [bookingId=" + bookingId + ", custEmail="
-				+ custEmail + ", noOfPassengers=" + noOfPassengers
-				+ ", classType=" + classType + ", totalFare=" + totalFare
-				+ ", creditcardInfo=" + creditcardInfo + ", srcCity=" + srcCity
-				+ ", destCity=" + destCity + ", flightNo=" + flightNo
-				+ ", bookingDate=" + bookingDate + "]";
+	public Date getTravelDate() {
+		return travelDate;
+	}
+
+	public void setTravelDate(Date travelDate) {
+		this.travelDate = travelDate;
 	}
 
 	public void formattedString() {
-		System.out.format("%15s%20s%15s%10s%15s%20s%20s%15s%15s", bookingId,
-				custEmail, noOfPassengers, classType, totalFare,
-				creditcardInfo, srcCity, destCity, flightNo,bookingDate + "\n");
+		System.out
+				.format("%15s%20s%15s%10s%15s%20s%20s%15s%15s", bookingId,
+						custEmail, noOfPassengers, classType, totalFare,
+						creditcardInfo, srcCity, destCity, flightNo,
+						bookingDate + "\n");
 	}
 }

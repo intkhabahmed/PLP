@@ -8,6 +8,9 @@
 </head>
 <body>
 <h1>I'm in success page</h1>
-${message}
+${message1}
+${message2}
+${message3}
+${message4}
 </body>
 </html>

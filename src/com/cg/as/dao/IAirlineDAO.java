@@ -7,6 +7,10 @@ import com.cg.as.entity.Flight;
 import com.cg.as.entity.User;
 import com.cg.as.exception.AirlineException;
 
+/**
+ * @author inahmed
+ *
+ */
 public interface IAirlineDAO {
 	
 	/**
@@ -49,5 +53,7 @@ public interface IAirlineDAO {
 	public int bookingConfirm(String username,String flightno, int noOfPassengers, String classType,
 			String creditCard) throws AirlineException;
 	public int checkAvailability(String query, String type) throws AirlineException;*/
+
+	public int[] flightOccupancyDetails(String flightNo);
 
 }

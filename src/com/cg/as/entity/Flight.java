@@ -1,56 +1,54 @@
 package com.cg.as.entity;
 
 import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="flightinformation")
+@Table(name = "flightinformation")
 public class Flight {
-	
+
 	@Id
-	@Column(name="flightno")
+	@Column(name = "Flightno")
 	private String flightNo;
-	
-	@Column(name="airline")
+
+	@Column(name = "Airline")
 	private String flightName;
-	
-	@Column(name="dep_city")
+
+	@Column(name = "Dep_city")
 	private String deptCity;
-	
-	@Column(name="arr_city")
+
+	@Column(name = "Arr_city")
 	private String arrCity;
-	
-	@Column(name="dep_date")
+
+	@Column(name = "Dep_date")
 	private Date deptDate;
-	
-	@Column(name="arr_date")
+
+	@Column(name = "Arr_date")
 	private Date arrDate;
-	
-	@Column(name="dep_time")
+
+	@Column(name = "Dep_time")
 	private String deptTime;
-	
-	@Column(name="arr_time")
+
+	@Column(name = "Arr_time")
 	private String arrTime;
-	
-	@Column(name="FirstSeats")
+
+	@Column(name = "FirstSeats")
 	private int firstSeats;
-	
-	@Column(name="FirstSeatFare")
+
+	@Column(name = "FirstSeatFare")
 	private double firstSeatsFare;
-	
-	@Column(name="BussSeats")
+
+	@Column(name = "BussSeats")
 	private int bussSeats;
-	
-	@Column(name="BussSeatsFare")
+
+	@Column(name = "BussSeatsFare")
 	private double bussSeatsFare;
-	
-	public Flight(String flightNo, String flightName, String deptCity, String arrCity,
-			Date deptDate, Date arrDate, String deptTime,
+
+	public Flight(String flightNo, String flightName, String deptCity,
+			String arrCity, Date deptDate, Date arrDate, String deptTime,
 			String arrTime, int firstSeats, double firstSeatsFare,
 			int bussSeats, double bussSeatsFare) {
 		super();
@@ -67,8 +65,8 @@ public class Flight {
 		this.bussSeats = bussSeats;
 		this.bussSeatsFare = bussSeatsFare;
 	}
-	
-	public Flight(){
+
+	public Flight() {
 		System.out.println("Empty constructor is called");
 	}
 
@@ -119,10 +117,12 @@ public class Flight {
 	public double getBussSeatsFare() {
 		return bussSeatsFare;
 	}
-	
-	public void formattedString(){
-		System.out.format("%10s%10s%10s%10s%30s%30s%10s%10s%15s%20s%10s%15s",flightNo,flightName,deptCity,arrCity,arrDate,deptDate
-				,arrTime,deptTime,firstSeats,firstSeatsFare,bussSeats,bussSeatsFare+"\n");
+
+	public void formattedString() {
+		System.out.format("%10s%10s%10s%10s%30s%30s%10s%10s%15s%20s%10s%15s",
+				flightNo, flightName, deptCity, arrCity, arrDate, deptDate,
+				arrTime, deptTime, firstSeats, firstSeatsFare, bussSeats,
+				bussSeatsFare + "\n");
 	}
 
 	@Override
@@ -135,6 +135,5 @@ public class Flight {
 				+ firstSeatsFare + ", bussSeats=" + bussSeats
 				+ ", bussSeatsFare=" + bussSeatsFare + "]";
 	}
-	
-	
+
 }

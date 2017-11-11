@@ -7,20 +7,20 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="airport")
+@Table(name="Airport")
 public class Airport {
 	
 	@Id
-	@Column(name="airportid")
+	@Column(name="Airportid")
 	private int airportId;
 	
-	@Column(name="airportname")
+	@Column(name="Airportname")
 	private String airpotName;
 	
-	@Column(name="abbreviation")
+	@Column(name="Abbreviation")
 	private String abbreviation;
 	
-	@Column(name="location")
+	@Column(name="Location")
 	private String location;
 
 	public Airport() {
