@@ -64,6 +64,6 @@ public interface IAirlineService {
 
 	public boolean checkAvailabiltiy(String query, String searchBasis);
 
-	public String forotPassword(String username, String password);
+	public String forgotPassword(String username, String password);
 	
 }

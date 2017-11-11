@@ -77,6 +77,6 @@ public interface IAirlineDAO {
 
 	public String checkAvailabiltiy(String query, String searchBasis);
 
-	public String forotPassword(String username, String password);
+	public String forgotPassword(String username, String password);
 
 }
