@@ -2,78 +2,113 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Home | MyAirlines</title>
+<style type="text/css">
+    <%@include file="../css/bootstrap.min.css" %>
+    <%@include file="../css/font-awesome.min.css" %>
+</style>
+<script>
+	<%@include file="../js/jquery-3.1.0.min.js" %>
+	<%@include file="../js/bootstrap.min.js" %>
+</script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<style type="text/css">
+#formContainer {
+	border-radius: 15px;
+	padding: 10px;
+}
+
+#login_btn_cover {
+	padding: 3px;
+}
+</style>
 </head>
 <body>
-	<h1>Airline Reservation System</h1>
+	<jsp:include  page="header.jsp" />
+	<!--Navigation bar-->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div id="formContainer">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h1 class="text-center">
+								<i class="fa fa-plane"></i> Search Flights
+							</h1>
+						</div>
+						<div class="panel-body">
 
-	<!-- <a href="flight.htm"></a> -->
+							<hr>
+							<form:form class="form-horizontal" action="listOfFlights.html"
+								method="post" modelAttribute="booking">
+								<div class="row">
+									<div class="col-sm-4 col-sm-offset-1">
+										<div class="form-group">
+											<form:label path="srcCity">Source City</form:label>
+											<form:input type="text" class="form-control" path="srcCity" required="required"/>
+											<form:errors path="srcCity"></form:errors><br>
+										</div>
+									</div>
+									<div class="col-sm-2 text-center">
+										<br> <span class="fa fa-exchange fa-3x"></span>
 
-
-	<form:form action="" method="">
-
-		<table>
-			<tr>
-				<td><input type="submit" value="Login" /></td>
-				<td><input type="submit" value="SignUp" /></td>
-			</tr>
-
-			<tr>
-				<td>From</td>
-				<td><form:select path="rcCity">
-						<form:option value="select">Select</form:option>
-						<form:option value="Pune">Pune(PNQ)</form:option>
-						<form:option value="Mumbai">Mumbai(BOM)</form:option>
-						<form:option value="Chennai">Chennai(MAA)</form:option>
-						<form:option value="Kolkata">Kolkata(CCU)</form:option>
-						<form:option value="Delhi">Delhi(DEL)</form:option>
-						<form:option value="Bangalore">Bangalore(BLR)</form:option>
-					</form:select></td>
-			</tr>
-
-			<tr>
-				<td>To</td>
-				<td><form:select path="destCity">
-						<form:option value="select">Select</form:option>
-						<form:option value="Pune">Pune(PNQ)</form:option>
-						<form:option value="Mumbai">Mumbai(BOM)</form:option>
-						<form:option value="Chennai">Chennai(MAA)</form:option>
-						<form:option value="Kolkata">Kolkata(CCU)</form:option>
-						<form:option value="Delhi">Delhi(DEL)</form:option>
-						<form:option value="Bangalore">Bangalore(BLR)</form:option>
-					</form:select></td>
-			</tr>
-
-			<tr>
-				<td>Depart</td>
-				<td><form:input path="bookingDate" /></td>
-			</tr>
-
-			<tr>
-				<td>No. of Passengers</td>
-				<td><form:input path="noOfPassengers" /></td>
-			</tr>
-
-			<tr>
-				<td>Class Type</td>
-				<td><form:input path="classType" /></td>
-			</tr>
-
-
-			<tr></tr>
-			<tr>
-				<td><input type="submit" value="Search" /></td>
-			</tr>
-
-		</table>
-
-
-
-
-	</form:form>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group">
+											<form:label path="destCity">Destination City</form:label>
+											<form:input type="text" class="form-control" path="destCity" required="required"/>
+											<form:errors path="destCity"></form:errors><br>
+										</div>
+									</div>
+								</div>
+								<!--end row-->
+								<div class="row">
+									<div class="col-sm-2 col-sm-offset-1">
+										<div class="form-group">
+											<form:label path="travelDate">Depart Date</form:label>
+											<form:input type="date" class="form-control"
+												path="travelDate" required="required" min="${date}"/>
+											<form:errors path="travelDate"></form:errors><br>
+										</div>
+									</div>
+									<div class="col-sm-3 col-sm-offset-1">
+										<div class="form-group">
+											<form:label path="noOfPassengers">No of Travellers</form:label>
+											<form:input type="text" class="form-control"
+												path="noOfPassengers" value="1" max="9" min="1" required="required"/>
+											<form:errors path="noOfPassengers"></form:errors><br>
+										</div>
+									</div>
+									<div class="col-sm-3 col-sm-offset-1">
+										<div class="form-group">
+											<form:label path="classType">Class Type</form:label>
+											<form:select path="classType" class="form-control" required="required">
+												<form:option value="">--Select--</form:option>
+												<form:options items="${classTypeOptions}" />
+											</form:select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="text-center">
+										<input type="submit" value="Search"
+											class="btn btn-danger btn-lg" />
+									</div>
+								</div>
+							</form:form>
+						</div>
+					</div>
+				</div>
+				<!--end searchForm container -->
+			</div>
+			<!--end col-sm-12 -->
+		</div>
+		<!--end row -->
+	</div>
+	<!--end main container-->
 </body>
 </html>

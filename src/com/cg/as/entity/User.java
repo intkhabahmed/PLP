@@ -25,7 +25,7 @@ public class User {
 	@Column(name = "username")
 	@Valid
 	@NotBlank(message = "Username is required")
-	@Size(min = 4, max = 20, message = "About Me must be between 4 and 20 characters")
+	@Size(min = 3, max = 20, message = "About Me must be between 4 and 20 characters")
 	@Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9._]{4,20}$", message = "Error: Username can have only characters,digits, '.(dot)' and '_'")
 	private String username;
 
@@ -48,7 +48,7 @@ public class User {
 	private String role;
 
 	public User() {
-		System.out.println("Empty constructor is called");
+		
 	}
 
 	public User(String username, String password, String email, long mobileNo,
