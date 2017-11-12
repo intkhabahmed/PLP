@@ -154,7 +154,7 @@ values('6E-389','INDIGO','BLR','MAA',to_date('2017-08-23','yyyy-mm-dd'),to_date(
 /
 
 insert into flightinformation 
-values('SG-3309','SPICE JET','MAA','BLR',to_date('2017-08-23','yyyy-mm-dd'),to_date('2012-05-06','yyyy-mm-dd'),'16:55','17:50','',30,4567,40,5432,'55 min')
+values('SG-3309','SPICE JET','MAA','BLR',to_date('2017-08-23','yyyy-mm-dd'),to_date('2012-05-06','yyyy-mm-dd'),'16:55','17:50',30,4567,40,5432,'55 min')
 /
 
 insert into flightinformation 

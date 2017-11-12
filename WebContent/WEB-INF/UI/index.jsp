@@ -10,22 +10,13 @@
 <style type="text/css">
     <%@include file="../css/bootstrap.min.css" %>
     <%@include file="../css/font-awesome.min.css" %>
+     <%@include file="../css/custom.css" %>
 </style>
 <script>
 	<%@include file="../js/jquery-3.1.0.min.js" %>
 	<%@include file="../js/bootstrap.min.js" %>
 </script>
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-<style type="text/css">
-#formContainer {
-	border-radius: 15px;
-	padding: 10px;
-}
-
-#login_btn_cover {
-	padding: 3px;
-}
-</style>
 </head>
 <body>
 	<jsp:include  page="header.jsp" />

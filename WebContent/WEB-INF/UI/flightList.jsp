@@ -79,11 +79,12 @@
 				<div id="flightList">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<h1 class="text-center panel-title">Flights List</h1>
+							<h1 class="text-center">Flights List</h1>
 						</div>
 						<div class="panel-body">
 							<table class="table">
 								<tr>
+									<th></th>
 									<th>Airlines</th>
 									<th>Departure</th>
 									<th>Duration</th>
@@ -93,9 +94,10 @@
 								</tr>
 								<c:forEach items="${flights}" var="flight">
 									<tr>
+										<td><i class="fa fa-plane fa-2x"></i></td>
 										<td>${flight.flightNo}<br>${flight.flightName}</td>
 										<td>${flight.deptCity}<br>${flight.deptTime}</td>
-										<td>Duration</td>
+										<td>${flight.duration}</td>
 										<td>${flight.arrCity}<br>${flight.arrTime}</td>
 										<c:if test="${booking.classType eq 'First' }">
 											<td><i class="fa fa-rupee"></i> ${flight.firstSeatsFare}</td>
@@ -108,7 +110,7 @@
 												<c:set var="action" value="showLoginAfterSearch.html"></c:set>
 											</c:if>
 											<c:if test="${sessionScope.user.username ne null}">
-												<c:set var="action" value="booking.html"></c:set>
+												<c:set var="action" value="showBooking.html"></c:set>
 											</c:if>
 											<form:form action="${action}" method="post" modelAttribute="booking">
 												<input type="hidden" name="flightNo" value="${flight.flightNo}"/>

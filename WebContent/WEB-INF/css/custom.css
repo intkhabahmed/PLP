@@ -1,0 +1,27 @@
+/****************************Common CSS**************************/
+.padding-10x{
+	padding: 10px;
+}
+.padding-5x{
+	padding: 5px;
+}
+.padding-20x{
+	padding: 20px;
+}
+
+/***********************Index Page*********************************/
+#formContainer {
+	border-radius: 15px;
+	padding: 10px;
+}
+
+#login_btn_cover {
+	padding: 3px;
+}
+
+
+#bookingsBody{
+	min-height: 457px;
+	max-height: 457px;
+	overflow-y: auto;
+}

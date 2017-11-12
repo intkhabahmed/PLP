@@ -10,17 +10,13 @@
 	<style type="text/css">
     <%@include file="../css/bootstrap.min.css" %>
     <%@include file="../css/font-awesome.min.css" %>
+    <%@include file="../css/custom.css" %>
 </style>
 <script>
 	<%@include file="../js/jquery-3.1.0.min.js" %>
 	<%@include file="../js/bootstrap.min.js" %>
 </script>
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<style type="text/css">
-		#loginFormBody{
-			padding: 5px;
-		}
-	</style>
 </head>
 <body>
 	<jsp:include  page="header.jsp" />
@@ -28,10 +24,10 @@
 	<div class="container" id="loginFormContainer">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-4" >
-						<c:if test="${error!=''}">
-							<p class="text-center">${error}</p>
+						<c:if test="${message!=''}">
+							<p class="text-center">${message}</p>
 						</c:if>
-						<div class="panel panel-primary" id="loginFormBody">
+						<div class="panel panel-primary padding-5x" id="loginFormBody">
 							<div class="panel-heading">
 								<h1 class="text-center">Login Form</h1>
 							</div>

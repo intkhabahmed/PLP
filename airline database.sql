@@ -46,7 +46,7 @@ Username Varchar2(20) constraint nn_user_username Not Null,
 User_email Varchar2(40) constraint nn_user_email Not Null, 
 Password Varchar2(20) constraint nn_user_password Not Null, 
 Role Varchar2(10) constraint nn_user_role Not Null,
-Mobile_no Number(10)
+Mobile_no Varchar2(10)
 )
 /
 
@@ -71,13 +71,13 @@ Arr_time Varchar2(10),
 FirstSeats Number(10), 
 FirstSeatFare Number(10,2), 
 BussSeats Number, 
-BussSeatsFare Number(10,2)
+BussSeatsFare Number(10,2),
 duration Varchar2(30)
 )
 /
 
 Create table BookingInformation ( 
-Booking_id Varchar2(10) constraint pk_bookinginfo_bookingid primary key, 
+Booking_id Number(6) constraint pk_bookinginfo_bookingid primary key, 
 User_email Varchar2(40) constraint nn_bookinginfo_useremail not null, 
 No_of_passengers Number, 
 Class_type Varchar2(10),
@@ -89,6 +89,4 @@ FlightNo varchar2(10) constraint fk_bookinginfo_flightno references FlightInform
 Booking_date Date,
 Travel_date Date
 )
-
-
 /
