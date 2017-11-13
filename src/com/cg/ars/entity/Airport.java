@@ -24,7 +24,6 @@ public class Airport {
 
 	public Airport() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Airport(int airportId, String airpotName, String abbreviation,

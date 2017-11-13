@@ -1,2 +1,5 @@
 /com/
-/image/
+/jpaContext.xml
+/log4j.properties
+/.sonar/
+/sonar-project.properties

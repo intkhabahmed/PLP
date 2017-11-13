@@ -25,8 +25,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	@Override
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
 			throws Exception {
-		List<Flight> flights = airlineDAO.viewListOfFlights(query, searchBasis);
-		return flights;
+		return airlineDAO.viewListOfFlights(query, searchBasis);
 	}
 
 	@Override
@@ -112,10 +111,7 @@ public class AirlineServiceImpl implements IAirlineService {
 			throws Exception {
 		try {
 			String isAvail = airlineDAO.checkAvailabiltiy(query, searchBasis);
-			if (isAvail.isEmpty())
-				return true;
-			else
-				return false;
+			return isAvail.isEmpty();
 		} catch (NoResultException nre) {
 			return true;
 		} catch (Exception e) {

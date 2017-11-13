@@ -72,6 +72,7 @@ public class Flight {
 	}
 
 	public Flight() {
+		super();
 	}
 
 	public String getFlightNo() {
