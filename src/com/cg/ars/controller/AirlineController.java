@@ -49,7 +49,7 @@ public class AirlineController {
 
 	@RequestMapping(value = "/listOfFlights", method = RequestMethod.POST)
 	public String getAllFlights(
-			@ModelAttribute(ARSConstants.booking) BookingInformation bookingInformation,
+			@ModelAttribute(ARSConstants.BOOKING) BookingInformation bookingInformation,
 			Model model) {
 		try {
 			String src = airlineService.getAbbreviation(bookingInformation
@@ -66,7 +66,7 @@ public class AirlineController {
 			} else {
 				model.addAttribute(ARSConstants.flights, flights);
 			}
-			model.addAttribute(ARSConstants.booking, bookingInformation);
+			model.addAttribute(ARSConstants.BOOKING, bookingInformation);
 
 			model.addAttribute(ARSConstants.classTypeOptions, new String[] {
 					ARSConstants.First, ARSConstants.Business });
@@ -98,7 +98,7 @@ public class AirlineController {
 				model.addAttribute(ARSConstants.user,
 						session.getAttribute("user"));
 			}
-			model.addAttribute(ARSConstants.booking, new BookingInformation());
+			model.addAttribute(ARSConstants.BOOKING, new BookingInformation());
 			model.addAttribute(ARSConstants.classTypeOptions, new String[] {
 					ARSConstants.First, ARSConstants.Business });
 
@@ -112,7 +112,7 @@ public class AirlineController {
 
 	@RequestMapping(value = "/showLogin")
 	public String showLogin(Model model) {
-		model.addAttribute(ARSConstants.booking, new BookingInformation());
+		model.addAttribute(ARSConstants.BOOKING, new BookingInformation());
 		model.addAttribute(ARSConstants.user, new User());
 		return login;
 	}
@@ -120,9 +120,9 @@ public class AirlineController {
 	@RequestMapping(value = "/showLoginAfterSearch", method = RequestMethod.POST)
 	public String showLoginAfterSearch(
 			Model model,
-			@ModelAttribute(ARSConstants.booking) BookingInformation bookingInformation) {
+			@ModelAttribute(ARSConstants.BOOKING) BookingInformation bookingInformation) {
 		model.addAttribute(ARSConstants.user, new User());
-		model.addAttribute(ARSConstants.booking, bookingInformation);
+		model.addAttribute(ARSConstants.BOOKING, bookingInformation);
 		return login;
 	}
 
@@ -166,7 +166,7 @@ public class AirlineController {
 	@RequestMapping("/logout")
 	public String logout(Model model, SessionStatus status) {
 		status.setComplete();
-		model.addAttribute(ARSConstants.booking, new BookingInformation());
+		model.addAttribute(ARSConstants.BOOKING, new BookingInformation());
 		model.addAttribute(ARSConstants.classTypeOptions, new String[] {
 				ARSConstants.First, ARSConstants.Business });
 		model.addAttribute(ARSConstants.date, Date.valueOf(LocalDate.now()));
@@ -180,7 +180,7 @@ public class AirlineController {
 		try {
 			user = airlineService.validLogin(user);
 			if (user != null) {
-				model.addAttribute(ARSConstants.booking,
+				model.addAttribute(ARSConstants.BOOKING,
 						new BookingInformation());
 				model.addAttribute(ARSConstants.classTypeOptions, new String[] {
 						ARSConstants.First, ARSConstants.Business });
@@ -229,7 +229,7 @@ public class AirlineController {
 				bookingInformation
 						.setBookingDate(Date.valueOf(LocalDate.now()));
 				model.addAttribute(ARSConstants.flight, flights.get(0));
-				returnPage = ARSConstants.booking;
+				returnPage = ARSConstants.BOOKING;
 			}
 
 		} catch (Exception e) {
@@ -239,7 +239,7 @@ public class AirlineController {
 			returnPage = login;
 		}
 		model.addAttribute(ARSConstants.user, user);
-		model.addAttribute(ARSConstants.booking, bookingInformation);
+		model.addAttribute(ARSConstants.BOOKING, bookingInformation);
 		return returnPage;
 	}
 
@@ -265,7 +265,7 @@ public class AirlineController {
 
 	@RequestMapping(value = "/showBooking", method = RequestMethod.POST)
 	public String bookFlight(
-			@ModelAttribute(ARSConstants.booking) BookingInformation bookingInformation,
+			@ModelAttribute(ARSConstants.BOOKING) BookingInformation bookingInformation,
 			Model model, HttpSession session) {
 		try {
 			List<Flight> flights = airlineService.viewListOfFlights(
@@ -285,17 +285,17 @@ public class AirlineController {
 					.getAttribute(ARSConstants.user)).getEmail());
 			bookingInformation.setBookingDate(Date.valueOf(LocalDate.now()));
 			model.addAttribute(ARSConstants.flight, flights.get(0));
-			model.addAttribute(ARSConstants.booking, bookingInformation);
+			model.addAttribute(ARSConstants.BOOKING, bookingInformation);
 		} catch (Exception e) {
 			e.getMessage();
 		}
-		return ARSConstants.booking;
+		return ARSConstants.BOOKING;
 
 	}
 
 	@RequestMapping(value = "/confirmBooking", method = RequestMethod.POST)
 	public String confirmBooking(
-			@ModelAttribute(ARSConstants.booking) BookingInformation bookingInformation,
+			@ModelAttribute(ARSConstants.BOOKING) BookingInformation bookingInformation,
 			Model model) throws Exception {
 		try {
 			airlineService.confirmBooking(bookingInformation);

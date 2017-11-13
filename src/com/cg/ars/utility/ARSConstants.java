@@ -1,7 +1,7 @@
 package com.cg.ars.utility;
 
 public interface ARSConstants {
-	public String booking = "booking";
+	public String BOOKING = "booking";
 	public String bookings = "bookings";
 	public String byUser = "byUser";
 	public String byUsername = "byUsername";
