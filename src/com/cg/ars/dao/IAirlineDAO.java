@@ -113,7 +113,7 @@ public interface IAirlineDAO {
 
 	/**
 	 * @param cityName
-	 * @return
+	 * @return type String
 	 * @throws Exception
 	 */
 	public String getAbbreviation(String cityName) throws Exception;

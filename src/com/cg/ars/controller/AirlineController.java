@@ -49,7 +49,7 @@ public class AirlineController {
 
 	
 	/**
-	 * @description It calls the function viewListOfFlights of AirlineServiceImpl and 
+	 * @description It calls the function viewListOfFlights of AirlineServiceImpl 
 	 * @param bookingInformation
 	 * @param model
 	 * @return type String
@@ -93,7 +93,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description It calls the function getCities() of AirlineServiceImpl 
 	 * @param model
 	 * @param session
 	 * @return
@@ -120,7 +120,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description It adds booking object and user object to model
 	 * @param model
 	 * @return
 	 */
@@ -132,7 +132,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description It adds booking object and user object to model
 	 * @param model
 	 * @param bookingInformation
 	 * @return
@@ -147,7 +147,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description It adds user object to model
 	 * @param model
 	 * @return
 	 */
@@ -158,7 +158,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description signUp 
 	 * @param model
 	 * @param user
 	 * @param bindingResult
@@ -195,8 +195,8 @@ public class AirlineController {
 
 	}
 	
-    /**
-     * @description 
+    /** 
+     * @description logout
      * @param model
      * @param status
      * @return
@@ -212,7 +212,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description It calls validLogin(user) of AirlineServiceImpl 
 	 * @param user
 	 * @param model
 	 * @param req
@@ -244,7 +244,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description this function validates the login details after searching the flight
 	 * @param user
 	 * @param model
 	 * @param session
@@ -296,7 +296,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description It checks the flight occupancy details
 	 * @param model
 	 * @return
 	 */
@@ -321,7 +321,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description It calls viewListOfFlights function of AirlineServiceImpl then book the flights
 	 * @param bookingInformation
 	 * @param model
 	 * @param session
@@ -358,7 +358,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description It checks that flight is booked or not
 	 * @param bookingInformation
 	 * @param model
 	 * @return
@@ -383,7 +383,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description It updates the user details
 	 * @param user
 	 * @param bindingResult
 	 * @param model
@@ -415,7 +415,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description It shows user profile
 	 * @param model
 	 * @param session
 	 * @return
@@ -434,7 +434,7 @@ public class AirlineController {
 	}
 
 	/**
-	 * @description 
+	 * @description It cancels the booking of flight
 	 * @param bookingId
 	 * @param model
 	 * @param session
@@ -460,6 +460,13 @@ public class AirlineController {
 		return userProfile;
 	}
 
+	/**
+	 * @description It gives the booking details of flight
+	 * @param bookingId
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/viewBooking", method = RequestMethod.GET)
 	public String viewBooking(@RequestParam("bookingId") String bookingId,
 			Model model, HttpSession session) {
@@ -473,12 +480,24 @@ public class AirlineController {
 		return "bookingDetails";
 	}
 
+	/**
+	 * @description it adds user object to model
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/showForgotPassword")
 	public String showForgotPassword(Model model) {
 		model.addAttribute("userObj", new User());
 		return "forgotPassword";
 	}
 
+	/**
+	 * @description 
+	 * @param user
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
 	public String forgotPassword(@ModelAttribute("userObj") User user,
 			Model model, HttpSession session) {

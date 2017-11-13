@@ -102,7 +102,7 @@ public interface IAirlineService {
 
 	/**
 	 * @param cityName
-	 * @return
+	 * @return Type String
 	 * @throws Exception
 	 */
 	public String getAbbreviation(String cityName) throws Exception;

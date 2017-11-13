@@ -21,8 +21,8 @@ public class AirlineServiceImpl implements IAirlineService {
 	@Autowired
 	private IAirlineDAO airlineDAO;
 
-	
-	/**
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#viewListOfFlights(java.lang.String, java.lang.String)
 	 * description: It calls the function viewListOfFlights(query, searchBasis) of AirlineDaoImpl and returns the list of flights to AirlineController
 	 */
 	@Override
@@ -30,8 +30,9 @@ public class AirlineServiceImpl implements IAirlineService {
 			throws Exception {
 		return airlineDAO.viewListOfFlights(query, searchBasis);
 	}
-
-	/**
+	
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#viewBookings(java.lang.String, java.lang.String)
 	 * description: It calls the function viewBookings(query, searchBasis) of AirlineDaoImpl and returns the result to AirlineController
 	 */
 	@Override
@@ -40,15 +41,17 @@ public class AirlineServiceImpl implements IAirlineService {
 		return airlineDAO.viewBookings(query, searchBasis);
 	}
 	
-	/**
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#signUp(com.cg.ars.entity.User)
 	 * description: It calls the function signUp(user) of AirlineDaoImpl and returns the result to AirlineController
 	 */
 	@Override
 	public User signUp(User user) throws Exception {
 		return airlineDAO.signUp(user);
 	}
-
-	/**
+	
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#validLogin(com.cg.ars.entity.User)
 	 * description: It calls the function validLogin(user) of AirlineDaoImpl and returns the result to AirlineController
 	 */
 	@Override
@@ -56,7 +59,9 @@ public class AirlineServiceImpl implements IAirlineService {
 		return airlineDAO.validLogin(user);
 	}
 
-	/**
+	
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#bookingCancel(int)
 	 * description: It calls the function bookingCancel(bookingId), viewListOfFlights(booking.getFlightNo(),"flightNo") and updateFlight(flight)
 	 * of AirlineDaoImpl and returns the result to AirlineController
 	 */
@@ -76,7 +81,8 @@ public class AirlineServiceImpl implements IAirlineService {
 		return booking;
 	}
 
-	/**
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#flightOccupancyDetails(java.lang.String)
 	 * description: It calls the function flightOccupancyDetails(flightNo) of AirlineDaoImpl and returns the result to AirlineController
 	 */
 	@Override
@@ -84,7 +90,8 @@ public class AirlineServiceImpl implements IAirlineService {
 		return airlineDAO.flightOccupancyDetails(flightNo);
 	}
 
-	/**
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#modifyBookingInformation(com.cg.ars.entity.BookingInformation)
 	 * description: It calls modifyBookingInformation(booking) of AirlineDaoImpl and returns the result to AirlineController
 	 */
 	@Override
@@ -93,8 +100,9 @@ public class AirlineServiceImpl implements IAirlineService {
 		return airlineDAO.modifyBookingInformation(booking);
 	}
 
-	/**
-	 * It calls the function confirmBooking(booking), viewListOfFlights(booking.getFlightNo(),"flightNo") and updateFlight(flight)
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#confirmBooking(com.cg.ars.entity.BookingInformation)
+	 * description: It calls the function confirmBooking(booking), viewListOfFlights(booking.getFlightNo(),"flightNo") and updateFlight(flight)
 	 * of AirlineDaoImpl and returns the result to AirlineController
 	 */
 	@Override
@@ -113,9 +121,10 @@ public class AirlineServiceImpl implements IAirlineService {
 		airlineDAO.updateFlight(flight);
 		return booking;
 	}
-
-	/**
-	 *description: It calls the function getUserDetails(user.getUsername()) of AirlineDaoImpl and returns the updated result to AirlineController
+	
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#forgotPassword(com.cg.ars.entity.User)
+	 * description: It calls the function getUserDetails(user.getUsername()) of AirlineDaoImpl and returns the updated result to AirlineController
 	 */
 	@Override
 	public User forgotPassword(User user) throws Exception {
@@ -134,7 +143,8 @@ public class AirlineServiceImpl implements IAirlineService {
 		}
 	}
 
-	/**
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#checkAvailabiltiy(java.lang.String, java.lang.String)
 	 * description: It calls the function checkAvailabiltiy(query, searchBasis) of AirlineDaoImpl 
 	 * and if user is not available then returns false otherwise it returns true
 	 */
@@ -151,8 +161,9 @@ public class AirlineServiceImpl implements IAirlineService {
 		}
 
 	}
-
-	/**
+	
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#updateUser(com.cg.ars.entity.User)
 	 * description: It calls the function of AirlineDaoImpl and returns the result to AirlineController
 	 */
 	@Override
@@ -160,14 +171,20 @@ public class AirlineServiceImpl implements IAirlineService {
 		return airlineDAO.updateUser(user);
 	}
 
-	/**
-	 * It calls the function getCities() of AirlineDaoImpl and returns the result to AirlineController
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#getCities()
+	 * description: It calls the function getCities() of AirlineDaoImpl and returns the result to AirlineController
 	 */
 	@Override
 	public List<String> getCities() throws Exception {
 		return airlineDAO.getCities();
 	}
 	
+	
+	/* (non-Javadoc)
+	 * @see com.cg.ars.service.IAirlineService#getAbbreviation(java.lang.String)
+	 * description: It calls getAbbreviation(cityName) of data access layer and return the abbreviation of cities
+	 */
 	@Override
 	public String getAbbreviation(String cityName) throws Exception{
 		String abbr="";

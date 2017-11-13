@@ -42,6 +42,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 * (non-Javadoc)
 	 * @see com.cg.as.dao.IAirlineDAO#viewListOfFlights(java.lang.String,
 	 * java.lang.String)
+	 * It returns the list of flight to service layer
 	 */
 	@Override
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
