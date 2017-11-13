@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.ars.dao.IAirlineDAO;
-import com.cg.ars.entity.Airport;
 import com.cg.ars.entity.BookingInformation;
 import com.cg.ars.entity.Flight;
 import com.cg.ars.entity.User;
@@ -130,8 +129,19 @@ public class AirlineServiceImpl implements IAirlineService {
 	}
 
 	@Override
-	public List<Airport> getCities() throws Exception {
+	public List<String> getCities() throws Exception {
 		return airlineDAO.getCities();
+	}
+	
+	@Override
+	public String getAbbreviation(String cityName) throws Exception{
+		String abbr="";
+		try{
+			abbr = airlineDAO.getAbbreviation(cityName);
+		}catch(NoResultException nre){
+			throw new AirlineException("Entered City does not exist in database");
+		}
+		return abbr;
 	}
 
 }

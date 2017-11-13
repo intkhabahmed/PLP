@@ -18,4 +18,5 @@ public interface ARSConstants {
 	public String bookingInfo = "bookingInfo";
 	public String flightNo = "flightNo";
 	public String bookingId = "bookingId";
+	public String airport = "airport";
 }

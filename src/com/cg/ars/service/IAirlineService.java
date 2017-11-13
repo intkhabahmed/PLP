@@ -2,7 +2,6 @@ package com.cg.ars.service;
 
 import java.util.List;
 
-import com.cg.ars.entity.Airport;
 import com.cg.ars.entity.BookingInformation;
 import com.cg.ars.entity.Flight;
 import com.cg.ars.entity.User;
@@ -106,5 +105,12 @@ public interface IAirlineService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Airport> getCities() throws Exception;
+	public List<String> getCities() throws Exception;
+
+	/**
+	 * @param cityName
+	 * @return
+	 * @throws Exception
+	 */
+	public String getAbbreviation(String cityName) throws Exception;
 }

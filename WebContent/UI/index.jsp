@@ -24,6 +24,9 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div id="formContainer">
+					<c:if test="${message!=''}">
+						<p class="text-center">${message}</p>
+					</c:if>
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h1 class="text-center">
@@ -31,7 +34,7 @@
 							</h1>
 						</div>
 						<div class="panel-body">
-
+			
 							<hr>
 							<form:form class="form-horizontal" action="listOfFlights.html"
 								method="post" modelAttribute="booking">
@@ -39,7 +42,10 @@
 									<div class="col-sm-4 col-sm-offset-1">
 										<div class="form-group">
 											<form:label path="srcCity">Source City</form:label>
-											<form:input type="text" class="form-control" path="srcCity" required="required"/>
+											<form:select class="form-control" path="srcCity" required="required">
+												<form:option value="">--Select--</form:option>
+												<form:options items="${airport}"/>
+											</form:select>
 											<form:errors path="srcCity"></form:errors><br>
 										</div>
 									</div>
@@ -50,7 +56,10 @@
 									<div class="col-sm-4">
 										<div class="form-group">
 											<form:label path="destCity">Destination City</form:label>
-											<form:input type="text" class="form-control" path="destCity" required="required"/>
+											<form:select class="form-control" path="destCity" required="required">
+												<form:option value="">--Select--</form:option>
+												<form:options items="${airport}"/>
+											</form:select>
 											<form:errors path="destCity"></form:errors><br>
 										</div>
 									</div>
@@ -90,6 +99,7 @@
 									</div>
 								</div>
 							</form:form>
+							<input type="hidden" id="airport" value="${airport}"/>
 						</div>
 					</div>
 				</div>

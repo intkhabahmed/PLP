@@ -1,7 +1,6 @@
 package com.cg.ars.dao;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-import com.cg.ars.entity.Airport;
 import com.cg.ars.entity.BookingInformation;
 import com.cg.ars.entity.Flight;
 import com.cg.ars.entity.User;
@@ -42,6 +40,14 @@ public class AirlineDAOImpl implements IAirlineDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	
+	@Override
+	public String getAbbreviation(String cityName) throws Exception{
+		TypedQuery<String> sqlQuery = entityManager.createQuery(QueryMapper.getAbbreviation,String.class);
+		sqlQuery.setParameter("location", cityName.toUpperCase());
+		return sqlQuery.getSingleResult();
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -279,10 +285,13 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		return query.getSingleResult();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.cg.ars.dao.IAirlineDAO#getCities()
+	 */
 	@Override
-	public List<Airport> getCities() throws Exception {
-		TypedQuery<Airport> query = entityManager.createQuery(
-				QueryMapper.getAllCities,Airport.class);
+	public List<String> getCities() throws Exception {
+		TypedQuery<String> query = entityManager.createQuery(
+				QueryMapper.getAllCities,String.class);
 		return query.getResultList();
 	}
 
