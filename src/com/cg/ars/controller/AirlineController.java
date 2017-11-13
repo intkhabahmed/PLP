@@ -107,14 +107,9 @@ public class AirlineController {
 
 	@RequestMapping("/showSignup")
 	public String showSignup(Model model) {
-<<<<<<< HEAD
-		model.addAttribute("userObj", new User());
 	//	model.addAttribute("captchaImage","../image/V4XBG.png");
-		return "signup";
-=======
 		model.addAttribute(ARSConstants.userObj, new User());
 		return signup;
->>>>>>> 8903ee361b488a766135ebef05c1c37d771acacb
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
