@@ -49,29 +49,29 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			throws Exception {
 		TypedQuery<Flight> sqlQuery = null;
 		if (searchBasis.equals("dest")) {
-			sqlQuery = entityManager.createQuery(QueryMapper.query1,
+			sqlQuery = entityManager.createQuery(QueryMapper.searchFlightByArrivalCity,
 					Flight.class);
 			sqlQuery.setParameter("arrCity", query);
 		} else if (searchBasis.equals("day")) {
-			sqlQuery = entityManager.createQuery(QueryMapper.query2,
+			sqlQuery = entityManager.createQuery(QueryMapper.searchFlightByDepartureDate,
 					Flight.class);
 			sqlQuery.setParameter("deptDate", Date.valueOf(query));
 		} else if (searchBasis.equals("route")) {
 			String route[] = query.split("=");
-			sqlQuery = entityManager.createQuery(QueryMapper.query3,
+			sqlQuery = entityManager.createQuery(QueryMapper.searchFlightByDepartureAndArrivalCity,
 					Flight.class);
 			sqlQuery.setParameter("deptCity", route[0]);
 			sqlQuery.setParameter("arrCity", route[1]);
 		} else if (searchBasis.equals("flightNo")) {
-			sqlQuery = entityManager.createQuery(QueryMapper.query4,
+			sqlQuery = entityManager.createQuery(QueryMapper.searchFlightByFlightNumber,
 					Flight.class);
 			sqlQuery.setParameter("flightNo", query);
 		} else if (searchBasis.equals("all")) {
-			sqlQuery = entityManager.createQuery(QueryMapper.query5,
+			sqlQuery = entityManager.createQuery(QueryMapper.flightInformation,
 					Flight.class);
 		} else if (searchBasis.equals("byUser")) {
 			String route[] = query.split("=");
-			sqlQuery = entityManager.createQuery(QueryMapper.query6,
+			sqlQuery = entityManager.createQuery(QueryMapper.searchFlightByArrivalAndDepartureCityAndDepartureDate,
 					Flight.class);
 			sqlQuery.setParameter("deptCity", route[0]);
 			sqlQuery.setParameter("arrCity", route[1]);
@@ -94,15 +94,15 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		TypedQuery<BookingInformation> sqlQuery = null;
 
 		if (searchBasis.equals("byFlight")) {
-			sqlQuery = entityManager.createQuery(QueryMapper.query7,
+			sqlQuery = entityManager.createQuery(QueryMapper.BookingInformationOfAFlight,
 					BookingInformation.class);
 			sqlQuery.setParameter("flightNo", query);
 		} else if (searchBasis.equals("byUser")) {
 			TypedQuery<User> userQuery = entityManager.createQuery(
-					QueryMapper.query8, User.class);
+					QueryMapper.userInformation, User.class);
 			userQuery.setParameter("username", query);
 			User user = userQuery.getSingleResult();
-			sqlQuery = entityManager.createQuery(QueryMapper.query9,
+			sqlQuery = entityManager.createQuery(QueryMapper.BookingInformationByEmail,
 					BookingInformation.class);
 			sqlQuery.setParameter("email", user.getEmail());
 		}
@@ -118,7 +118,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	@Override
 	public User validLogin(User user) throws Exception {
 		TypedQuery<User> sqlQuery = entityManager.createQuery(
-				QueryMapper.query10, User.class);
+				QueryMapper.validateUsernameAndPassword, User.class);
 		sqlQuery.setParameter("user", user.getUsername());
 		sqlQuery.setParameter("pass", user.getPassword());
 		return sqlQuery.getSingleResult();
@@ -158,19 +158,19 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		int[] seatDetails = new int[4];
 		TypedQuery<Integer> sqlQuery = null;
 		sqlQuery = entityManager
-				.createQuery(QueryMapper.query11, Integer.class);
+				.createQuery(QueryMapper.firstSeatsOfAFlight, Integer.class);
 		sqlQuery.setParameter("flightNo", flightNo);
 		seatDetails[0] = sqlQuery.getSingleResult();
 		sqlQuery = entityManager
-				.createQuery(QueryMapper.query12, Integer.class);
+				.createQuery(QueryMapper.businessSeatsOfAFlight, Integer.class);
 		sqlQuery.setParameter("flightNo", flightNo);
 		seatDetails[1] = sqlQuery.getSingleResult();
 		sqlQuery = entityManager
-				.createQuery(QueryMapper.query13, Integer.class);
+				.createQuery(QueryMapper.passengersInFirstClassOfAFlight, Integer.class);
 		sqlQuery.setParameter("flightNo", flightNo);
 		seatDetails[2] = sqlQuery.getSingleResult();
 		sqlQuery = entityManager
-				.createQuery(QueryMapper.query14, Integer.class);
+				.createQuery(QueryMapper.passengersInBusinessClassOfAFlight, Integer.class);
 		sqlQuery.setParameter("flightNo", flightNo);
 		seatDetails[3] = sqlQuery.getSingleResult();
 		return seatDetails;
@@ -207,7 +207,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 
 	@Override
 	public String forgotPassword(String username, String password) {
-		Query sqlQuery = entityManager.createQuery(QueryMapper.query15);
+		Query sqlQuery = entityManager.createQuery(QueryMapper.forgotPassword);
 		sqlQuery.setParameter("username", username);
 		return username;
 	}
@@ -218,11 +218,11 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		TypedQuery<String> sqlQuery = null;
 		String isAvail;
 		if (searchBasis.equals("byUsername")) {
-			sqlQuery = entityManager.createQuery(QueryMapper.query16,
+			sqlQuery = entityManager.createQuery(QueryMapper.checkUsernameAvailable,
 					String.class);
 			sqlQuery.setParameter("query", query);
 		} else if (searchBasis.equals("byEmail")) {
-			sqlQuery = entityManager.createQuery(QueryMapper.query17,
+			sqlQuery = entityManager.createQuery(QueryMapper.checkEmailAvailable,
 					String.class);
 			sqlQuery.setParameter("query", query);
 		}
