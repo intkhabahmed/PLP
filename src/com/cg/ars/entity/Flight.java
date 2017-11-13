@@ -47,14 +47,14 @@ public class Flight {
 
 	@Column(name = "BussSeatsFare")
 	private double bussSeatsFare;
-	
-	@Column(name ="duration")
+
+	@Column(name = "duration")
 	private String duration;
 
 	public Flight(String flightNo, String flightName, String deptCity,
 			String arrCity, Date deptDate, Date arrDate, String deptTime,
 			String arrTime, int firstSeats, double firstSeatsFare,
-			int bussSeats, double bussSeatsFare,String duration) {
+			int bussSeats, double bussSeatsFare, String duration) {
 		super();
 		this.flightNo = flightNo;
 		this.flightName = flightName;
@@ -67,7 +67,7 @@ public class Flight {
 		this.firstSeats = firstSeats;
 		this.firstSeatsFare = firstSeatsFare;
 		this.bussSeats = bussSeats;
-		this.duration=duration;
+		this.duration = duration;
 		this.bussSeatsFare = bussSeatsFare;
 	}
 
@@ -122,7 +122,6 @@ public class Flight {
 	public double getBussSeatsFare() {
 		return bussSeatsFare;
 	}
-	
 
 	public String getDuration() {
 		return duration;

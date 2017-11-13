@@ -36,7 +36,7 @@ public class AirlineController {
 
 	@Autowired
 	IAirlineService airlineService;
-	
+
 	User user;
 
 	@RequestMapping(value = "/listOfFlights", method = RequestMethod.POST)
@@ -55,7 +55,6 @@ public class AirlineController {
 				model.addAttribute("flights", flights);
 			}
 			model.addAttribute("booking", bookingInformation);
-
 
 			model.addAttribute("classTypeOptions", new String[] { "First",
 					"Business" });
@@ -98,25 +97,28 @@ public class AirlineController {
 		return "login";
 	}
 
-
 	@RequestMapping("/showSignup")
 	public String showSignup(Model model) {
 		model.addAttribute("userObj", new User());
 		return "signup";
 	}
-	
-	@RequestMapping(value="/signup", method=RequestMethod.POST)
-	public String signup(Model model,@Valid @ModelAttribute("userObj") User user,BindingResult bindingResult) {
-		if(bindingResult.hasErrors()){
+
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public String signup(Model model,
+			@Valid @ModelAttribute("userObj") User user,
+			BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
 			model.addAttribute("userObj", user);
 			return "signup";
-		}else{
+		} else {
 			try {
 				user.setRole("customer");
-				if(!airlineService.checkAvailabiltiy(user.getUsername(), "byUsername")){
+				if (!airlineService.checkAvailabiltiy(user.getUsername(),
+						"byUsername")) {
 					throw new AirlineException("This Username is already taken");
 				}
-				if(!airlineService.checkAvailabiltiy(user.getEmail(), "byEmail")){
+				if (!airlineService.checkAvailabiltiy(user.getEmail(),
+						"byEmail")) {
 					throw new AirlineException("This Email is already taken");
 				}
 				airlineService.signUp(user);
@@ -129,9 +131,9 @@ public class AirlineController {
 				return "signup";
 			}
 		}
-		
+
 	}
-	
+
 	@RequestMapping("/logout")
 	public String logout(Model model, SessionStatus status) {
 		status.setComplete();
@@ -158,7 +160,8 @@ public class AirlineController {
 			}
 
 		} catch (Exception e) {
-			model.addAttribute("message", "Invalid Username/Password, Try Again");
+			model.addAttribute("message",
+					"Invalid Username/Password, Try Again");
 			model.addAttribute("user", new User());
 			returnPage = "login";
 		}
@@ -167,46 +170,48 @@ public class AirlineController {
 
 	@RequestMapping("/loginAfterSearch")
 	public String loginValidationAfterSearch(@ModelAttribute("user") User user,
-			Model model,
-			HttpSession session) {
+			Model model, HttpSession session) {
 		String returnPage = "";
-		BookingInformation bookingInformation = (BookingInformation)session.getAttribute("bookingInfo");
-		
+		BookingInformation bookingInformation = (BookingInformation) session
+				.getAttribute("bookingInfo");
 
 		try {
 			user = airlineService.validLogin(user);
 			if (user != null) {
 				session.removeAttribute("bookingInfo");
 				List<Flight> flights = airlineService.viewListOfFlights(
-					bookingInformation.getFlightNo(), "flightNo");
-				if("First".equalsIgnoreCase(bookingInformation.getClassType())) {
-				    bookingInformation.setTotalFare(MyUtil.calculatefare(bookingInformation.getNoOfPassengers(), flights.get(0).getFirstSeatsFare()));
-		} else if ("Business".equalsIgnoreCase(bookingInformation
-			.getClassType())) {
-		    bookingInformation.setTotalFare(MyUtil.calculatefare(
-			    bookingInformation.getNoOfPassengers(), flights
-				    .get(0).getBussSeatsFare()));
+						bookingInformation.getFlightNo(), "flightNo");
+				if ("First".equalsIgnoreCase(bookingInformation.getClassType())) {
+					bookingInformation.setTotalFare(MyUtil.calculatefare(
+							bookingInformation.getNoOfPassengers(), flights
+									.get(0).getFirstSeatsFare()));
+				} else if ("Business".equalsIgnoreCase(bookingInformation
+						.getClassType())) {
+					bookingInformation.setTotalFare(MyUtil.calculatefare(
+							bookingInformation.getNoOfPassengers(), flights
+									.get(0).getBussSeatsFare()));
 				}
-		bookingInformation.setCustEmail(user.getEmail());
-		bookingInformation
-			.setBookingDate(Date.valueOf(LocalDate.now()));
-		model.addAttribute("flight", flights.get(0));
+				bookingInformation.setCustEmail(user.getEmail());
+				bookingInformation
+						.setBookingDate(Date.valueOf(LocalDate.now()));
+				model.addAttribute("flight", flights.get(0));
 				returnPage = "booking";
 			}
 
 		} catch (Exception e) {
-			model.addAttribute("message", "Invalid Username/Password, Try Again");
+			model.addAttribute("message",
+					"Invalid Username/Password, Try Again");
 			model.addAttribute("user", new User());
 
 			returnPage = "login";
 		}
 		model.addAttribute("user", user);
-	model.addAttribute("booking", bookingInformation);
+		model.addAttribute("booking", bookingInformation);
 		return returnPage;
 	}
-	
-	@RequestMapping(value="viewOccupancyDetails.html")
-	public String viewOccupancyDetails(Model model){
+
+	@RequestMapping(value = "viewOccupancyDetails.html")
+	public String viewOccupancyDetails(Model model) {
 		int a[];
 		try {
 			a = airlineService.flightOccupancyDetails("SG-3309");
@@ -221,44 +226,44 @@ public class AirlineController {
 		} catch (Exception e1) {
 			e1.getMessage();
 		}
-		
+
 		return "success";
 	}
 
-    @RequestMapping(value = "/showBooking", method = RequestMethod.POST)
+	@RequestMapping(value = "/showBooking", method = RequestMethod.POST)
 	public String bookFlight(
-	    @ModelAttribute("booking") BookingInformation bookingInformation,
-	    Model model, HttpSession session) {
-	try {
+			@ModelAttribute("booking") BookingInformation bookingInformation,
+			Model model, HttpSession session) {
+		try {
 			List<Flight> flights = airlineService.viewListOfFlights(
-			bookingInformation.getFlightNo(), "flightNo");
-		if ("First".equalsIgnoreCase(bookingInformation.getClassType())) {
-		    bookingInformation.setTotalFare(MyUtil.calculatefare(
-			    bookingInformation.getNoOfPassengers(), flights.get(0)
-				    .getFirstSeatsFare()));
-		} else if ("Business".equalsIgnoreCase(bookingInformation
-			.getClassType())) {
-		    bookingInformation.setTotalFare(MyUtil.calculatefare(
-			    bookingInformation.getNoOfPassengers(), flights.get(0)
-				    .getBussSeatsFare()));
+					bookingInformation.getFlightNo(), "flightNo");
+			if ("First".equalsIgnoreCase(bookingInformation.getClassType())) {
+				bookingInformation.setTotalFare(MyUtil.calculatefare(
+						bookingInformation.getNoOfPassengers(), flights.get(0)
+								.getFirstSeatsFare()));
+			} else if ("Business".equalsIgnoreCase(bookingInformation
+					.getClassType())) {
+				bookingInformation.setTotalFare(MyUtil.calculatefare(
+						bookingInformation.getNoOfPassengers(), flights.get(0)
+								.getBussSeatsFare()));
+			}
+			bookingInformation.setCustEmail(((User) session
+					.getAttribute("user")).getEmail());
+			bookingInformation.setBookingDate(Date.valueOf(LocalDate.now()));
+			model.addAttribute("flight", flights.get(0));
+			model.addAttribute("booking", bookingInformation);
+		} catch (Exception e) {
+			e.getMessage();
 		}
-	    bookingInformation.setCustEmail(((User) session
-		    .getAttribute("user")).getEmail());
-		bookingInformation.setBookingDate(Date.valueOf(LocalDate.now()));
-		model.addAttribute("flight", flights.get(0));
-	    model.addAttribute("booking", bookingInformation);
-	} catch (Exception e) {
-	    e.getMessage();
+		return "booking";
 	}
-	return "booking";
-	}
-    	
-    @RequestMapping(value = "/confirmBooking", method = RequestMethod.POST)
-    public String confirmBooking(
-	    @ModelAttribute("booking") BookingInformation bookingInformation,
+
+	@RequestMapping(value = "/confirmBooking", method = RequestMethod.POST)
+	public String confirmBooking(
+			@ModelAttribute("booking") BookingInformation bookingInformation,
 			Model model) throws Exception {
 		try {
-	    airlineService.confirmBooking(bookingInformation);
+			airlineService.confirmBooking(bookingInformation);
 			model.addAttribute(
 					"message",
 					"Your flight booking is successful with bookingId-"
@@ -268,8 +273,8 @@ public class AirlineController {
 		} catch (Exception e) {
 			model.addAttribute("message", "Server Error: " + e.getMessage());
 		}
-	return "bookingSuccess";
-    }
+		return "bookingSuccess";
+	}
 
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public String updateUser(@ModelAttribute("userObj") @Valid User user,
@@ -277,10 +282,10 @@ public class AirlineController {
 		try {
 			model.addAttribute("bookings",
 					airlineService.viewBookings(user.getUsername(), "byUser"));
-		if (bindingResult.hasErrors()) {
+			if (bindingResult.hasErrors()) {
 
-			model.addAttribute("userObj", user);
-		} else {
+				model.addAttribute("userObj", user);
+			} else {
 
 				user.setRole("customer");
 				airlineService.updateUser(user);
@@ -288,8 +293,6 @@ public class AirlineController {
 				model.addAttribute("message",
 						"Information updated successfully");
 				model.addAttribute("userObj", user);
-
-
 
 			}
 		} catch (Exception e) {
@@ -299,9 +302,9 @@ public class AirlineController {
 	}
 
 	@RequestMapping(value = "/showUserProfile")
-	public String showUserProfile(Model model,HttpSession session) {
-			User user = (User)session.getAttribute("user");
-			model.addAttribute("userObj", user);
+	public String showUserProfile(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("userObj", user);
 		try {
 			List<BookingInformation> bookings = airlineService.viewBookings(
 					user.getUsername(), "byUser");
@@ -309,8 +312,8 @@ public class AirlineController {
 		} catch (Exception e) {
 			model.addAttribute("message", "Server Error: " + e.getMessage());
 		}
-			return "userProfile";
-		}
+		return "userProfile";
+	}
 
 	@RequestMapping(value = "/cancelBooking", method = RequestMethod.GET)
 	public String cancelBooking(@RequestParam("bookingId") int bookingId,

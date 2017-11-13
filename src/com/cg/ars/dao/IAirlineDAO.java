@@ -11,37 +11,39 @@ import com.cg.ars.entity.User;
  *
  */
 public interface IAirlineDAO {
-	
+
 	/**
 	 * @param query
 	 * @param searchBasis
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Flight> viewListOfFlights(String query, String searchBasis) throws Exception;
-	
+	public List<Flight> viewListOfFlights(String query, String searchBasis)
+			throws Exception;
+
 	/**
 	 * @param query
 	 * @param searchBasis
 	 * @return
 	 * @throws Exception
 	 */
-	public List<BookingInformation> viewBookings(String query, String searchBasis) throws Exception;
-	
+	public List<BookingInformation> viewBookings(String query,
+			String searchBasis) throws Exception;
+
 	/**
 	 * @param user
 	 * @return
 	 * @throws Exception
 	 */
 	public User signUp(User user) throws Exception;
-	
+
 	/**
 	 * @param user
 	 * @return
 	 * @throws Exception
 	 */
 	public User validLogin(User user) throws Exception;
-	
+
 	/**
 	 * @param bookingId
 	 * @return
@@ -55,20 +57,22 @@ public interface IAirlineDAO {
 	 * @throws Exception
 	 */
 	public int[] flightOccupancyDetails(String flightNo) throws Exception;
-	
+
 	/**
 	 * @param booking
 	 * @return
 	 * @throws Exception
 	 */
-	public BookingInformation modifyBookingInformation(BookingInformation booking) throws Exception;
-	
+	public BookingInformation modifyBookingInformation(
+			BookingInformation booking) throws Exception;
+
 	/**
 	 * @param booking
 	 * @return
 	 * @throws Exception
 	 */
-	public BookingInformation confirmBooking(BookingInformation booking) throws Exception;
+	public BookingInformation confirmBooking(BookingInformation booking)
+			throws Exception;
 
 	/**
 	 * @param query
@@ -76,7 +80,8 @@ public interface IAirlineDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public String checkAvailabiltiy(String query, String searchBasis) throws Exception;
+	public String checkAvailabiltiy(String query, String searchBasis)
+			throws Exception;
 
 	/**
 	 * @param username
@@ -84,7 +89,8 @@ public interface IAirlineDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public String forgotPassword(String username, String password) throws Exception;
+	public String forgotPassword(String username, String password)
+			throws Exception;
 
 	/**
 	 * @param user
