@@ -31,7 +31,6 @@ public class Airport implements Serializable{
 
 	public Airport() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Airport(int airportId, String airpotName, String abbreviation,

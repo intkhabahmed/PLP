@@ -34,12 +34,6 @@ public interface IAirlineService {
 	public User signUp(User user) throws Exception;
 
 	/**
-	 * @param user
-	 * @return
-	 * @throws Exception
-	 */
-
-	/**
 	 * @param bookingId
 	 * @return
 	 * @throws Exception
