@@ -82,8 +82,8 @@ public class BookingInformation {
 		return userEmail;
 	}
 
-	public void setUserEmail(String UserEmail) {
-		this.userEmail = UserEmail;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 	public int getNoOfPassengers() {

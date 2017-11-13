@@ -1,7 +1,7 @@
 package com.cg.ars.utility;
 
 public interface ARSConstants {
-	public String booking = "booking";
+	public String BOOKING = "booking";
 	public String bookings = "bookings";
 	public String byUser = "byUser";
 	public String byUsername = "byUsername";
@@ -18,4 +18,5 @@ public interface ARSConstants {
 	public String bookingInfo = "bookingInfo";
 	public String flightNo = "flightNo";
 	public String bookingId = "bookingId";
+	public String airport = "airport";
 }

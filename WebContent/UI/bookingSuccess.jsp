@@ -51,5 +51,6 @@
     	</div>
     </div>
   </div><!--End Booking Container-->
+  <jsp:include page="footer.jsp" />
 </body>
 </html>

@@ -9,6 +9,7 @@
 <style type="text/css">
 	<%@include file="../css/bootstrap.min.css"%>
 	<%@include file="../css/font-awesome.min.css"%>
+	<%@include file="../css/custom.css"%>
 </style>
 <script>
 	
@@ -35,13 +36,19 @@
 						<div class="col-sm-2">
 							<div class="form-group">
 								<form:label path="srcCity">Source City</form:label>
-								<form:input type="text" class="form-control" path="srcCity" required="required"/>
+								<form:select class="form-control" path="srcCity" required="required">
+									<form:option value="">--Select--</form:option>
+									<form:options items="${airport}"/>
+								</form:select>
 							</div>
 						</div>
 						<div class="col-sm-2">
 							<div class="form-group">
 								<form:label path="destCity">Destination City</form:label>
-								<form:input type="text" class="form-control" path="destCity" required="required"/>
+								<form:select class="form-control" path="destCity" required="required">
+									<form:option value="">--Select--</form:option>
+									<form:options items="${airport}"/>
+								</form:select>
 							</div>
 						</div>
 						<div class="col-sm-2">
@@ -136,5 +143,6 @@
 		</div>
 		<!--Form container end-->
 	</div>
+	<jsp:include page="footer.jsp" />
 </body>
 </html>

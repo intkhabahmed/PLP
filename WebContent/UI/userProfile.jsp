@@ -108,5 +108,6 @@
         <!-- End FlightList -->
     </div><!--End Row-->
   </div><!--End Booking Container-->
+  <jsp:include page="footer.jsp" />
 </body>
 </html>

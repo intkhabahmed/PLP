@@ -9,6 +9,7 @@
 <style type="text/css">
   <%@include file="../css/bootstrap.min.css"%>
   <%@include file="../css/font-awesome.min.css"%>
+  <%@include file="../css/custom.css"%>
 </style>
 <script>
   
@@ -80,5 +81,6 @@
     	</div>
     </div>
   </div><!--End Booking Container-->
+  <jsp:include page="footer.jsp" />
 </body>
 </html>

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.ars.dao.IAirlineDAO;
-import com.cg.ars.entity.Airport;
 import com.cg.ars.entity.BookingInformation;
 import com.cg.ars.entity.Flight;
 import com.cg.ars.entity.User;
@@ -29,8 +28,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	@Override
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
 			throws Exception {
-		List<Flight> flights = airlineDAO.viewListOfFlights(query, searchBasis);
-		return flights;
+		return airlineDAO.viewListOfFlights(query, searchBasis);
 	}
 
 	/**
@@ -145,10 +143,7 @@ public class AirlineServiceImpl implements IAirlineService {
 			throws Exception {
 		try {
 			String isAvail = airlineDAO.checkAvailabiltiy(query, searchBasis);
-			if (isAvail.isEmpty())
-				return true;
-			else
-				return false;
+			return isAvail.isEmpty();
 		} catch (NoResultException nre) {
 			return true;
 		} catch (Exception e) {
@@ -169,8 +164,19 @@ public class AirlineServiceImpl implements IAirlineService {
 	 * It calls the function getCities() of AirlineDaoImpl and returns the result to AirlineController
 	 */
 	@Override
-	public List<Airport> getCities() throws Exception {
+	public List<String> getCities() throws Exception {
 		return airlineDAO.getCities();
+	}
+	
+	@Override
+	public String getAbbreviation(String cityName) throws Exception{
+		String abbr="";
+		try{
+			abbr = airlineDAO.getAbbreviation(cityName);
+		}catch(NoResultException nre){
+			throw new AirlineException("Entered City does not exist in database");
+		}
+		return abbr;
 	}
 
 }
