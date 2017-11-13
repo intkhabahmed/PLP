@@ -36,7 +36,9 @@
 								<form:form class="form-horizontal" action="forgotPassword.html" method="post" modelAttribute="userObj">
 									<div class="form-group">
 										<form:label path="username">Username:</form:label>
-										<form:input type="text" class="form-control" path="username" required="required"/>
+										<form:input type="text" class="form-control" path="username" required="required"
+											pattern="^[a-zA-Z][a-zA-Z0-9._]{2,20}$" 
+											title="Username(min=3 & max=20) can have only characters,digits, '.(dot)' and '_' and start with an alphabet"/>
 									</div>
 									<div class="form-group">
 										<form:label path="password">New Password:</form:label>

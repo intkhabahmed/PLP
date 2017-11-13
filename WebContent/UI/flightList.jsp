@@ -61,7 +61,8 @@
 							<div class="form-group">
 								<form:label path="noOfPassengers">No of Travellers</form:label>
 								<form:input type="text" class="form-control"
-									path="noOfPassengers" required="required"/>
+												path="noOfPassengers" required="required"
+												pattern="[1-9]{1}" title="min=1 & max=9"/>
 							</div>
 						</div>
 						<div class="col-sm-2">

@@ -37,12 +37,16 @@
 								<form:form class="form-horizontal" action="signup.html" method="post" modelAttribute="userObj">
 									<div class="form-group">
 										<form:label path="username">Username:</form:label>
-										<form:input type="text" class="form-control" path="username" required="required"/>
+										<form:input type="text" class="form-control" path="username" required="required"
+											pattern="^[a-zA-Z][a-zA-Z0-9._]{2,20}$" 
+											title="Username(min=3 & max=20) can have only characters,digits, '.(dot)' and '_' and start with an alphabet"/>
 										<form:errors path="username"/><br>
 									</div>
 									<div class="form-group">
 										<form:label path="password">Password:</form:label>
-										<form:input type="password" class="form-control" path="password" required="required"/>
+										<form:input type="password" class="form-control" path="password" required="required"
+											pattern="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})"
+											title="Password(min=8 & max=20) must contain alteast a small, an uppercase letter, a digit and a special symbol"/>
 										<form:errors path="password"/><br>
 									</div>
 									<div class="form-group">
@@ -53,7 +57,8 @@
 
 									<div class="form-group">
 										<form:label path="mobileNo">Mobile No:</form:label>
-										<form:input type="text" class="form-control" path="mobileNo" required="required"/>
+										<form:input type="text" class="form-control" path="mobileNo" required="required"
+											pattern="[1-9][0-9]{9}" title="Please provide a valid mobile number of 10 digits only"/>
 										<form:errors path="mobileNo"/><br>
 									</div>
 									
@@ -63,7 +68,7 @@
 										</div>	
 									</div>
 								</form:form>
-								<h4 align="center">Already have account? <a href="showLogin.html">Login here</a></h4>
+								<h4 align="center">Already have an account? <a href="showLogin.html">Login here</a></h4>
 							</div><!--end panel body-->
 						</div><!--end panel-->
 				</div>

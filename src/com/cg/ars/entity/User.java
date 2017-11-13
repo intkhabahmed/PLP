@@ -40,7 +40,7 @@ public class User {
 	private String email;
 
 	@Column(name = "Mobile_no")
-	@Pattern(regexp = "[1-9][0-9]{9}", message = "Error: please provide a valid mobile number")
+	@Pattern(regexp = "[1-9][0-9]{9}", message = "Please provide a valid mobile number of 10 digits only")
 	private String mobileNo;
 
 	@Column(name = "Role")

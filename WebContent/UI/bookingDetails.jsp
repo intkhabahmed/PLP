@@ -58,7 +58,7 @@
 			    			<td>${booking.userEmail}</td>
 			    			<td>${booking.noOfPassengers}</td>
 			    			<td>${booking.classType}</td>
-			    			<td>${booking.totalFare}</td>
+			    			<td><i class="fa fa-rupee"></i> ${booking.totalFare}</td>
 			    			<td>${booking.srcCity}</td>
 			    			<td>${booking.destCity}</td>
 			    			<td>${booking.flightNo}</td>
@@ -74,10 +74,10 @@
     </div><!--End Row-->
     <div class="row text-center">
     	<div class="col-sm-4 col-sm-offset-2">
-    		<a href="cancelBooking.html?bookingId=${booking.bookingId}" class="btn btn-danger">Cancel Booking</a>
+    		<a href="cancelBooking.html?bookingId=${booking.bookingId}" class="btn btn-danger btn-lg">Cancel Booking</a>
     	</div>
     	<div class="col-sm-4">
-    		<a href="showUserProfile.html" class="btn btn-danger">Go Back to Profile</a>
+    		<a href="showUserProfile.html" class="btn btn-danger btn-lg">Go Back to Profile</a>
     	</div>
     </div>
   </div><!--End Booking Container-->

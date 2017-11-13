@@ -1,9 +1,5 @@
 package com.cg.ars.utility;
 
-import javax.persistence.Parameter;
-
-
-
 public interface ARSConstants {
 	public String BOOKING = "booking";
 	public String BOOKINGS = "bookings";
@@ -27,11 +23,11 @@ public interface ARSConstants {
 	public String URLINDEX = "/index";
 	public String URLSHOWLOGIN = "/showLogin";
 	public String URLSHOWLOGINAFTERSEARCH = "/showLoginAfterSearch";
-	public String URLSHOWSIGNUP ="/showSignup";
+	public String URLSHOWSIGNUP = "/showSignup";
 	public String URLSIGNUP = "/signup";
-	public String URLLOGOUT ="/logout";
+	public String URLLOGOUT = "/logout";
 	public String URLLOGIN = "/login";
-	public String URLLOGINAFTERSEARCH ="/loginAfterSearch";
+	public String URLLOGINAFTERSEARCH = "/loginAfterSearch";
 	public String URLOCCUPANCYDETAIL = "viewOccupancyDetails.html";
 	public String URLSHOWBOOKING = "/showBooking";
 	public String URLCONFIRMBOOKING = "/confirmBooking";
@@ -44,10 +40,10 @@ public interface ARSConstants {
 	public String FORGOTPWD = "forgotPassword";
 	public String LOGIN = "login";
 	public String PWDCHANGED = "Password changed successfully, Login here";
-	public String SERVERERROR = "Server Error: ";
+	public String ERROR = "Error: ";
 	public String BOOKINGDETAILS = "bookingDetails";
 	public String BYBOOKINGID = "byBookingId";
-	public String TICKETCANCEL = "Your ticket is successfully cancelled with Booking Id :";
+	public String TICKETCANCEL = "Your ticket is successfully cancelled with Booking Id: ";
 	public String INVALIDUSERNAMEPWD = "Invalid Username/Password, Try Again";
 	public String SOURCEDESTINATIONCANNOTSAME = "Source and Destination cannot be same";
 	public String USERNAMETAKEN = "This Username is already taken";
@@ -55,7 +51,7 @@ public interface ARSConstants {
 	public String SIGNUPSUCCESS = "Signup successful, Login here";
 	public String FLIGHTLIST = "flightList";
 	public String INDEX = "index";
-	public String  SIGNUP= "signup";
+	public String SIGNUP = "signup";
 	public String MESSAGE = "message";
 	public String BOOKINGSUCCESS = "bookingSuccess";
 	public String USERPROFILE = "userProfile";
@@ -66,11 +62,8 @@ public interface ARSConstants {
 	public String PASS = "pass";
 	public String BYFLIGHT = "byFlight";
 	public String EMAIL = "email";
-	public String ARRCITY ="arrCity";
+	public String ARRCITY = "arrCity";
 	public String DEPDATE = "deptDate";
 	public String DEPCITY = "deptCity";
-	
-	
-	
-	
+
 }

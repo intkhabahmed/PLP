@@ -51,7 +51,9 @@
                   </div>
                   <div class="form-group">
                     <form:label path="password">Password:</form:label>
-                    <form:input type="password" class="form-control" path="password" required="required"/>
+                    <form:input type="password" class="form-control" path="password" required="required" 
+                    	pattern="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})" 
+                    	title="Password(min=8 & max=20) must contain alteast a small, an uppercase letter, a digit and a special symbol"/>
                     <form:errors path="password"/><br>
                   </div>
                   <div class="form-group">
@@ -61,7 +63,8 @@
 
                   <div class="form-group">
                     <form:label path="mobileNo">Mobile No:</form:label>
-                    <form:input type="text" class="form-control" path="mobileNo" required="required"/>
+                    <form:input type="text" class="form-control" path="mobileNo" required="required" pattern="[1-9][0-9]{9}"
+                    	title="Please provide a valid mobile number of 10 digits only"/>
                     <form:errors path="mobileNo"/><br>
                   </div>
                   
@@ -85,7 +88,7 @@
 	                <tr>
 	                  <th>Booking Id</th>
 	                  <th>Booked Flight</th>
-	                  <th class="text-center">Action</th>
+	                  <th class="text-center" colspan="2">Action</th>
 	                </tr>
 	                <c:forEach items="${bookings}" var="booking">
 	                	<tr>

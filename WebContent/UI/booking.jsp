@@ -68,7 +68,8 @@
                 <div class="form-group">
                   <form:label path="creditCardInfo" class="form-label">Card No:</form:label>
                   <i class="fa fa-credit-card pull-right fa-2x"></i>
-                  <form:input type="text" path="creditCardInfo" required="required" class="form-control" />
+                  <form:input type="text" path="creditCardInfo" required="required" class="form-control" 
+                  	pattern="^[1-9][0-9]{9}$" title="Card number should be of 10 digits"/>
                   <form:hidden path="userEmail"/>
                   <form:hidden path="noOfPassengers"/>
                   <form:hidden path="classType"/>

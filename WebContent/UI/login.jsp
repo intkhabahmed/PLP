@@ -44,7 +44,8 @@
 								<form:form class="form-horizontal" action="${action}" method="post" modelAttribute="user">
 									<div class="form-group">
 										<form:label path="username">Username:</form:label>
-										<form:input type="text" class="form-control" path="username" required="required"/>
+										<form:input type="text" class="form-control" path="username" required="required"
+											pattern="^[a-zA-Z][a-zA-Z0-9._]{2,20}$" title="Username(min=3 & max=20) can have only characters,digits, '.(dot)' and '_' and start with an alphabet"/>
 									</div>
 									<div class="form-group">
 										<form:label path="password">Password:</form:label>
@@ -57,7 +58,7 @@
 									</div>
 								</form:form>
 								<h4 align="center">Forgot Password? <a href="showForgotPassword.html">Click here</a></h4>
-								<h4 align="center">Don't have account? <a href="showSignup.html">Signup here</a></h4>
+								<h4 align="center">Don't have an account? <a href="showSignup.html">Signup here</a></h4>
 							</div>
 						</div>
 				</div>

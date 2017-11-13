@@ -44,10 +44,10 @@
     </div><!--End Row-->
     <div class="row">
     	<div class="col-sm-6 text-center">
-    		<a href="showUserProfile.html" class="btn btn-danger">View Booking</a>
+    		<a href="showUserProfile.html" class="btn btn-danger btn-lg">View Booking</a>
     	</div>
     	<div class="col-sm-6 text-center">
-    		<a href="index.html" class="btn btn-danger">Go Home</a>
+    		<a href="index.html" class="btn btn-danger btn-lg">Go Home</a>
     	</div>
     </div>
   </div><!--End Booking Container-->

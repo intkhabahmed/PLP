@@ -22,59 +22,80 @@ public class AirlineServiceImpl implements IAirlineService {
 	@Autowired
 	private IAirlineDAO airlineDAO;
 
-	/* (non-Javadoc)
-	 * @see com.cg.ars.service.IAirlineService#viewListOfFlights(java.lang.String, java.lang.String)
-	 * description: It calls the function viewListOfFlights(query, searchBasis) of AirlineDaoImpl and returns the list of flights to AirlineController
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.cg.ars.service.IAirlineService#viewListOfFlights(java.lang.String,
+	 * java.lang.String) description: It calls the function
+	 * viewListOfFlights(query, searchBasis) of AirlineDaoImpl and returns the
+	 * list of flights to AirlineController
 	 */
 	@Override
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
-			throws Exception {
+			throws AirlineException {
 		return airlineDAO.viewListOfFlights(query, searchBasis);
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.cg.ars.service.IAirlineService#viewBookings(java.lang.String, java.lang.String)
-	 * description: It calls the function viewBookings(query, searchBasis) of AirlineDaoImpl and returns the result to AirlineController
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.cg.ars.service.IAirlineService#viewBookings(java.lang.String,
+	 * java.lang.String) description: It calls the function viewBookings(query,
+	 * searchBasis) of AirlineDaoImpl and returns the result to
+	 * AirlineController
 	 */
 	@Override
 	public List<BookingInformation> viewBookings(String query,
-			String searchBasis) throws Exception {
+			String searchBasis) throws AirlineException {
 		return airlineDAO.viewBookings(query, searchBasis);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.cg.ars.service.IAirlineService#signUp(com.cg.ars.entity.User)
-	 * description: It calls the function signUp(user) of AirlineDaoImpl and returns the result to AirlineController
+	 * description: It calls the function signUp(user) of AirlineDaoImpl and
+	 * returns the result to AirlineController
 	 */
 	@Override
-	public User signUp(User user) throws Exception {
+	public User signUp(User user) throws AirlineException {
 		return airlineDAO.signUp(user);
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.cg.ars.service.IAirlineService#validLogin(com.cg.ars.entity.User)
-	 * description: It calls the function validLogin(user) of AirlineDaoImpl and returns the result to AirlineController
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.cg.ars.service.IAirlineService#validLogin(com.cg.ars.entity.User)
+	 * description: It calls the function validLogin(user) of AirlineDaoImpl and
+	 * returns the result to AirlineController
 	 */
 	@Override
-	public User validLogin(User user) throws Exception {
+	public User validLogin(User user) throws AirlineException {
 		return airlineDAO.validLogin(user);
 	}
 
-	
-	/* (non-Javadoc)
-	 * @see com.cg.ars.service.IAirlineService#bookingCancel(int)
-	 * description: It calls the function bookingCancel(bookingId), viewListOfFlights(booking.getFlightNo(),"flightNo") and updateFlight(flight)
-	 * of AirlineDaoImpl and returns the result to AirlineController
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.cg.ars.service.IAirlineService#bookingCancel(int) description:
+	 * It calls the function bookingCancel(bookingId),
+	 * viewListOfFlights(booking.getFlightNo(),"flightNo") and
+	 * updateFlight(flight) of AirlineDaoImpl and returns the result to
+	 * AirlineController
 	 */
 	@Override
-	public BookingInformation bookingCancel(int bookingId) throws Exception {
+	public BookingInformation bookingCancel(int bookingId)
+			throws AirlineException {
 		BookingInformation booking = airlineDAO.bookingCancel(bookingId);
 		Flight flight = airlineDAO.viewListOfFlights(booking.getFlightNo(),
 				ARSConstants.FLIGHTNO).get(0);
 		if (ARSConstants.FIRST.equalsIgnoreCase(booking.getClassType())) {
 			flight.setFirstSeats(flight.getFirstSeats()
 					+ booking.getNoOfPassengers());
-		} else if (ARSConstants.BUSINESS.equalsIgnoreCase(booking.getClassType())) {
+		} else if (ARSConstants.BUSINESS.equalsIgnoreCase(booking
+				.getClassType())) {
 			flight.setFirstSeats(flight.getBussSeats()
 					+ booking.getNoOfPassengers());
 		}
@@ -82,53 +103,73 @@ public class AirlineServiceImpl implements IAirlineService {
 		return booking;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.cg.ars.service.IAirlineService#flightOccupancyDetails(java.lang.String)
-	 * description: It calls the function flightOccupancyDetails(flightNo) of AirlineDaoImpl and returns the result to AirlineController
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.cg.ars.service.IAirlineService#flightOccupancyDetails(java.lang.String
+	 * ) description: It calls the function flightOccupancyDetails(flightNo) of
+	 * AirlineDaoImpl and returns the result to AirlineController
 	 */
 	@Override
-	public int[] flightOccupancyDetails(String flightNo) throws Exception {
+	public int[] flightOccupancyDetails(String flightNo)
+			throws AirlineException {
 		return airlineDAO.flightOccupancyDetails(flightNo);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.cg.ars.service.IAirlineService#modifyBookingInformation(com.cg.ars.entity.BookingInformation)
-	 * description: It calls modifyBookingInformation(booking) of AirlineDaoImpl and returns the result to AirlineController
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.cg.ars.service.IAirlineService#modifyBookingInformation(com.cg.ars
+	 * .entity.BookingInformation) description: It calls
+	 * modifyBookingInformation(booking) of AirlineDaoImpl and returns the
+	 * result to AirlineController
 	 */
 	@Override
 	public BookingInformation modifyBookingInformation(
-			BookingInformation booking) throws Exception {
+			BookingInformation booking) throws AirlineException {
 		return airlineDAO.modifyBookingInformation(booking);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.cg.ars.service.IAirlineService#confirmBooking(com.cg.ars.entity.BookingInformation)
-	 * description: It calls the function confirmBooking(booking), viewListOfFlights(booking.getFlightNo(),"flightNo") and updateFlight(flight)
-	 * of AirlineDaoImpl and returns the result to AirlineController
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.cg.ars.service.IAirlineService#confirmBooking(com.cg.ars.entity.
+	 * BookingInformation) description: It calls the function
+	 * confirmBooking(booking),
+	 * viewListOfFlights(booking.getFlightNo(),"flightNo") and
+	 * updateFlight(flight) of AirlineDaoImpl and returns the result to
+	 * AirlineController
 	 */
 	@Override
 	public BookingInformation confirmBooking(BookingInformation booking)
-			throws Exception {
+			throws AirlineException {
 		booking = airlineDAO.confirmBooking(booking);
 		Flight flight = airlineDAO.viewListOfFlights(booking.getFlightNo(),
 				ARSConstants.FLIGHTNO).get(0);
 		if (ARSConstants.FIRST.equalsIgnoreCase(booking.getClassType())) {
 			flight.setFirstSeats(flight.getFirstSeats()
 					- booking.getNoOfPassengers());
-		} else if (ARSConstants.BUSINESS.equalsIgnoreCase(booking.getClassType())) {
+		} else if (ARSConstants.BUSINESS.equalsIgnoreCase(booking
+				.getClassType())) {
 			flight.setFirstSeats(flight.getBussSeats()
 					- booking.getNoOfPassengers());
 		}
 		airlineDAO.updateFlight(flight);
 		return booking;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.cg.ars.service.IAirlineService#forgotPassword(com.cg.ars.entity.User)
-	 * description: It calls the function getUserDetails(user.getUsername()) of AirlineDaoImpl and returns the updated result to AirlineController
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.cg.ars.service.IAirlineService#forgotPassword(com.cg.ars.entity.User)
+	 * description: It calls the function getUserDetails(user.getUsername()) of
+	 * AirlineDaoImpl and returns the updated result to AirlineController
 	 */
 	@Override
-	public User forgotPassword(User user) throws Exception {
+	public User forgotPassword(User user) throws AirlineException {
 		try {
 			String password = user.getPassword();
 			user = airlineDAO.getUserDetails(user.getUsername());
@@ -144,54 +185,68 @@ public class AirlineServiceImpl implements IAirlineService {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.cg.ars.service.IAirlineService#checkAvailabiltiy(java.lang.String, java.lang.String)
-	 * description: It calls the function checkAvailabiltiy(query, searchBasis) of AirlineDaoImpl 
-	 * and if user is not available then returns false otherwise it returns true
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.cg.ars.service.IAirlineService#checkAvailabiltiy(java.lang.String,
+	 * java.lang.String) description: It calls the function
+	 * checkAvailabiltiy(query, searchBasis) of AirlineDaoImpl and if user is
+	 * not available then returns false otherwise it returns true
 	 */
 	@Override
 	public boolean checkAvailabiltiy(String query, String searchBasis)
-			throws Exception {
+			throws AirlineException {
 		try {
 			String isAvail = airlineDAO.checkAvailabiltiy(query, searchBasis);
 			return isAvail.isEmpty();
 		} catch (NoResultException nre) {
 			return true;
 		} catch (Exception e) {
-			throw new AirlineException(ARSConstants.SERVERERROR + e.getMessage());
+			throw new AirlineException(ARSConstants.ERROR
+					+ e.getMessage());
 		}
 
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.cg.ars.service.IAirlineService#updateUser(com.cg.ars.entity.User)
-	 * description: It calls the function of AirlineDaoImpl and returns the result to AirlineController
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.cg.ars.service.IAirlineService#updateUser(com.cg.ars.entity.User)
+	 * description: It calls the function of AirlineDaoImpl and returns the
+	 * result to AirlineController
 	 */
 	@Override
-	public User updateUser(User user) throws Exception {
+	public User updateUser(User user) throws AirlineException {
 		return airlineDAO.updateUser(user);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.cg.ars.service.IAirlineService#getCities()
-	 * description: It calls the function getCities() of AirlineDaoImpl and returns the result to AirlineController
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.cg.ars.service.IAirlineService#getCities() description: It calls
+	 * the function getCities() of AirlineDaoImpl and returns the result to
+	 * AirlineController
 	 */
 	@Override
-	public List<String> getCities() throws Exception {
+	public List<String> getCities() throws AirlineException {
 		return airlineDAO.getCities();
 	}
-	
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.cg.ars.service.IAirlineService#getAbbreviation(java.lang.String)
-	 * description: It calls getAbbreviation(cityName) of data access layer and return the abbreviation of cities
+	 * description: It calls getAbbreviation(cityName) of data access layer and
+	 * return the abbreviation of cities
 	 */
 	@Override
-	public String getAbbreviation(String cityName) throws Exception{
-		String abbr="";
-		try{
+	public String getAbbreviation(String cityName) throws AirlineException {
+		String abbr = "";
+		try {
 			abbr = airlineDAO.getAbbreviation(cityName);
-		}catch(NoResultException nre){
+		} catch (NoResultException nre) {
 			throw new AirlineException(ARSConstants.CITYNOTINDATABASE);
 		}
 		return abbr;
