@@ -1,6 +1,7 @@
 package com.cg.ars.dao;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
+import com.cg.ars.entity.Airport;
 import com.cg.ars.entity.BookingInformation;
 import com.cg.ars.entity.Flight;
 import com.cg.ars.entity.User;
@@ -275,6 +277,13 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				"SELECT u FROM User u WHERE u.username=:username", User.class);
 		query.setParameter("username", username);
 		return query.getSingleResult();
+	}
+	
+	@Override
+	public List<Airport> getCities() throws Exception {
+		TypedQuery<Airport> query = entityManager.createQuery(
+				QueryMapper.getAllCities,Airport.class);
+		return query.getResultList();
 	}
 
 }
