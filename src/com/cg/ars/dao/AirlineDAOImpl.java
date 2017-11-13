@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.cg.ars.entity.BookingInformation;
 import com.cg.ars.entity.Flight;
 import com.cg.ars.entity.User;
+import com.cg.ars.utility.QueryMapper;
 
 /**
  * @author inahmed
@@ -48,37 +49,30 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			throws Exception {
 		TypedQuery<Flight> sqlQuery = null;
 		if (searchBasis.equals("dest")) {
-			sqlQuery = entityManager.createQuery(
-					"SELECT f FROM Flight f WHERE f.arrCity=:arrCity",
+			sqlQuery = entityManager.createQuery(QueryMapper.query1,
 					Flight.class);
 			sqlQuery.setParameter("arrCity", query);
 		} else if (searchBasis.equals("day")) {
-			sqlQuery = entityManager.createQuery(
-					"SELECT f FROM Flight f WHERE f.deptDate=:deptDate",
+			sqlQuery = entityManager.createQuery(QueryMapper.query2,
 					Flight.class);
 			sqlQuery.setParameter("deptDate", Date.valueOf(query));
 		} else if (searchBasis.equals("route")) {
 			String route[] = query.split("=");
-			sqlQuery = entityManager
-					.createQuery(
-							"SELECT f FROM Flight f WHERE f.deptCity=:deptCity AND f.arrCity=:arrCity",
-							Flight.class);
+			sqlQuery = entityManager.createQuery(QueryMapper.query3,
+					Flight.class);
 			sqlQuery.setParameter("deptCity", route[0]);
 			sqlQuery.setParameter("arrCity", route[1]);
 		} else if (searchBasis.equals("flightNo")) {
-			sqlQuery = entityManager.createQuery(
-					"SELECT f FROM Flight f WHERE f.flightNo=:flightNo",
+			sqlQuery = entityManager.createQuery(QueryMapper.query4,
 					Flight.class);
 			sqlQuery.setParameter("flightNo", query);
 		} else if (searchBasis.equals("all")) {
-			sqlQuery = entityManager.createQuery("SELECT f FROM Flight f",
+			sqlQuery = entityManager.createQuery(QueryMapper.query5,
 					Flight.class);
 		} else if (searchBasis.equals("byUser")) {
 			String route[] = query.split("=");
-			sqlQuery = entityManager
-					.createQuery(
-							"SELECT f FROM Flight f where f.deptCity=:deptCity AND f.arrCity=:arrCity AND f.deptDate=:deptDate",
-							Flight.class);
+			sqlQuery = entityManager.createQuery(QueryMapper.query6,
+					Flight.class);
 			sqlQuery.setParameter("deptCity", route[0]);
 			sqlQuery.setParameter("arrCity", route[1]);
 			sqlQuery.setParameter("deptDate", Date.valueOf(route[2]));
@@ -100,22 +94,16 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		TypedQuery<BookingInformation> sqlQuery = null;
 
 		if (searchBasis.equals("byFlight")) {
-			sqlQuery = entityManager
-					.createQuery(
-							"SELECT b FROM BookingInformation b WHERE b.flightNo=:flightNo",
-							BookingInformation.class);
+			sqlQuery = entityManager.createQuery(QueryMapper.query7,
+					BookingInformation.class);
 			sqlQuery.setParameter("flightNo", query);
 		} else if (searchBasis.equals("byUser")) {
-
 			TypedQuery<User> userQuery = entityManager.createQuery(
-					"SELECT u FROM User u WHERE u.username=:username",
-					User.class);
+					QueryMapper.query8, User.class);
 			userQuery.setParameter("username", query);
 			User user = userQuery.getSingleResult();
-			sqlQuery = entityManager
-					.createQuery(
-							"SELECT b FROM BookingInformation b WHERE b.userEmail=:email",
-							BookingInformation.class);
+			sqlQuery = entityManager.createQuery(QueryMapper.query9,
+					BookingInformation.class);
 			sqlQuery.setParameter("email", user.getEmail());
 		}
 		return sqlQuery.getResultList();
@@ -129,10 +117,8 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 */
 	@Override
 	public User validLogin(User user) throws Exception {
-		TypedQuery<User> sqlQuery = entityManager
-				.createQuery(
-						"SELECT u FROM User u WHERE u.username=:user AND u.password=:pass",
-						User.class);
+		TypedQuery<User> sqlQuery = entityManager.createQuery(
+				QueryMapper.query10, User.class);
 		sqlQuery.setParameter("user", user.getUsername());
 		sqlQuery.setParameter("pass", user.getPassword());
 		return sqlQuery.getSingleResult();
@@ -155,81 +141,95 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 * @see com.cg.as.dao.IAirlineDAO#bookingCancel(java.lang.String)
 	 */
 	@Override
-	public BookingInformation bookingCancel(int bookingId)
-			throws Exception {
+	public BookingInformation bookingCancel(int bookingId) throws Exception {
 		BookingInformation booking = entityManager.find(
 				BookingInformation.class, bookingId);
 		entityManager.remove(booking);
 		return booking;
 	}
-	
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.cg.as.dao.IAirlineDAO#flightOccupancyDetails(java.lang.String)
 	 */
 	@Override
-	public int[] flightOccupancyDetails(String flightNo) throws Exception{
+	public int[] flightOccupancyDetails(String flightNo) throws Exception {
 		int[] seatDetails = new int[4];
 		TypedQuery<Integer> sqlQuery = null;
-		sqlQuery = entityManager.createQuery("SELECT f.firstSeats FROM Flight f where f.flightNo=:flightNo",Integer.class);
+		sqlQuery = entityManager
+				.createQuery(QueryMapper.query11, Integer.class);
 		sqlQuery.setParameter("flightNo", flightNo);
 		seatDetails[0] = sqlQuery.getSingleResult();
-		sqlQuery = entityManager.createQuery("SELECT f.bussSeats FROM Flight f where f.flightNo=:flightNo",Integer.class);
+		sqlQuery = entityManager
+				.createQuery(QueryMapper.query12, Integer.class);
 		sqlQuery.setParameter("flightNo", flightNo);
 		seatDetails[1] = sqlQuery.getSingleResult();
-		sqlQuery =  entityManager.createQuery("SELECT f.noOfPassengers FROM BookingInformation f where f.flightNo=:flightNo AND f.classType='first'",Integer.class);
+		sqlQuery = entityManager
+				.createQuery(QueryMapper.query13, Integer.class);
 		sqlQuery.setParameter("flightNo", flightNo);
 		seatDetails[2] = sqlQuery.getSingleResult();
-		sqlQuery =  entityManager.createQuery("SELECT f.noOfPassengers FROM BookingInformation f where f.flightNo=:flightNo AND f.classType='business'",Integer.class);
+		sqlQuery = entityManager
+				.createQuery(QueryMapper.query14, Integer.class);
 		sqlQuery.setParameter("flightNo", flightNo);
 		seatDetails[3] = sqlQuery.getSingleResult();
 		return seatDetails;
 	}
-	
-	
-	/* (non-Javadoc)
-	 * @see com.cg.as.dao.IAirlineDAO#modifyBookingInformation(com.cg.as.entity.BookingInformation)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.cg.as.dao.IAirlineDAO#modifyBookingInformation(com.cg.as.entity.
+	 * BookingInformation)
 	 */
 	@Override
-	public BookingInformation modifyBookingInformation(BookingInformation booking) throws Exception{
+	public BookingInformation modifyBookingInformation(
+			BookingInformation booking) throws Exception {
 		booking = entityManager.merge(booking);
 		return booking;
 	}
-	
-	
-	/* (non-Javadoc)
-	 * @see com.cg.as.dao.IAirlineDAO#confirmBooking(com.cg.as.entity.BookingInformation)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.cg.as.dao.IAirlineDAO#confirmBooking(com.cg.as.entity.BookingInformation
+	 * )
 	 */
 	@Override
-	public BookingInformation confirmBooking(BookingInformation booking) throws Exception{
+	public BookingInformation confirmBooking(BookingInformation booking)
+			throws Exception {
 		entityManager.persist(booking);
 		entityManager.flush();
 		return booking;
-		
+
 	}
-	
+
 	@Override
-	public String forgotPassword(String username, String password){
-		Query sqlQuery = entityManager.createQuery("Update User u Set u.password where u.username=:username");
+	public String forgotPassword(String username, String password) {
+		Query sqlQuery = entityManager.createQuery(QueryMapper.query15);
 		sqlQuery.setParameter("username", username);
 		return username;
 	}
 
 	@Override
-	public String checkAvailabiltiy(String query, String searchBasis) throws Exception{
-		TypedQuery<String> sqlQuery= null;
+	public String checkAvailabiltiy(String query, String searchBasis)
+			throws Exception {
+		TypedQuery<String> sqlQuery = null;
 		String isAvail;
-		if(searchBasis.equals("byUsername")){
-			sqlQuery = entityManager.createQuery("Select u.username from User u where u.username=:query", String.class);
+		if (searchBasis.equals("byUsername")) {
+			sqlQuery = entityManager.createQuery(QueryMapper.query16,
+					String.class);
 			sqlQuery.setParameter("query", query);
-		}else if(searchBasis.equals("byEmail")){
-			sqlQuery = entityManager.createQuery("Select u.email from User u where u.email=:query", String.class);
+		} else if (searchBasis.equals("byEmail")) {
+			sqlQuery = entityManager.createQuery(QueryMapper.query17,
+					String.class);
 			sqlQuery.setParameter("query", query);
 		}
 		isAvail = sqlQuery.getSingleResult();
 		return isAvail;
 	}
-	
+
 	@Override
 	public User updateUser(User user) throws Exception {
 		entityManager.merge(user);
