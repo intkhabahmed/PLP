@@ -51,26 +51,6 @@ public class Flight {
 	@Column(name = "duration")
 	private String duration;
 
-	public Flight(String flightNo, String flightName, String deptCity,
-			String arrCity, Date deptDate, Date arrDate, String deptTime,
-			String arrTime, int firstSeats, double firstSeatsFare,
-			int bussSeats, double bussSeatsFare, String duration) {
-		super();
-		this.flightNo = flightNo;
-		this.flightName = flightName;
-		this.arrCity = arrCity;
-		this.deptCity = deptCity;
-		this.arrDate = arrDate;
-		this.deptDate = deptDate;
-		this.arrTime = arrTime;
-		this.deptTime = deptTime;
-		this.firstSeats = firstSeats;
-		this.firstSeatsFare = firstSeatsFare;
-		this.bussSeats = bussSeats;
-		this.duration = duration;
-		this.bussSeatsFare = bussSeatsFare;
-	}
-
 	public Flight() {
 		super();
 	}

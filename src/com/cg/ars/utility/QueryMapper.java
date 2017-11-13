@@ -20,5 +20,5 @@ public interface QueryMapper {
 	public static String CHECKEMAILISAVAILABLE = "Select u.email from User u where u.email=:query";
 	public static String GETALLCITIES = "Select a.location from Airport a";
 	public static String GETABBREVIATION = "SELECT a.abbreviation FROM Airport a WHERE a.location=:location";
-
+	public static String BOOKINGINFOBYBOOKINGID = "SELECT b FROM BookingInformation b WHERE b.bookingId=:bookingId";
 }

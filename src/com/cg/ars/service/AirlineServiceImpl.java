@@ -13,6 +13,7 @@ import com.cg.ars.entity.BookingInformation;
 import com.cg.ars.entity.Flight;
 import com.cg.ars.entity.User;
 import com.cg.ars.exception.AirlineException;
+import com.cg.ars.utility.ARSConstants;
 
 @Service
 @Transactional
@@ -47,11 +48,11 @@ public class AirlineServiceImpl implements IAirlineService {
 	public BookingInformation bookingCancel(int bookingId) throws Exception {
 		BookingInformation booking = airlineDAO.bookingCancel(bookingId);
 		Flight flight = airlineDAO.viewListOfFlights(booking.getFlightNo(),
-				"flightNo").get(0);
-		if ("First".equalsIgnoreCase(booking.getClassType())) {
+				ARSConstants.FLIGHTNO).get(0);
+		if (ARSConstants.FIRST.equalsIgnoreCase(booking.getClassType())) {
 			flight.setFirstSeats(flight.getFirstSeats()
 					+ booking.getNoOfPassengers());
-		} else if ("Business".equalsIgnoreCase(booking.getClassType())) {
+		} else if (ARSConstants.BUSINESS.equalsIgnoreCase(booking.getClassType())) {
 			flight.setFirstSeats(flight.getBussSeats()
 					+ booking.getNoOfPassengers());
 		}
@@ -76,11 +77,11 @@ public class AirlineServiceImpl implements IAirlineService {
 			throws Exception {
 		booking = airlineDAO.confirmBooking(booking);
 		Flight flight = airlineDAO.viewListOfFlights(booking.getFlightNo(),
-				"flightNo").get(0);
-		if ("First".equalsIgnoreCase(booking.getClassType())) {
+				ARSConstants.FLIGHTNO).get(0);
+		if (ARSConstants.FIRST.equalsIgnoreCase(booking.getClassType())) {
 			flight.setFirstSeats(flight.getFirstSeats()
 					- booking.getNoOfPassengers());
-		} else if ("Business".equalsIgnoreCase(booking.getClassType())) {
+		} else if (ARSConstants.BUSINESS.equalsIgnoreCase(booking.getClassType())) {
 			flight.setFirstSeats(flight.getBussSeats()
 					- booking.getNoOfPassengers());
 		}
@@ -93,13 +94,13 @@ public class AirlineServiceImpl implements IAirlineService {
 		try {
 			String password = user.getPassword();
 			user = airlineDAO.getUserDetails(user.getUsername());
-			if ("customer".equals(user.getRole())) {
+			if (ARSConstants.CUSTOMER.equals(user.getRole())) {
 				user.setPassword(password);
 				return airlineDAO.updateUser(user);
 			} else
-				throw new AirlineException("Username does not exist");
+				throw new AirlineException(ARSConstants.USERNAMENOTEXIST);
 		} catch (NoResultException nre) {
-			throw new AirlineException("Username does not exist");
+			throw new AirlineException(ARSConstants.USERNAMENOTEXIST);
 		} catch (Exception e) {
 			throw new AirlineException(e.getMessage());
 		}
@@ -114,7 +115,7 @@ public class AirlineServiceImpl implements IAirlineService {
 		} catch (NoResultException nre) {
 			return true;
 		} catch (Exception e) {
-			throw new AirlineException("Server Error: " + e.getMessage());
+			throw new AirlineException(ARSConstants.SERVERERROR + e.getMessage());
 		}
 
 	}
@@ -135,7 +136,7 @@ public class AirlineServiceImpl implements IAirlineService {
 		try{
 			abbr = airlineDAO.getAbbreviation(cityName);
 		}catch(NoResultException nre){
-			throw new AirlineException("Entered City does not exist in database");
+			throw new AirlineException(ARSConstants.CITYNOTINDATABASE);
 		}
 		return abbr;
 	}
