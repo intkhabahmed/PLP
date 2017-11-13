@@ -1,10 +1,1 @@
-<<<<<<< HEAD
-/.sonar/
 /com/
-/jpaContext.xml
-/log4j.properties
-/sonar-project.properties
-=======
-/com/
-/.sonar/
->>>>>>> 7090e1df061e27d405987dffc6a512f1405e959f

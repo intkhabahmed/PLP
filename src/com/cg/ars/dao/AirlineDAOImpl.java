@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.cg.ars.entity.BookingInformation;
@@ -25,7 +26,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	
+	private static Logger logger = Logger.getLogger(com.cg.ars.dao.AirlineDAOImpl.class);
 
 	/* (non-Javadoc)
 	 * @see com.cg.ars.dao.IAirlineDAO#viewListOfFlights(java.lang.String, java.lang.String)
@@ -80,7 +81,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			sqlQuery.setParameter("arrCity", route[1]);
 			sqlQuery.setParameter("deptDate", Date.valueOf(route[2]));
 		}
-
+		logger.info("List of flights retrieved");
 		return sqlQuery.getResultList();
 	}
 
@@ -117,6 +118,8 @@ public class AirlineDAOImpl implements IAirlineDAO {
 							BookingInformation.class);
 			sqlQuery.setParameter("bookingId", Integer.parseInt(query));
 		}
+		
+		logger.info("List of Bookings retrieved");
 		return sqlQuery.getResultList();
 
 	}
@@ -132,6 +135,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				QueryMapper.VALIDATEUSERNAMEANDPASSWORD, User.class);
 		sqlQuery.setParameter("user", user.getUsername());
 		sqlQuery.setParameter("pass", user.getPassword());
+		logger.info("Following User Logged in:" + user.getUsername());
 		return sqlQuery.getSingleResult();
 	}
 
@@ -143,6 +147,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	@Override
 	public User signUp(User user) throws Exception {
 		entityManager.persist(user);
+		logger.info("New User signed in with following username:" + user.getUsername());
 		return user;
 	}
 
@@ -156,6 +161,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		BookingInformation booking = entityManager.find(
 				BookingInformation.class, bookingId);
 		entityManager.remove(booking);
+		logger.info("Booking cancelled for booking id: " + bookingId);
 		return booking;
 	}
 
@@ -185,6 +191,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 				QueryMapper.PASSENGERSINBUSINESSCLASSOFAFLIGHT, Integer.class);
 		sqlQuery.setParameter("flightNo", flightNo);
 		seatDetails[3] = sqlQuery.getSingleResult();
+		logger.info("Flight occupancy details retrieved for flight: " + flightNo);
 		return seatDetails;
 	}
 
@@ -198,6 +205,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	public BookingInformation modifyBookingInformation(
 			BookingInformation booking) throws Exception {
 		booking = entityManager.merge(booking);
+		logger.info("Booking modified for booking id: " + booking.getBookingId());
 		return booking;
 	}
 
@@ -212,6 +220,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 			throws Exception {
 		entityManager.persist(booking);
 		entityManager.flush();
+		logger.info("Booking confirmed for booking id: " + booking.getBookingId());
 		return booking;
 	}
 
