@@ -45,8 +45,15 @@ public class AirlineController {
 	private String signup = "signup";
 	private String message = "message";
 	private String bookingSuccess = "bookingSuccess";
-	private String userProfile = "userProfile";
+	private String userProfile = "userProfile"; 
 
+	
+	/**
+	 * @description It calls the function viewListOfFlights of AirlineServiceImpl and 
+	 * @param bookingInformation
+	 * @param model
+	 * @return type String
+	 */
 	@RequestMapping(value = "/listOfFlights", method = RequestMethod.POST)
 	public String getAllFlights(
 			@ModelAttribute(ARSConstants.booking) BookingInformation bookingInformation,
@@ -73,7 +80,9 @@ public class AirlineController {
 	}
 
 	/**
+	 * @description 
 	 * @param model
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("/index")
@@ -90,6 +99,11 @@ public class AirlineController {
 		return index;
 	}
 
+	/**
+	 * @description 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/showLogin")
 	public String showLogin(Model model) {
 		model.addAttribute(ARSConstants.booking, new BookingInformation());
@@ -97,6 +111,12 @@ public class AirlineController {
 		return login;
 	}
 
+	/**
+	 * @description 
+	 * @param model
+	 * @param bookingInformation
+	 * @return
+	 */
 	@RequestMapping(value = "/showLoginAfterSearch", method = RequestMethod.POST)
 	public String showLoginAfterSearch(Model model,
 			@ModelAttribute(ARSConstants.booking) BookingInformation bookingInformation) {
@@ -105,12 +125,24 @@ public class AirlineController {
 		return login;
 	}
 
+	/**
+	 * @description 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/showSignup")
 	public String showSignup(Model model) {
 		model.addAttribute(ARSConstants.userObj, new User());
 		return signup;
 	}
 
+	/**
+	 * @description 
+	 * @param model
+	 * @param user
+	 * @param bindingResult
+	 * @return
+	 */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signup(Model model,
 			@Valid @ModelAttribute(ARSConstants.userObj) User user,
@@ -141,7 +173,13 @@ public class AirlineController {
 		}
 
 	}
-
+	
+    /**
+     * @description 
+     * @param model
+     * @param status
+     * @return
+     */
 	@RequestMapping("/logout")
 	public String logout(Model model, SessionStatus status) {
 		status.setComplete();
@@ -152,6 +190,13 @@ public class AirlineController {
 		return index;
 	}
 
+	/**
+	 * @description 
+	 * @param user
+	 * @param model
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping("/login")
 	public String loginValidation(@ModelAttribute(ARSConstants.user) User user,
 			Model model, HttpServletRequest req) {
@@ -176,6 +221,13 @@ public class AirlineController {
 		return returnPage;
 	}
 
+	/**
+	 * @description 
+	 * @param user
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/loginAfterSearch")
 	public String loginValidationAfterSearch(@ModelAttribute(ARSConstants.user) User user,
 			Model model, HttpSession session) {
@@ -218,6 +270,11 @@ public class AirlineController {
 		return returnPage;
 	}
 
+	/**
+	 * @description 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "viewOccupancyDetails.html")
 	public String viewOccupancyDetails(Model model) {
 		int a[];
@@ -238,6 +295,13 @@ public class AirlineController {
 		return "success";
 	}
 
+	/**
+	 * @description 
+	 * @param bookingInformation
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/showBooking", method = RequestMethod.POST)
 	public String bookFlight(
 			@ModelAttribute(ARSConstants.booking) BookingInformation bookingInformation,
@@ -267,6 +331,13 @@ public class AirlineController {
 
 	}
 
+	/**
+	 * @description 
+	 * @param bookingInformation
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/confirmBooking", method = RequestMethod.POST)
 	public String confirmBooking(
 			@ModelAttribute(ARSConstants.booking) BookingInformation bookingInformation,
@@ -283,6 +354,13 @@ public class AirlineController {
 		return bookingSuccess;
 	}
 
+	/**
+	 * @description 
+	 * @param user
+	 * @param bindingResult
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public String updateUser(@ModelAttribute(ARSConstants.userObj) @Valid User user,
 			BindingResult bindingResult, Model model) {
@@ -308,6 +386,12 @@ public class AirlineController {
 		return userProfile;
 	}
 
+	/**
+	 * @description 
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/showUserProfile")
 	public String showUserProfile(Model model, HttpSession session) {
 		User user = (User) session.getAttribute(ARSConstants.user);
@@ -322,6 +406,13 @@ public class AirlineController {
 		return userProfile;
 	}
 
+	/**
+	 * @description 
+	 * @param bookingId
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/cancelBooking", method = RequestMethod.GET)
 	public String cancelBooking(@RequestParam(ARSConstants.bookingId) int bookingId,
 			Model model, HttpSession session) {
@@ -341,6 +432,13 @@ public class AirlineController {
 		return userProfile;
 	}
 	
+	/**
+	 * @description 
+	 * @param bookingId
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/viewBooking", method = RequestMethod.GET)
 	public String viewBooking(@RequestParam("bookingId") String bookingId,
 			Model model, HttpSession session) {
@@ -353,12 +451,25 @@ public class AirlineController {
 		return "bookingDetails";
 	}
 	
+	
+	/**
+	 * @description 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/showForgotPassword")
 	public String showForgotPassword(Model model){
 		model.addAttribute("userObj", new User());
 		return "forgotPassword";
 	}
 	
+	/**
+	 * @description 
+	 * @param user
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
 	public String forgotPassword(@ModelAttribute("userObj") User user,
 			Model model, HttpSession session) {

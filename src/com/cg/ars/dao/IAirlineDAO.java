@@ -16,7 +16,7 @@ public interface IAirlineDAO {
 	/**
 	 * @param query
 	 * @param searchBasis
-	 * @return
+	 * @return type List
 	 * @throws Exception
 	 */
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
@@ -25,7 +25,7 @@ public interface IAirlineDAO {
 	/**
 	 * @param query
 	 * @param searchBasis
-	 * @return
+	 * @return type List
 	 * @throws Exception
 	 */
 	public List<BookingInformation> viewBookings(String query,
@@ -33,35 +33,35 @@ public interface IAirlineDAO {
 
 	/**
 	 * @param user
-	 * @return
+	 * @return type User
 	 * @throws Exception
 	 */
 	public User signUp(User user) throws Exception;
 
 	/**
 	 * @param user
-	 * @return
+	 * @return type User
 	 * @throws Exception
 	 */
 	public User validLogin(User user) throws Exception;
 
 	/**
 	 * @param bookingId
-	 * @return
+	 * @return type BookingInformation
 	 * @throws Exception
 	 */
 	public BookingInformation bookingCancel(int bookingId) throws Exception;
 
 	/**
 	 * @param flightNo
-	 * @return
+	 * @return type Integer Array
 	 * @throws Exception
 	 */
 	public int[] flightOccupancyDetails(String flightNo) throws Exception;
 
 	/**
 	 * @param booking
-	 * @return
+	 * @return type BookingInformation
 	 * @throws Exception
 	 */
 	public BookingInformation modifyBookingInformation(
@@ -69,7 +69,7 @@ public interface IAirlineDAO {
 
 	/**
 	 * @param booking
-	 * @return
+	 * @return type BookingInformation
 	 * @throws Exception
 	 */
 	public BookingInformation confirmBooking(BookingInformation booking)
@@ -78,7 +78,7 @@ public interface IAirlineDAO {
 	/**
 	 * @param query
 	 * @param searchBasis
-	 * @return
+	 * @return type String
 	 * @throws Exception
 	 */
 	public String checkAvailabiltiy(String query, String searchBasis)
@@ -86,7 +86,7 @@ public interface IAirlineDAO {
 
 	/**
 	 * @param user
-	 * @return
+	 * @return type User
 	 * @throws Exception
 	 */
 	public User updateUser(User user) throws Exception;
@@ -94,19 +94,20 @@ public interface IAirlineDAO {
 
 	/**
 	 * @param flight
+	 * @return type void
 	 * @throws Exception
 	 */
 	public void updateFlight(Flight flight) throws Exception;
 	
 	/**
 	 * @param username
-	 * @return
+	 * @return type User
 	 * @throws Exception
 	 */
 	public User getUserDetails(String username) throws Exception;
 
 	/**
-	 * @return
+	 * @return type List
 	 * @throws Exception
 	 */
 	public List<Airport> getCities() throws Exception;
