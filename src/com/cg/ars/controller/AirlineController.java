@@ -58,11 +58,7 @@ public class AirlineController {
 					.getDestCity());
 			String str = src + "=" + dest + "="
 					+ bookingInformation.getTravelDate();
-			if (bookingInformation.getSrcCity().equals(
-					bookingInformation.getDestCity())) {
-				throw new AirlineException(
-						"Source and Destination cannot be same");
-			}
+
 			List<Flight> flights = airlineService.viewListOfFlights(str,
 					ARSConstants.byUser);
 			if (flights.size() == 0) {
@@ -74,9 +70,17 @@ public class AirlineController {
 
 			model.addAttribute(ARSConstants.classTypeOptions, new String[] {
 					ARSConstants.First, ARSConstants.Business });
+			model.addAttribute(ARSConstants.airport, airlineService.getCities());
+			model.addAttribute(ARSConstants.date, Date.valueOf(LocalDate.now()));
+			if (bookingInformation.getSrcCity().equals(
+					bookingInformation.getDestCity())) {
+				throw new AirlineException(
+						"Source and Destination cannot be same");
+			}
 		} catch (Exception e) {
+
 			model.addAttribute(message, "Server Error: " + e.getMessage());
-			return "index";
+			return index;
 		}
 		return flightList;
 	}
@@ -87,21 +91,22 @@ public class AirlineController {
 	 */
 	@RequestMapping("/index")
 	public String showHome(Model model, HttpSession session) {
-		if (session.getAttribute(ARSConstants.user) == null) {
-			model.addAttribute(ARSConstants.user, new User());
-		} else {
-			model.addAttribute(ARSConstants.user, session.getAttribute("user"));
-		}
-		model.addAttribute(ARSConstants.booking, new BookingInformation());
-		model.addAttribute(ARSConstants.classTypeOptions, new String[] {
-				ARSConstants.First, ARSConstants.Business });
 		try {
-			model.addAttribute(ARSConstants.airport,
-					airlineService.getCities());
+			if (session.getAttribute(ARSConstants.user) == null) {
+				model.addAttribute(ARSConstants.user, new User());
+			} else {
+				model.addAttribute(ARSConstants.user,
+						session.getAttribute("user"));
+			}
+			model.addAttribute(ARSConstants.booking, new BookingInformation());
+			model.addAttribute(ARSConstants.classTypeOptions, new String[] {
+					ARSConstants.First, ARSConstants.Business });
+
+			model.addAttribute(ARSConstants.airport, airlineService.getCities());
+			model.addAttribute(ARSConstants.date, Date.valueOf(LocalDate.now()));
 		} catch (Exception e) {
 			model.addAttribute(message, "Server Error: " + e.getMessage());
 		}
-		model.addAttribute(ARSConstants.date, Date.valueOf(LocalDate.now()));
 		return index;
 	}
 
