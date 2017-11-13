@@ -2,21 +2,21 @@ package com.cg.ars.utility;
 
 public interface ARSConstants {
 	public String BOOKING = "booking";
-	public String bookings = "bookings";
-	public String byUser = "byUser";
-	public String byUsername = "byUsername";
-	public String byEmail = "byEmail";
-	public String flights = "flights";
-	public String flight = "flight";
-	public String classTypeOptions = "classTypeOptions";
-	public String First = "First";
-	public String Business = "Business";
-	public String user = "user";
-	public String date = "date";
-	public String userObj = "userObj";
-	public String customer = "customer";
-	public String bookingInfo = "bookingInfo";
-	public String flightNo = "flightNo";
-	public String bookingId = "bookingId";
-	public String airport = "airport";
+	public String BOOKINGS = "bookings";
+	public String BYUSER = "byUser";
+	public String BYUSERNAME = "byUsername";
+	public String BYEMAIL = "byEmail";
+	public String FLIGHTS = "flights";
+	public String FLIGHT = "flight";
+	public String CLASSTYPEOPTION = "classTypeOptions";
+	public String FIRST = "First";
+	public String BUSINESS = "Business";
+	public String USER = "user";
+	public String DATE = "date";
+	public String USEROBJ = "userObj";
+	public String CUSTOMER = "customer";
+	public String BOOKINGINFO = "bookingInfo";
+	public String FLIGHTNO = "flightNo";
+	public String BOOKINGID = "bookingId";
+	public String AIRPORT = "airport";
 }
