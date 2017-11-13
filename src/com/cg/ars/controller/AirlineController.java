@@ -100,6 +100,7 @@ public class AirlineController {
 	@RequestMapping("/showSignup")
 	public String showSignup(Model model) {
 		model.addAttribute("userObj", new User());
+	//	model.addAttribute("captchaImage","../image/V4XBG.png");
 		return "signup";
 	}
 
