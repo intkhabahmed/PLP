@@ -21,28 +21,45 @@ public class AirlineServiceImpl implements IAirlineService {
 	@Autowired
 	private IAirlineDAO airlineDAO;
 
+	
+	/**
+	 * description: It calls the function viewListOfFlights(query, searchBasis) of AirlineDaoImpl and returns the list of flights to AirlineController
+	 */
 	@Override
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
 			throws Exception {
 		return airlineDAO.viewListOfFlights(query, searchBasis);
 	}
 
+	/**
+	 * description: It calls the function viewBookings(query, searchBasis) of AirlineDaoImpl and returns the result to AirlineController
+	 */
 	@Override
 	public List<BookingInformation> viewBookings(String query,
 			String searchBasis) throws Exception {
 		return airlineDAO.viewBookings(query, searchBasis);
 	}
-
+	
+	/**
+	 * description: It calls the function signUp(user) of AirlineDaoImpl and returns the result to AirlineController
+	 */
 	@Override
 	public User signUp(User user) throws Exception {
 		return airlineDAO.signUp(user);
 	}
 
+	/**
+	 * description: It calls the function validLogin(user) of AirlineDaoImpl and returns the result to AirlineController
+	 */
 	@Override
 	public User validLogin(User user) throws Exception {
 		return airlineDAO.validLogin(user);
 	}
 
+	/**
+	 * description: It calls the function bookingCancel(bookingId), viewListOfFlights(booking.getFlightNo(),"flightNo") and updateFlight(flight)
+	 * of AirlineDaoImpl and returns the result to AirlineController
+	 */
 	@Override
 	public BookingInformation bookingCancel(int bookingId) throws Exception {
 		BookingInformation booking = airlineDAO.bookingCancel(bookingId);
@@ -57,20 +74,29 @@ public class AirlineServiceImpl implements IAirlineService {
 		}
 		airlineDAO.updateFlight(flight);
 		return booking;
-
 	}
 
+	/**
+	 * description: It calls the function flightOccupancyDetails(flightNo) of AirlineDaoImpl and returns the result to AirlineController
+	 */
 	@Override
 	public int[] flightOccupancyDetails(String flightNo) throws Exception {
 		return airlineDAO.flightOccupancyDetails(flightNo);
 	}
 
+	/**
+	 * description: It calls modifyBookingInformation(booking) of AirlineDaoImpl and returns the result to AirlineController
+	 */
 	@Override
 	public BookingInformation modifyBookingInformation(
 			BookingInformation booking) throws Exception {
 		return airlineDAO.modifyBookingInformation(booking);
 	}
 
+	/**
+	 * It calls the function confirmBooking(booking), viewListOfFlights(booking.getFlightNo(),"flightNo") and updateFlight(flight)
+	 * of AirlineDaoImpl and returns the result to AirlineController
+	 */
 	@Override
 	public BookingInformation confirmBooking(BookingInformation booking)
 			throws Exception {
@@ -88,6 +114,9 @@ public class AirlineServiceImpl implements IAirlineService {
 		return booking;
 	}
 
+	/**
+	 *description: It calls the function getUserDetails(user.getUsername()) of AirlineDaoImpl and returns the updated result to AirlineController
+	 */
 	@Override
 	public User forgotPassword(User user) throws Exception {
 		try {
@@ -105,6 +134,10 @@ public class AirlineServiceImpl implements IAirlineService {
 		}
 	}
 
+	/**
+	 * description: It calls the function checkAvailabiltiy(query, searchBasis) of AirlineDaoImpl 
+	 * and if user is not available then returns false otherwise it returns true
+	 */
 	@Override
 	public boolean checkAvailabiltiy(String query, String searchBasis)
 			throws Exception {
@@ -119,11 +152,17 @@ public class AirlineServiceImpl implements IAirlineService {
 
 	}
 
+	/**
+	 * description: It calls the function of AirlineDaoImpl and returns the result to AirlineController
+	 */
 	@Override
 	public User updateUser(User user) throws Exception {
 		return airlineDAO.updateUser(user);
 	}
 
+	/**
+	 * It calls the function getCities() of AirlineDaoImpl and returns the result to AirlineController
+	 */
 	@Override
 	public List<String> getCities() throws Exception {
 		return airlineDAO.getCities();

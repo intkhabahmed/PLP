@@ -11,7 +11,7 @@ public interface IAirlineService {
 	/**
 	 * @param query
 	 * @param searchBasis
-	 * @return
+	 * @return type List
 	 * @throws Exception
 	 */
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
@@ -20,7 +20,7 @@ public interface IAirlineService {
 	/**
 	 * @param query
 	 * @param searchBasis
-	 * @return
+	 * @return type List
 	 * @throws Exception
 	 */
 	public List<BookingInformation> viewBookings(String query,
@@ -28,36 +28,35 @@ public interface IAirlineService {
 
 	/**
 	 * @param user
-	 * @return
+	 * @return type User
 	 * @throws Exception
 	 */
 	public User signUp(User user) throws Exception;
 
 	/**
 	 * @param bookingId
-	 * @return
+	 * @return type BookingInformation
 	 * @throws Exception
 	 */
-
 	public BookingInformation bookingCancel(int bookingId) throws Exception;
 
 	/**
 	 * @param user
-	 * @return
+	 * @return type User
 	 * @throws Exception
 	 */
 	public User validLogin(User user) throws Exception;
 
 	/**
 	 * @param flightNo
-	 * @return
+	 * @return type Integer Array
 	 * @throws Exception
 	 */
 	public int[] flightOccupancyDetails(String flightNo) throws Exception;
 
 	/**
 	 * @param booking
-	 * @return
+	 * @return type BookingInformation
 	 * @throws Exception
 	 */
 	public BookingInformation modifyBookingInformation(
@@ -65,7 +64,7 @@ public interface IAirlineService {
 
 	/**
 	 * @param booking
-	 * @return
+	 * @return type BookingInformation
 	 * @throws Exception
 	 */
 	public BookingInformation confirmBooking(BookingInformation booking)
@@ -74,7 +73,7 @@ public interface IAirlineService {
 	/**
 	 * @param query
 	 * @param searchBasis
-	 * @return
+	 * @return type boolean
 	 * @throws Exception
 	 */
 	public boolean checkAvailabiltiy(String query, String searchBasis)
@@ -83,20 +82,20 @@ public interface IAirlineService {
 	/**
 	 * @param username
 	 * @param password
-	 * @return
+	 * @return type User
 	 * @throws Exception
 	 */
 	public User forgotPassword(User user)	throws Exception;
 
 	/**
 	 * @param user
-	 * @return
+	 * @return type User
 	 * @throws Exception
 	 */
 	public User updateUser(User user) throws Exception;
 	
 	/**
-	 * @return
+	 * @return type List
 	 * @throws Exception
 	 */
 	public List<String> getCities() throws Exception;
