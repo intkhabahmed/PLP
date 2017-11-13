@@ -92,8 +92,7 @@ public interface IAirlineService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String forgotPassword(String username, String password)
-			throws Exception;
+	public User forgotPassword(User user)	throws Exception;
 
 	/**
 	 * @param user
@@ -101,5 +100,4 @@ public interface IAirlineService {
 	 * @throws Exception
 	 */
 	public User updateUser(User user) throws Exception;
-
 }

@@ -79,18 +79,23 @@ public interface IAirlineDAO {
 	public String checkAvailabiltiy(String query, String searchBasis) throws Exception;
 
 	/**
-	 * @param username
-	 * @param password
-	 * @return
-	 * @throws Exception
-	 */
-	public String forgotPassword(String username, String password) throws Exception;
-
-	/**
 	 * @param user
 	 * @return
 	 * @throws Exception
 	 */
 	public User updateUser(User user) throws Exception;
+
+	/**
+	 * @param flight
+	 * @throws Exception
+	 */
+	public void updateFlight(Flight flight) throws Exception;
+	
+	/**
+	 * @param username
+	 * @return
+	 * @throws Exception
+	 */
+	public User getUserDetails(String username) throws Exception;
 
 }

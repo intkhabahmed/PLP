@@ -47,7 +47,7 @@
 									</div>
 									<div class="form-group">
 										<form:label path="email">Email:</form:label>
-										<form:input type="email" class="form-control" path="email" required="required" readonly="true"/>
+										<form:input type="email" class="form-control" path="email" required="required"/>
 										<form:errors path="email"/><br>
 									</div>
 

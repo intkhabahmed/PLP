@@ -56,7 +56,7 @@
 										</div>	
 									</div>
 								</form:form>
-								<h4 align="center">Forgot Password? <a href="showChangePassword.html">Click here</a></h4>
+								<h4 align="center">Forgot Password? <a href="showForgotPassword.html">Click here</a></h4>
 								<h4 align="center">Don't have account? <a href="showSignup.html">Signup here</a></h4>
 							</div>
 						</div>

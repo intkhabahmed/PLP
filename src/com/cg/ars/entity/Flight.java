@@ -47,14 +47,14 @@ public class Flight {
 
 	@Column(name = "BussSeatsFare")
 	private double bussSeatsFare;
-	
-	@Column(name ="duration")
+
+	@Column(name = "duration")
 	private String duration;
 
 	public Flight(String flightNo, String flightName, String deptCity,
 			String arrCity, Date deptDate, Date arrDate, String deptTime,
 			String arrTime, int firstSeats, double firstSeatsFare,
-			int bussSeats, double bussSeatsFare,String duration) {
+			int bussSeats, double bussSeatsFare, String duration) {
 		super();
 		this.flightNo = flightNo;
 		this.flightName = flightName;
@@ -67,62 +67,108 @@ public class Flight {
 		this.firstSeats = firstSeats;
 		this.firstSeatsFare = firstSeatsFare;
 		this.bussSeats = bussSeats;
-		this.duration=duration;
+		this.duration = duration;
 		this.bussSeatsFare = bussSeatsFare;
 	}
 
 	public Flight() {
-		System.out.println("Empty constructor is called");
 	}
 
 	public String getFlightNo() {
 		return flightNo;
 	}
 
+	public void setFlightNo(String flightNo) {
+		this.flightNo = flightNo;
+	}
+
 	public String getFlightName() {
 		return flightName;
 	}
 
-	public String getArrCity() {
-		return arrCity;
+	public void setFlightName(String flightName) {
+		this.flightName = flightName;
 	}
 
 	public String getDeptCity() {
 		return deptCity;
 	}
 
-	public Date getArrDate() {
-		return arrDate;
+	public void setDeptCity(String deptCity) {
+		this.deptCity = deptCity;
+	}
+
+	public String getArrCity() {
+		return arrCity;
+	}
+
+	public void setArrCity(String arrCity) {
+		this.arrCity = arrCity;
 	}
 
 	public Date getDeptDate() {
 		return deptDate;
 	}
 
-	public String getArrTime() {
-		return arrTime;
+	public void setDeptDate(Date deptDate) {
+		this.deptDate = deptDate;
+	}
+
+	public Date getArrDate() {
+		return arrDate;
+	}
+
+	public void setArrDate(Date arrDate) {
+		this.arrDate = arrDate;
 	}
 
 	public String getDeptTime() {
 		return deptTime;
 	}
 
+	public void setDeptTime(String deptTime) {
+		this.deptTime = deptTime;
+	}
+
+	public String getArrTime() {
+		return arrTime;
+	}
+
+	public void setArrTime(String arrTime) {
+		this.arrTime = arrTime;
+	}
+
 	public int getFirstSeats() {
 		return firstSeats;
+	}
+
+	public void setFirstSeats(int firstSeats) {
+		this.firstSeats = firstSeats;
 	}
 
 	public double getFirstSeatsFare() {
 		return firstSeatsFare;
 	}
 
+	public void setFirstSeatsFare(double firstSeatsFare) {
+		this.firstSeatsFare = firstSeatsFare;
+	}
+
 	public int getBussSeats() {
 		return bussSeats;
+	}
+
+	public void setBussSeats(int bussSeats) {
+		this.bussSeats = bussSeats;
 	}
 
 	public double getBussSeatsFare() {
 		return bussSeatsFare;
 	}
-	
+
+	public void setBussSeatsFare(double bussSeatsFare) {
+		this.bussSeatsFare = bussSeatsFare;
+	}
 
 	public String getDuration() {
 		return duration;
@@ -131,23 +177,4 @@ public class Flight {
 	public void setDuration(String duration) {
 		this.duration = duration;
 	}
-
-	public void formattedString() {
-		System.out.format("%10s%10s%10s%10s%30s%30s%10s%10s%15s%20s%10s%15s",
-				flightNo, flightName, deptCity, arrCity, arrDate, deptDate,
-				arrTime, deptTime, firstSeats, firstSeatsFare, bussSeats,
-				bussSeatsFare + "\n");
-	}
-
-	@Override
-	public String toString() {
-		return "Flight [flightNo=" + flightNo + ", flightName=" + flightName
-				+ ", deptCity=" + deptCity + ", arrCity=" + arrCity
-				+ ", deptDate=" + deptDate + ", arrDate=" + arrDate
-				+ ", deptTime=" + deptTime + ", arrTime=" + arrTime
-				+ ", firstSeats=" + firstSeats + ", firstSeatsFare="
-				+ firstSeatsFare + ", bussSeats=" + bussSeats
-				+ ", bussSeatsFare=" + bussSeatsFare + "]";
-	}
-
 }

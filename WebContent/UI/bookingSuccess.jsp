@@ -9,6 +9,7 @@
 <style type="text/css">
   <%@include file="../css/bootstrap.min.css"%>
   <%@include file="../css/font-awesome.min.css"%>
+  <%@include file="../css/custom.css"%>
 </style>
 <script>
   
@@ -35,6 +36,7 @@
             </div>
             <div class="panel-body jumbotron">
               <h3 class="text-center">${message}</h3>
+              <img alt="Thankyou" src="images/thankyou.jpg" width="720" height="320" class="center img-responsive">
             </div>
           </div><!--End Panel-->
         </div>

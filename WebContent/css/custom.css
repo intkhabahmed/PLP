@@ -9,17 +9,28 @@
 	padding: 20px;
 }
 
+.center{
+	display: block;
+	margin: 0 auto; 
+}
+
 /***********************Index Page*********************************/
 #formContainer {
 	border-radius: 15px;
 	padding: 10px;
+	z-index: 1;
 }
 
 #login_btn_cover {
 	padding: 3px;
 }
 
+#homeBannerImage{
+	min-height: 370px;
+	z-index: 1;
+}
 
+/***********************UserProfile Page*********************************/
 #bookingsBody{
 	min-height: 457px;
 	max-height: 457px;
