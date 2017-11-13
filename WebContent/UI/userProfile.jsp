@@ -28,7 +28,7 @@
   <!--Navigation bar-->
   <div class="container" id="bookingContainer">
     <div class="row">
-      <h1 class="text-center">User Profile</h1>
+      <h1 class="text-center jumbotron"><i class="fa fa-user"></i> User Profile</h1>
       <hr>
       <c:if test="${message!=''}">
 				<h3 class="text-center">${message}</h3>

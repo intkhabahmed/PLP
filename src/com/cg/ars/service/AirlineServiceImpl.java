@@ -46,7 +46,18 @@ public class AirlineServiceImpl implements IAirlineService {
 
 	@Override
 	public BookingInformation bookingCancel(int bookingId) throws Exception {
-		return airlineDAO.bookingCancel(bookingId);
+		BookingInformation booking = airlineDAO.bookingCancel(bookingId);
+		Flight flight = airlineDAO.viewListOfFlights(booking.getFlightNo(),
+				"flightNo").get(0);
+		if ("First".equalsIgnoreCase(booking.getClassType())) {
+			flight.setFirstSeats(flight.getFirstSeats()
+					+ booking.getNoOfPassengers());
+		} else if ("Business".equalsIgnoreCase(booking.getClassType())) {
+			flight.setFirstSeats(flight.getBussSeats()
+					+ booking.getNoOfPassengers());
+		}
+		airlineDAO.updateFlight(flight);
+		return booking;
 
 	}
 
@@ -64,17 +75,35 @@ public class AirlineServiceImpl implements IAirlineService {
 	@Override
 	public BookingInformation confirmBooking(BookingInformation booking)
 			throws Exception {
-		return airlineDAO.confirmBooking(booking);
+		booking = airlineDAO.confirmBooking(booking);
+		Flight flight = airlineDAO.viewListOfFlights(booking.getFlightNo(),
+				"flightNo").get(0);
+		if ("First".equalsIgnoreCase(booking.getClassType())) {
+			flight.setFirstSeats(flight.getFirstSeats()
+					- booking.getNoOfPassengers());
+		} else if ("Business".equalsIgnoreCase(booking.getClassType())) {
+			flight.setFirstSeats(flight.getBussSeats()
+					- booking.getNoOfPassengers());
+		}
+		airlineDAO.updateFlight(flight);
+		return booking;
 	}
 
 	@Override
-	public String forgotPassword(String username, String password)
-			throws Exception {
-		String isAvail = airlineDAO.checkAvailabiltiy(username, "byUsername");
-		if (!isAvail.isEmpty())
-			return airlineDAO.forgotPassword(username, password);
-		else
-			return "Invalid Username";
+	public User forgotPassword(User user) throws Exception {
+		try {
+			String password = user.getPassword();
+			user = airlineDAO.getUserDetails(user.getUsername());
+			if ("customer".equals(user.getRole())) {
+				user.setPassword(password);
+				return airlineDAO.updateUser(user);
+			} else
+				throw new AirlineException("Username does not exist");
+		} catch (NoResultException nre) {
+			throw new AirlineException("Username does not exist");
+		} catch (Exception e) {
+			throw new AirlineException(e.getMessage());
+		}
 	}
 
 	@Override

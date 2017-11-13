@@ -7,7 +7,7 @@
 <html>
 <head>
 <title>Home | MyAirlines</title>
-<style type="text/css">
+<!--<style type="text/css">
     <%@include file="../css/bootstrap.min.css" %>
     <%@include file="../css/font-awesome.min.css" %>
      <%@include file="../css/custom.css" %>
@@ -15,13 +15,18 @@
 <script>
 	<%@include file="../js/jquery-3.1.0.min.js" %>
 	<%@include file="../js/bootstrap.min.js" %>
-</script>
+</script>-->
+<link rel="stylesheet" type="text/css" href="WebContent/WEB-INF/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="WebContent/WEB-INF/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="WebContent/WEB-INF/css/custom.css">
+<script type="text/javascript" src="WebContent/WEB-INF/js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="WebContent/WEB-INF/js/bootstrap.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include  page="header.jsp" />
 	<!--Navigation bar-->
-	<div class="container">
+	<div class="container" id="mainContainer">
 		<div class="row">
 			<div class="col-sm-12">
 				<div id="formContainer">
@@ -97,8 +102,10 @@
 				<!--end searchForm container -->
 			</div>
 			<!--end col-sm-12 -->
+		</div><!--end row -->
+		<div class="row" id="homeBanner">
+
 		</div>
-		<!--end row -->
 	</div>
 	<!--end main container-->
 </body>

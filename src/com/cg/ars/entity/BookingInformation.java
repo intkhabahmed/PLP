@@ -78,12 +78,12 @@ public class BookingInformation {
 		this.bookingId = bookingId;
 	}
 
-	public String getCustEmail() {
+	public String getUserEmail() {
 		return userEmail;
 	}
 
-	public void setCustEmail(String custEmail) {
-		this.userEmail = custEmail;
+	public void setUserEmail(String UserEmail) {
+		this.userEmail = UserEmail;
 	}
 
 	public int getNoOfPassengers() {

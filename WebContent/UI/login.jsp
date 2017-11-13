@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Signup | MyAirlines</title>
-<style type="text/css">
+	<title>Login | MyAirlines</title>
+	<style type="text/css">
     <%@include file="../css/bootstrap.min.css" %>
     <%@include file="../css/font-awesome.min.css" %>
     <%@include file="../css/custom.css" %>
@@ -21,54 +21,47 @@
 <body>
 	<jsp:include  page="header.jsp" />
 	<!--Navigation bar-->
-	<div class="container" id="signupFormContainer">
+	<div class="container" id="loginFormContainer">
 			<div class="row">
-				<div class="col-sm-4 col-sm-offset-4">
-					<c:if test="${message!=''}">
+				<div class="col-sm-4 col-sm-offset-4" >
+						<c:if test="${message!=''}">
 							<p class="text-center">${message}</p>
 						</c:if>
-						<div class="panel panel-primary padding-5x" id="signupFormBody">
+						<div class="panel panel-primary padding-5x" id="loginFormBody">
 							<div class="panel-heading">
-								<h1 class="text-center">Signup Form</h1>
+								<h1 class="text-center">Login Form</h1>
 							</div>
 							<div class="panel-body">
-								
+
 								<hr>
-								<form:form class="form-horizontal" action="signup.html" method="post" modelAttribute="userObj">
+								 <c:if test="${booking.flightNo eq null }">
+									<c:set var="action" value="login.html"></c:set>
+								</c:if>
+								<c:if test="${booking.flightNo ne null }">
+									<c:set var="action" value="loginAfterSearch.html"></c:set>
+									<c:set var="bookingInfo" value="${booking}" scope="session"> </c:set>
+								</c:if>
+								<form:form class="form-horizontal" action="${action}" method="post" modelAttribute="user">
 									<div class="form-group">
 										<form:label path="username">Username:</form:label>
 										<form:input type="text" class="form-control" path="username" required="required"/>
-										<form:errors path="username"/><br>
 									</div>
 									<div class="form-group">
 										<form:label path="password">Password:</form:label>
 										<form:input type="password" class="form-control" path="password" required="required"/>
-										<form:errors path="password"/><br>
 									</div>
-									<div class="form-group">
-										<form:label path="email">Email:</form:label>
-										<form:input type="email" class="form-control" path="email" required="required" />
-										<form:errors path="email"/><br>
-									</div>
-
-									<div class="form-group">
-										<form:label path="mobileNo">Mobile No:</form:label>
-										<form:input type="text" class="form-control" path="mobileNo" required="required"/>
-										<form:errors path="mobileNo"/><br>
-									</div>
-									
 									<div class="row">
 										<div class="text-center">
-											<input type="submit" value="Signup" class="btn btn-danger btn-lg"/>
+											<input type="submit" value="Login" class="btn btn-danger btn-lg"/>
 										</div>	
 									</div>
 								</form:form>
-								<h4 align="center">Already have account? <a href="showLogin.html">Login here</a></h4>
-							</div><!--end panel body-->
-						</div><!--end panel-->
+								<h4 align="center">Forgot Password? <a href="showForgotPassword.html">Click here</a></h4>
+								<h4 align="center">Don't have account? <a href="showSignup.html">Signup here</a></h4>
+							</div>
+						</div>
 				</div>
 			</div><!--Form container end-->
 		</div>
-		<img alt="no image" src="./WebContent/WEB-INF/image/V4XBG.jpg">
 </body>
 </html>

@@ -107,7 +107,6 @@ public class AirlineController {
 
 	@RequestMapping("/showSignup")
 	public String showSignup(Model model) {
-	//	model.addAttribute("captchaImage","../image/V4XBG.png");
 		model.addAttribute(ARSConstants.userObj, new User());
 		return signup;
 	}
@@ -199,7 +198,8 @@ public class AirlineController {
 							bookingInformation.getNoOfPassengers(), flights
 									.get(0).getBussSeatsFare()));
 				}
-				bookingInformation.setCustEmail(user.getEmail());
+
+				bookingInformation.setUserEmail(user.getEmail());
 				bookingInformation
 						.setBookingDate(Date.valueOf(LocalDate.now()));
 				model.addAttribute(ARSConstants.flight, flights.get(0));
@@ -255,7 +255,7 @@ public class AirlineController {
 						bookingInformation.getNoOfPassengers(), flights.get(0)
 								.getBussSeatsFare()));
 			}
-			bookingInformation.setCustEmail(((User) session
+			bookingInformation.setUserEmail(((User) session
 					.getAttribute(ARSConstants.user)).getEmail());
 			bookingInformation.setBookingDate(Date.valueOf(LocalDate.now()));
 			model.addAttribute(ARSConstants.flight, flights.get(0));
@@ -264,6 +264,7 @@ public class AirlineController {
 			e.getMessage();
 		}
 		return ARSConstants.booking;
+
 	}
 
 	@RequestMapping(value = "/confirmBooking", method = RequestMethod.POST)
@@ -338,5 +339,40 @@ public class AirlineController {
 			model.addAttribute(message, "Server Error: " + e.getMessage());
 		}
 		return userProfile;
+	}
+	
+	@RequestMapping(value = "/viewBooking", method = RequestMethod.GET)
+	public String viewBooking(@RequestParam("bookingId") String bookingId,
+			Model model, HttpSession session) {
+		try {
+			model.addAttribute("booking",
+					airlineService.viewBookings(bookingId, "byBookingId").get(0));
+		} catch (Exception e) {
+			model.addAttribute("message", "Server Error: " + e.getMessage());
+		}
+		return "bookingDetails";
+	}
+	
+	@RequestMapping("/showForgotPassword")
+	public String showForgotPassword(Model model){
+		model.addAttribute("userObj", new User());
+		return "forgotPassword";
+	}
+	
+	@RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
+	public String forgotPassword(@ModelAttribute("userObj") User user,
+			Model model, HttpSession session) {
+		String returnPage;
+		try {
+			user = airlineService.forgotPassword(user);
+			model.addAttribute("message", "Password changed successfully, Login here");
+			model.addAttribute("user", new User());
+			returnPage = "login";
+		} catch (Exception e) {
+			model.addAttribute("message", "Server Error: " + e.getMessage());
+			model.addAttribute("userObj", new User());
+			returnPage = "forgotPassword";
+		}
+		return returnPage;
 	}
 }
