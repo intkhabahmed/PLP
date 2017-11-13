@@ -112,5 +112,6 @@
 		</div>
 	</div>
 	<!--end main container-->
+	<jsp:include page="footer.jsp" />
 </body>
 </html>

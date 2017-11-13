@@ -63,5 +63,6 @@
 				</div>
 			</div><!--Form container end-->
 		</div>
+		<jsp:include page="footer.jsp" />
 </body>
 </html>

@@ -69,6 +69,6 @@
 				</div>
 			</div><!--Form container end-->
 		</div>
-		<img alt="no image" src="./WebContent/WEB-INF/image/V4XBG.jpg">
+		<jsp:include page="footer.jsp" />
 </body>
 </html>
