@@ -26,9 +26,6 @@ public class AirlineDAOImpl implements IAirlineDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-<<<<<<< HEAD
-
-=======
 	
 	private static Logger logger = Logger.getLogger(com.cg.ars.dao.AirlineDAOImpl.class);
 
@@ -36,7 +33,6 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	 * @see com.cg.ars.dao.IAirlineDAO#viewListOfFlights(java.lang.String, java.lang.String)
 	 * It returns the list of flights on search basis to service layer
 	 */
->>>>>>> 4645ab32cc6d8bba835d3446134e5292e7ee89aa
 	@Override
 	public String getAbbreviation(String cityName) throws Exception {
 		TypedQuery<String> sqlQuery = entityManager.createQuery(
@@ -139,14 +135,9 @@ public class AirlineDAOImpl implements IAirlineDAO {
 	public User validLogin(User user) throws Exception {
 		TypedQuery<User> sqlQuery = entityManager.createQuery(
 				QueryMapper.VALIDATEUSERNAMEANDPASSWORD, User.class);
-<<<<<<< HEAD
 		sqlQuery.setParameter(ARSConstants.USER, user.getUsername());
 		sqlQuery.setParameter(ARSConstants.PASS, user.getPassword());
-=======
-		sqlQuery.setParameter("user", user.getUsername());
-		sqlQuery.setParameter("pass", user.getPassword());
 		logger.info("Following User Logged in:" + user.getUsername());
->>>>>>> 4645ab32cc6d8bba835d3446134e5292e7ee89aa
 		return sqlQuery.getSingleResult();
 	}
 
@@ -293,17 +284,11 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		query.setParameter(ARSConstants.USERNAME, username);
 		return query.getSingleResult();
 	}
-<<<<<<< HEAD
 
-	/*
-	 * (non-Javadoc)
-	 * 
-=======
 	
 
 	
 	/* (non-Javadoc)
->>>>>>> 4645ab32cc6d8bba835d3446134e5292e7ee89aa
 	 * @see com.cg.ars.dao.IAirlineDAO#getCities()
 	 * It returns the list of all cities present in the database to service layer
 	 */
