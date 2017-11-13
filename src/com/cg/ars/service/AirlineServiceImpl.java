@@ -58,6 +58,7 @@ public class AirlineServiceImpl implements IAirlineService {
 		}
 		airlineDAO.updateFlight(flight);
 		return booking;
+
 	}
 
 	@Override
