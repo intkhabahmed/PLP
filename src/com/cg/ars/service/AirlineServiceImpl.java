@@ -21,8 +21,6 @@ public class AirlineServiceImpl implements IAirlineService {
 	@Autowired
 	private IAirlineDAO airlineDAO;
 
-	
-
 	@Override
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
 			throws Exception {
@@ -31,8 +29,8 @@ public class AirlineServiceImpl implements IAirlineService {
 	}
 
 	@Override
-	public List<BookingInformation> viewBookings(String query, String searchBasis)
-			throws Exception {
+	public List<BookingInformation> viewBookings(String query,
+			String searchBasis) throws Exception {
 		return airlineDAO.viewBookings(query, searchBasis);
 	}
 
@@ -47,52 +45,53 @@ public class AirlineServiceImpl implements IAirlineService {
 	}
 
 	@Override
-	public BookingInformation bookingCancel(int bookingId)
-			throws Exception {
+	public BookingInformation bookingCancel(int bookingId) throws Exception {
 		return airlineDAO.bookingCancel(bookingId);
 
 	}
-	
-	
+
 	@Override
-	public int[] flightOccupancyDetails(String flightNo) throws Exception{
+	public int[] flightOccupancyDetails(String flightNo) throws Exception {
 		return airlineDAO.flightOccupancyDetails(flightNo);
 	}
-	
-	
+
 	@Override
-	public BookingInformation modifyBookingInformation(BookingInformation booking) throws Exception{
+	public BookingInformation modifyBookingInformation(
+			BookingInformation booking) throws Exception {
 		return airlineDAO.modifyBookingInformation(booking);
 	}
-	
+
 	@Override
-	public BookingInformation confirmBooking(BookingInformation booking) throws Exception{
+	public BookingInformation confirmBooking(BookingInformation booking)
+			throws Exception {
 		return airlineDAO.confirmBooking(booking);
 	}
-	
+
 	@Override
-	public String forgotPassword(String username, String password) throws Exception{
+	public String forgotPassword(String username, String password)
+			throws Exception {
 		String isAvail = airlineDAO.checkAvailabiltiy(username, "byUsername");
-		if(!isAvail.isEmpty())
+		if (!isAvail.isEmpty())
 			return airlineDAO.forgotPassword(username, password);
 		else
 			return "Invalid Username";
 	}
-	
+
 	@Override
-	public boolean checkAvailabiltiy(String query, String searchBasis) throws Exception{
-		try{
+	public boolean checkAvailabiltiy(String query, String searchBasis)
+			throws Exception {
+		try {
 			String isAvail = airlineDAO.checkAvailabiltiy(query, searchBasis);
-			if(isAvail.isEmpty())
+			if (isAvail.isEmpty())
 				return true;
 			else
 				return false;
-		}catch(NoResultException nre){
+		} catch (NoResultException nre) {
 			return true;
-		}catch(Exception e){
-			throw new AirlineException("Server Error: "+e.getMessage());
+		} catch (Exception e) {
+			throw new AirlineException("Server Error: " + e.getMessage());
 		}
-		
+
 	}
 
 	@Override

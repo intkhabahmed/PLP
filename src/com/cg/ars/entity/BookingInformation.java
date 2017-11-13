@@ -22,8 +22,8 @@ public class BookingInformation {
 
 	@Id
 	@Column(name = "Booking_id")
-	@SequenceGenerator(name="seq1",sequenceName="ticketbooking_id_seq")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seq1")
+	@SequenceGenerator(name = "seq1", sequenceName = "ticketbooking_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq1")
 	private int bookingId;
 
 	@Column(name = "User_email")
@@ -70,8 +70,6 @@ public class BookingInformation {
 		super();
 	}
 
-	
-	
 	public int getBookingId() {
 		return bookingId;
 	}

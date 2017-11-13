@@ -5,22 +5,21 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="Airport")
+@Table(name = "Airport")
 public class Airport {
-	
+
 	@Id
-	@Column(name="Airportid")
+	@Column(name = "Airportid")
 	private int airportId;
-	
-	@Column(name="Airportname")
+
+	@Column(name = "Airportname")
 	private String airpotName;
-	
-	@Column(name="Abbreviation")
+
+	@Column(name = "Abbreviation")
 	private String abbreviation;
-	
-	@Column(name="Location")
+
+	@Column(name = "Location")
 	private String location;
 
 	public Airport() {
@@ -75,7 +74,5 @@ public class Airport {
 				+ ", abbreviation=" + abbreviation + ", location=" + location
 				+ "]";
 	}
-	
-	
-	
+
 }
