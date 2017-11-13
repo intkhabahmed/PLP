@@ -2,6 +2,7 @@ package com.cg.ars.dao;
 
 import java.util.List;
 
+import com.cg.ars.entity.Airport;
 import com.cg.ars.entity.BookingInformation;
 import com.cg.ars.entity.Flight;
 import com.cg.ars.entity.User;
@@ -103,5 +104,11 @@ public interface IAirlineDAO {
 	 * @throws Exception
 	 */
 	public User getUserDetails(String username) throws Exception;
+
+	/**
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Airport> getCities() throws Exception;
 
 }

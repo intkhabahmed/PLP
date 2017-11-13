@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.ars.dao.IAirlineDAO;
+import com.cg.ars.entity.Airport;
 import com.cg.ars.entity.BookingInformation;
 import com.cg.ars.entity.Flight;
 import com.cg.ars.entity.User;
@@ -126,6 +127,11 @@ public class AirlineServiceImpl implements IAirlineService {
 	@Override
 	public User updateUser(User user) throws Exception {
 		return airlineDAO.updateUser(user);
+	}
+
+	@Override
+	public List<Airport> getCities() throws Exception {
+		return airlineDAO.getCities();
 	}
 
 }

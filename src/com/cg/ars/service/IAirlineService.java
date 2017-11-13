@@ -2,6 +2,7 @@ package com.cg.ars.service;
 
 import java.util.List;
 
+import com.cg.ars.entity.Airport;
 import com.cg.ars.entity.BookingInformation;
 import com.cg.ars.entity.Flight;
 import com.cg.ars.entity.User;
@@ -100,4 +101,10 @@ public interface IAirlineService {
 	 * @throws Exception
 	 */
 	public User updateUser(User user) throws Exception;
+	
+	/**
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Airport> getCities() throws Exception;
 }

@@ -107,7 +107,6 @@ public class AirlineController {
 
 	@RequestMapping("/showSignup")
 	public String showSignup(Model model) {
-
 		model.addAttribute(ARSConstants.userObj, new User());
 		return signup;
 	}

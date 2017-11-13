@@ -18,5 +18,6 @@ public interface QueryMapper {
 	public static String forgotPassword = "Update User u Set u.password where u.username=:username";
 	public static String checkUsernameAvailable = "Select u.username from User u where u.username=:query";
 	public static String checkEmailAvailable = "Select u.email from User u where u.email=:query";
+	public static String getAllCities = "Select a.location from Airport a";
 
 }
