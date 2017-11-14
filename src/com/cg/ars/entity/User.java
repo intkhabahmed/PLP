@@ -32,7 +32,7 @@ public class User {
 	@Column(name = "Password")
 	@NotNull(message = "Please provide a valid password")
 	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})", message = "Password(min=8 & max=20) must contain alteast a small, an uppercase letter, a digit and a special symbol")
-	private String password;
+	private String pwd;
 
 	@Column(name = "User_email")
 	@Email(message = "Email should be valid")
@@ -54,7 +54,7 @@ public class User {
 			String mobileNo, String role) {
 		super();
 		this.username = username;
-		this.password = password;
+		this.pwd = password;
 		this.email = email;
 		this.mobileNo = mobileNo;
 		this.role = role;
@@ -69,11 +69,11 @@ public class User {
 	}
 
 	public String getPassword() {
-		return password;
+		return pwd;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.pwd = password;
 	}
 
 	public String getEmail() {
