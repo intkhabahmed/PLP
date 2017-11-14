@@ -52,7 +52,7 @@ public class AirlineController {
 
 			List<Flight> flights = airlineService.viewListOfFlights(str,
 					ARSConstants.BYUSER);
-			if (flights.size() == 0) {
+			if (flights.isEmpty()) {
 				model.addAttribute(ARSConstants.FLIGHTS, null);
 			} else {
 				model.addAttribute(ARSConstants.FLIGHTS, flights);

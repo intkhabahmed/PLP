@@ -146,6 +146,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		sqlQuery.setParameter(ARSConstants.PASS, user.getPassword());
 		logger.info("Following User Logged in:" + user.getUsername());
 		return sqlQuery.getSingleResult();
+
 	}
 
 	/*
