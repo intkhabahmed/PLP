@@ -50,11 +50,11 @@
                     <form:input type="text" class="form-control" path="username" required="required" readonly="true"/>
                   </div>
                   <div class="form-group">
-                    <form:label path="password">Password:</form:label>
-                    <form:input type="password" class="form-control" path="password" required="required" 
+                    <form:label path="pwd">Password:</form:label>
+                    <form:input type="password" class="form-control" path="pwd" required="required" 
                     	pattern="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})" 
                     	title="Password(min=8 & max=20) must contain alteast a small, an uppercase letter, a digit and a special symbol"/>
-                    <form:errors path="password"/><br>
+                    <form:errors path="pwd"/><br>
                   </div>
                   <div class="form-group">
                     <form:label path="email">Email:</form:label>

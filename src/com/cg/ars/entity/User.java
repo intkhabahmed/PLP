@@ -68,12 +68,12 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPassword() {
+	public String getPwd() {
 		return pwd;
 	}
 
-	public void setPassword(String password) {
-		this.pwd = password;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	public String getEmail() {

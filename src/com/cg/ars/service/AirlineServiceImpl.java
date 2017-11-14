@@ -12,7 +12,6 @@ import com.cg.ars.dao.IAirlineDAO;
 import com.cg.ars.entity.BookingInformation;
 import com.cg.ars.entity.Flight;
 import com.cg.ars.entity.User;
-import com.cg.ars.exception.AirlineException;
 import com.cg.ars.utility.ARSConstants;
 
 @Service
@@ -33,7 +32,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	 */
 	@Override
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
-			throws AirlineException {
+			throws RuntimeException {
 		return airlineDAO.viewListOfFlights(query, searchBasis);
 	}
 
@@ -47,7 +46,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	 */
 	@Override
 	public List<BookingInformation> viewBookings(String query,
-			String searchBasis) throws AirlineException {
+			String searchBasis) throws RuntimeException {
 		return airlineDAO.viewBookings(query, searchBasis);
 	}
 
@@ -59,7 +58,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	 * returns the result to AirlineController
 	 */
 	@Override
-	public User signUp(User user) throws AirlineException {
+	public User signUp(User user) throws RuntimeException {
 		return airlineDAO.signUp(user);
 	}
 
@@ -72,7 +71,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	 * returns the result to AirlineController
 	 */
 	@Override
-	public User validLogin(User user) throws AirlineException {
+	public User validLogin(User user) throws RuntimeException {
 		return airlineDAO.validLogin(user);
 	}
 
@@ -87,7 +86,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	 */
 	@Override
 	public BookingInformation bookingCancel(int bookingId)
-			throws AirlineException {
+			throws RuntimeException {
 		BookingInformation booking = airlineDAO.bookingCancel(bookingId);
 		Flight flight = airlineDAO.viewListOfFlights(booking.getFlightNo(),
 				ARSConstants.FLIGHTNO).get(0);
@@ -113,7 +112,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	 */
 	@Override
 	public int[] flightOccupancyDetails(String flightNo)
-			throws AirlineException {
+			throws RuntimeException {
 		return airlineDAO.flightOccupancyDetails(flightNo);
 	}
 
@@ -128,7 +127,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	 */
 	@Override
 	public BookingInformation modifyBookingInformation(
-			BookingInformation booking) throws AirlineException {
+			BookingInformation booking) throws RuntimeException {
 		return airlineDAO.modifyBookingInformation(booking);
 	}
 
@@ -144,7 +143,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	 */
 	@Override
 	public BookingInformation confirmBooking(BookingInformation booking)
-			throws AirlineException {
+			throws RuntimeException {
 		booking = airlineDAO.confirmBooking(booking);
 		Flight flight = airlineDAO.viewListOfFlights(booking.getFlightNo(),
 				ARSConstants.FLIGHTNO).get(0);
@@ -169,19 +168,19 @@ public class AirlineServiceImpl implements IAirlineService {
 	 * AirlineDaoImpl and returns the updated result to AirlineController
 	 */
 	@Override
-	public User forgotPassword(User user) throws AirlineException {
+	public User forgotPassword(User user) throws RuntimeException {
 		try {
-			String password = user.getPassword();
+			String password = user.getPwd();
 			user = airlineDAO.getUserDetails(user.getUsername());
 			if (ARSConstants.CUSTOMER.equals(user.getRole())) {
-				user.setPassword(password);
+				user.setPwd(password);
 				return airlineDAO.updateUser(user);
 			} else
-				throw new AirlineException(ARSConstants.USERNAMENOTEXIST);
+				throw new RuntimeException(ARSConstants.USERNAMENOTEXIST);
 		} catch (NoResultException nre) {
-			throw new AirlineException(ARSConstants.USERNAMENOTEXIST);
+			throw new RuntimeException(ARSConstants.USERNAMENOTEXIST);
 		} catch (Exception e) {
-			throw new AirlineException(e.getMessage());
+			throw new RuntimeException(e.getMessage());
 		}
 	}
 
@@ -196,14 +195,14 @@ public class AirlineServiceImpl implements IAirlineService {
 	 */
 	@Override
 	public boolean checkAvailabiltiy(String query, String searchBasis)
-			throws AirlineException {
+			throws RuntimeException {
 		try {
 			String isAvail = airlineDAO.checkAvailabiltiy(query, searchBasis);
 			return isAvail.isEmpty();
 		} catch (NoResultException nre) {
 			return true;
 		} catch (Exception e) {
-			throw new AirlineException(ARSConstants.ERROR
+			throw new RuntimeException(ARSConstants.ERROR
 					+ e.getMessage());
 		}
 
@@ -218,7 +217,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	 * result to AirlineController
 	 */
 	@Override
-	public User updateUser(User user) throws AirlineException {
+	public User updateUser(User user) throws RuntimeException {
 		return airlineDAO.updateUser(user);
 	}
 
@@ -230,7 +229,7 @@ public class AirlineServiceImpl implements IAirlineService {
 	 * AirlineController
 	 */
 	@Override
-	public List<String> getCities() throws AirlineException {
+	public List<String> getCities() throws RuntimeException {
 		return airlineDAO.getCities();
 	}
 
@@ -242,12 +241,12 @@ public class AirlineServiceImpl implements IAirlineService {
 	 * return the abbreviation of cities
 	 */
 	@Override
-	public String getAbbreviation(String cityName) throws AirlineException {
+	public String getAbbreviation(String cityName) throws RuntimeException {
 		String abbr = "";
 		try {
 			abbr = airlineDAO.getAbbreviation(cityName);
 		} catch (NoResultException nre) {
-			throw new AirlineException(ARSConstants.CITYNOTINDATABASE);
+			throw new RuntimeException(ARSConstants.CITYNOTINDATABASE);
 		}
 		return abbr;
 	}

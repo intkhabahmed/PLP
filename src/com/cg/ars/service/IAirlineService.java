@@ -5,7 +5,6 @@ import java.util.List;
 import com.cg.ars.entity.BookingInformation;
 import com.cg.ars.entity.Flight;
 import com.cg.ars.entity.User;
-import com.cg.ars.exception.AirlineException;
 
 public interface IAirlineService {
 
@@ -13,100 +12,100 @@ public interface IAirlineService {
 	 * @param query
 	 * @param searchBasis
 	 * @return type List
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
 	public List<Flight> viewListOfFlights(String query, String searchBasis)
-			throws AirlineException;
+			throws RuntimeException;
 
 	/**
 	 * @param query
 	 * @param searchBasis
 	 * @return type List
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
 	public List<BookingInformation> viewBookings(String query,
-			String searchBasis) throws AirlineException;
+			String searchBasis) throws RuntimeException;
 
 	/**
 	 * @param user
 	 * @return type User
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
-	public User signUp(User user) throws AirlineException;
+	public User signUp(User user) throws RuntimeException;
 
 	/**
 	 * @param bookingId
 	 * @return type BookingInformation
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
 	public BookingInformation bookingCancel(int bookingId)
-			throws AirlineException;
+			throws RuntimeException;
 
 	/**
 	 * @param user
 	 * @return type User
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
-	public User validLogin(User user) throws AirlineException;
+	public User validLogin(User user) throws RuntimeException;
 
 	/**
 	 * @param flightNo
 	 * @return type Integer Array
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
 	public int[] flightOccupancyDetails(String flightNo)
-			throws AirlineException;
+			throws RuntimeException;
 
 	/**
 	 * @param booking
 	 * @return type BookingInformation
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
 	public BookingInformation modifyBookingInformation(
-			BookingInformation booking) throws AirlineException;
+			BookingInformation booking) throws RuntimeException;
 
 	/**
 	 * @param booking
 	 * @return type BookingInformation
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
 	public BookingInformation confirmBooking(BookingInformation booking)
-			throws AirlineException;
+			throws RuntimeException;
 
 	/**
 	 * @param query
 	 * @param searchBasis
 	 * @return type boolean
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
 	public boolean checkAvailabiltiy(String query, String searchBasis)
-			throws AirlineException;
+			throws RuntimeException;
 
 	/**
 	 * @param username
 	 * @param password
 	 * @return type User
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
-	public User forgotPassword(User user) throws AirlineException;
+	public User forgotPassword(User user) throws RuntimeException;
 
 	/**
 	 * @param user
 	 * @return type User
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
-	public User updateUser(User user) throws AirlineException;
+	public User updateUser(User user) throws RuntimeException;
 	
 	/**
 	 * @return type List
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
-	public List<String> getCities() throws AirlineException;
+	public List<String> getCities() throws RuntimeException;
 
 	/**
 	 * @param cityName
 	 * @return Type String
-	 * @throws AirlineException
+	 * @throws RuntimeException
 	 */
-	public String getAbbreviation(String cityName) throws AirlineException;
+	public String getAbbreviation(String cityName) throws RuntimeException;
 }

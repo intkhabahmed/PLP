@@ -143,7 +143,7 @@ public class AirlineDAOImpl implements IAirlineDAO {
 		TypedQuery<User> sqlQuery = entityManager.createQuery(
 				QueryMapper.VALIDATEUSERNAMEANDPASSWORD, User.class);
 		sqlQuery.setParameter(ARSConstants.USER, user.getUsername());
-		sqlQuery.setParameter(ARSConstants.PASS, user.getPassword());
+		sqlQuery.setParameter(ARSConstants.PASS, user.getPwd());
 		logger.info("Following User Logged in:" + user.getUsername());
 		return sqlQuery.getSingleResult();
 

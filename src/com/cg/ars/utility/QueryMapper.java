@@ -21,5 +21,5 @@ public interface QueryMapper {
 	public static String GETALLCITIES = "Select a.location from Airport a";
 	public static String GETABBREVIATION = "SELECT a.abbreviation FROM Airport a WHERE a.location=:location";
 	public static String BOOKINGINFOBYBOOKINGID = "SELECT b FROM BookingInformation b WHERE b.bookingId=:bookingId";
-	public static String VALIDATEUSERNAMEANDPASSWORD = "SELECT u FROM User u WHERE u.username=:user AND u.password=:pass";
+	public static String VALIDATEUSERNAMEANDPASSWORD = "SELECT u FROM User u WHERE u.username=:user AND u.pwd=:pass";
 }

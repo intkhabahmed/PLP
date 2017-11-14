@@ -48,8 +48,8 @@
 											pattern="^[a-zA-Z][a-zA-Z0-9._]{2,20}$" title="Username(min=3 & max=20) can have only characters,digits, '.(dot)' and '_' and start with an alphabet"/>
 									</div>
 									<div class="form-group">
-										<form:label path="password">Password:</form:label>
-										<form:input type="password" class="form-control" path="password" required="required"/>
+										<form:label path="pwd">Password:</form:label>
+										<form:input type="password" class="form-control" path="pwd" required="required"/>
 									</div>
 									<div class="row">
 										<div class="text-center">
